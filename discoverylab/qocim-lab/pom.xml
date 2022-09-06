@@ -1,0 +1,106 @@
+<!-- This file is part of the INCOME platform. The INCOME platform is free 
+	software: you can redistribute it and/or modify it under the terms of the 
+	GNU Lesser General Public License as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. The 
+	INCOME platform is distributed in the hope that it will be useful, but WITHOUT 
+	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+	FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
+	details. You should have received a copy of the GNU Lesser General Public 
+	License along with the INCOME platform. If not, see <http://www.gnu.org/licenses/>. 
+	Initial developer(s): Pierrick MARIE Contributor(s): -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>qocim-lab</artifactId>
+	<name>The helloQoCIM discovery lab.</name>
+	<packaging>pom</packaging>
+	<description>This project contains all the source code required to discover the main features of the QoCIM framework.</description>
+	<version>0.0.1</version>
+	<groupId>qocim.lab</groupId>
+
+	<repositories>
+		<repository>
+			<id>qocim-common</id>
+			<name>The QoCIM common model</name>
+			<url>https://fusionforge.int-evry.fr/www/qocim/maven-repository/release/</url>
+		</repository>
+		<repository>
+			<id>muContext-release</id>
+			<name>muContext's release repository</name>
+			<url>https://fusionforge.int-evry.fr/www/mucontext/maven-repository/release/</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>muContext</groupId>
+			<artifactId>muContext-api</artifactId>
+			<version>0.15.2</version>
+		</dependency>
+		<dependency>
+			<groupId>muContext.data-model</groupId>
+			<artifactId>muContext-data-model-context</artifactId>
+			<version>0.15.2</version>
+		</dependency>
+		<dependency>
+			<groupId>muContext.data-model</groupId>
+			<artifactId>muContext-data-model-contract</artifactId>
+			<version>0.15.2</version>
+		</dependency>
+		<dependency>
+			<groupId>muContext.data-model</groupId>
+			<artifactId>muContext-data-model-multiscalability</artifactId>
+			<version>0.15.2</version>
+		</dependency>
+		<dependency>
+			<groupId>muContext.data-model</groupId>
+			<artifactId>muContext-data-model-recommendation</artifactId>
+			<version>0.15.2</version>
+		</dependency>
+		<dependency>
+			<groupId>qocim-common</groupId>
+			<artifactId>qocim-common</artifactId>
+			<version>0.14.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>qocim-tools</groupId>
+			<artifactId>qocim-precisionindicator</artifactId>
+			<version>0.14.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>qocim-tools</groupId>
+			<artifactId>qocim-freshnessindicator</artifactId>
+			<version>0.14.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>qocim-tools</groupId>
+			<artifactId>qocim-tool-functions</artifactId>
+			<version>0.14.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>qocim-tools</groupId>
+			<artifactId>qocim-qocmanagement-functions</artifactId>
+			<version>0.14.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>qocim-tools</groupId>
+			<artifactId>qocim-cdfm-functions</artifactId>
+			<version>0.14.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>qocim-tools</groupId>
+			<artifactId>qocim-routing-filter</artifactId>
+			<version>0.14.2-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<modules>
+		<module>qocim-lab-application</module>
+		<module>qocim-lab-collector</module>
+		<module>qocim-lab-collector-exercise2</module>
+		<module>qocim-lab-application-exercise3</module>
+	</modules>
+
+</project>
