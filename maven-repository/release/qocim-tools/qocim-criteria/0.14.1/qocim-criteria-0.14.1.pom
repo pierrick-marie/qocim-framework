@@ -1,0 +1,33 @@
+<!-- This file is part of the INCOME platform. The INCOME platform is free 
+	software: you can redistribute it and/or modify it under the terms of the 
+	GNU Lesser General Public License as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. The 
+	INCOME platform is distributed in the hope that it will be useful, but WITHOUT 
+	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+	FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
+	details. You should have received a copy of the GNU Lesser General Public 
+	License along with the INCOME platform. If not, see <http://www.gnu.org/licenses/>. 
+	Initial developer(s): Pierrick MARIE Contributor(s): -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+			     http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>qocim-tools</groupId>
+		<artifactId>qocim-tools</artifactId>
+		<version>0.14.1</version>
+	</parent>
+
+	<artifactId>qocim-criteria</artifactId>
+	<name>The QoCIM-based QoC criteria</name>
+	<packaging>pom</packaging>
+	<description>Modelling QoC criteria with the QoCIM model</description>
+
+	<modules>
+		<module>qocim-freshnessindicator</module>
+		<module>qocim-precisionindicator</module>
+		<module>qocim-spatialresolutionindicator</module>
+	</modules>
+
+</project>

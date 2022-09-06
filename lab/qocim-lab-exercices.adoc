@@ -1,0 +1,313 @@
+:numbered:
+:toc:
+
+= QoC management discovery lab
+Pierrick MARIE 
+
+== Objectives of this lab
+
+The objective of this lab is discover the features of the QoCIM framework.
+The first part of this lab is related to the QoC management within context collectors and applications.
+The management of the QoC is presented through two aspects, the evaluation of the Quality of the Context information and the production of QoC-based routing filters.
+
+== Prerequisite
+
+To play with the QoCIM framework you need to install the following software:
+
+ * Eclipse;
+ * Maven;
+ * Git.
+   
+== Installation
+
+Clone the Git repository that contains the sources with the following command:
+
+ $> git clone http://fusionforge.int-evry.fr/anonscm/git/qocim/qocim.git
+
+Enter into the folder 'qocim-lab' and install the required maven modules:
+
+ $> cd discoverylab/qocim-lab
+ $> mvn clean install -Djsse.enableSNIExtension=false
+
+To finish the exercises presented in this discovery lab, three consoles are required.
+For the rest of the tutorial, the consoles will be numbered 1, 2 and 3.
+The console number 1 will handle a broker, the console number 2 will handle a context collector and the console number 3 will handle a context application.
+
+== Context collectors and applications
+
+The purpose of this section is to discover two main features of the QoCIM framework:
+
+ * evaluating the Quality of Context information;
+ * creating routing filters based on the Quality of Context information.
+
+To discover these features, the document proposes three exercises.
+The exercises describe precisely the QoCIM framework and require few Java programming skills.
+
+In this document three software entities are manipulated:
+
+ * 'broker': it enables the communications between collectors and applications;
+ * 'collector': it represents the embedded software connected to the sensor to produce low level context information;
+ * 'application': it represents the application that consumes context information.
+
+Two types of routing filters will be configured in this document:
+
+ * 'advertisement filter': to express the type of context information and QoC meta-data the software entity is able to produce;
+ * 'subscription filter': to express the type of context information and QoC meta-data the software entity requires.
+
+=== Exercise 1: Executing a QoCIM-based application
+
+This exercise presents the execution of a broker, a context collector and a context application.
+The purpose of this exercise is to demonstrate:
+
+ * a context collector is able to produce context information and QoC meta-data;
+ * a context application is able to consume context information with QoC meta-data.
+
+For this exercise, no modification of the source code are required.
+
+==== Start a broker
+
+To enable the communications between the collectors and the application, a broker have to be started.
+To do it, in the folder 'qocim-lab', execute in the console number 1 the following command:
+
+ $> startbroker.sh
+
+The output of the script should be:
+
+ Start the Broker
+ Hit return when you want to stop the broker
+
+That means the broker have been correctly started.
+Now it is possible to start the collectors and then application.
+
+WARNING: Don't stop the broker before the end of the exercise! The collector and the application require the broker to communicate.
+
+==== Start a collector
+
+In the console number 2, start a collector with the following commands:
+
+ $> cd qocim-lab-collector
+ $> ./run.sh
+
+The output should look like the following lines:
+
+ Start the percent Collector
+ Hit return when you want to stop the percent collector
+ Pushed report number: Report percent collector xxxx
+  - observation value: yyyy
+  - QoC indicator PrecisionQoCIndicator, value: zzzz
+
+These lines indicates the collector sends a context observation with two QoC meta-data: the precision.
+In that case, the precision is evaluated in percent.
+The next step of this tutorial presents how to start an application that consumes the context information produced by the collector.
+
+==== Start the application
+
+In the console number 3, start the application with the following commands:
+
+ $> cd qocim-lab-application
+ $> ./run.sh
+
+The output should look like the following lines:
+
+The context application consumes report number: Report percent collector XXXX
+         - Observation value: yyyy
+         - QoC indicator PrecisionQoCIndicator, value: zzzz
+
+The collector publishes context reports with one context observations and one QoC meta-data, the precision of the observation.
+The application receives the context reports and display the value of the observation and the precision indicator.
+
+==== Stop the collector and the application
+
+In the console number 1, 2 and 3, hit 'Enter' to respectively stop the broker, the collector and the application.
+
+==== Edit the collector and the application
+
+The purpose of this part is to edit the collector and the application to display:
+
+ * the subscription filter of the application;
+ * the advertisement filter of the collector;
+ * the xml documents sent by the collector.
+
+===== Prerequisite
+
+To get the source code of the collectors and applications, import as 'Existing Maven Projects' into Eclipse the following projects:
+
+ - +discoverylab/qocim-lab/qocim-lab-application+
+ - +discoverylab/qocim-lab/qocim-lab-collector+
+
+To make the exercise, you will have to modify the source code of the maven project +qocim-lab-collector+ and +qocim-lab-application+.
+
+===== Your mission
+
+In the module +qocim-lab-application+, observe the source of the class _application.Main_.
+Then, read and follow the instruction wrote at the *TODO* mark in the class _collector.Main_.
+
+In the module +qocim-lab-collector+, observe the source of the classes _collector.Main_ and _collector.utils.AdvertisementFilter_.
+Then, read and follow the instruction wrote at the *TODO* marks in the class _collector.Main_ (there are two *TODO* marks !).
+
+In the folder +discoverylab/qocim-lab+, compile your modifications with the following command:
+
+ $> mvn clean install -Djsse.enableSNIExtension=false
+
+To execute your application follow the instructions 4.1.1 to 4.1.4 of the link:./qocim-lab-exercices.html#_exercise_1_executing_a_qocim_based_application[Exercise 1: Executing a QoCIM-based application]
+
+=== Exercise 2: Developing a context collector
+
+The purpose of this exercise is creating a new context collector to produce context information with two QoC meta-data:
+
+ * the precision expressed in per-thousand;
+ * the freshness expressed in second.
+
+Because this discovery lab is focused on the QoC management, you will not have to create a context collector from scratch. To realise the exercise, you will just have to complete few instructions into the maven module +qocim-lab-collector-exercise2+.
+
+==== Prerequisite
+
+To get the source code of the collectors and applications, import as 'Existing Maven Projects' into Eclipse the following projects:
+
+ - +discoverylab/qocim-lab/qocim-lab-collector-exercise2+
+ - +discoverylab/qocim-lab/qocim-lab-application-exercise3+
+
+In the same way, to get the source code of the QoCIM framework, import all the maven project contained into the folder +framework/qocim-common+ and +framework/qocim-tools+.
+
+To make the exercise, you will have to modify the source code of the maven project +qocim-lab-collector-exercise2+.
+
+==== Your mission
+
+In the maven project +qocim-lab-collector-exercise2+, you have to modify the classes +collector.utils.QoCEvaluator+ and +collector.utils.AdvertisementFilter+.
+The class +collector.utils.QoCEvaluator+ is used to evaluate the QoC meta-data of a context information and the class +collector.utils.AdvertisementFilter+ is used to configure the advertisement filter of the collector.
+
+===== The QoC evaluation
+
+The first step consist to evaluate the Quality of the Context information produced by the collector.
+To do it, look into the class +collector.utils.QoCEvaluator+ and follow the instructions.
+For this question, the objective is associate to the context information the precision indicator evaluated in per-thousand and the freshness indicator evaluated in second.
+
+===== The advertisement filter
+
+The second step consists to configure the advertisement filter of the context collector to declare its capability to produce QoC meta-data associated to context information.
+The collector will produce QoC meta-data composed by the precision indicator expressed in per-thousand and the freshness indicator expressed in second.
+
+To do it, look into the class +collector.utils.AdvertisementFilter+ and read the *TODO* mark on the line 53.
+
+==== It's time to test
+
+To compile your context collector, use the following commands in the console number 2:
+
+ $> cd qocim-lab-collector-exercise2
+ $> mvn clean install -Djsse.enableSNIExtension=false
+
+Before executing the collector, be sure the broker is already running. 
+In the console number 1, execute the following command:
+
+ $> startbroker.sh
+
+To run the collector, in the console number 2, use the following command:
+
+ $> ./run.sh
+
+Then, in the console number 3, start the application with the same command:
+
+ $> ./run.sh
+
+If you made a good job, the output of the collector should be:
+
+ Pushed report number: Report collector XXXX
+  - observation value: xxxx
+  - QoC indicator PrecisionQoCIndicator, value: yyyy
+  - QoC indicator FreshnessQoCIndicator, value: zzzz
+
+And the output of the application should be:
+
+ Pushed report number: Report collector XXXX
+  - observation value: xxxx
+  - QoC indicator PrecisionQoCIndicator, value: yyyy
+  - QoC indicator FreshnessQoCIndicator, value: zzzz
+
+=== Changing the subscription filter of the application
+
+This exercise is divided in two questions.
+The first one consist to discover a new type of constraint expressed into the routing filters.
+The second question consist to discover how the constraints are combine into the routing filters.
+
+==== Question 1, a new constraint
+
+For the previous exercise the advertisement filter of the context collector has been generated with the following code (this is the answer to the exercise 2 :P) :
+
+ constraints = new ArrayList<QoCMetaData>();
+ final QoCMetaData precision = new QoCMetaData(
+       PerthousandPrecisionFactory.getInstance().createQoCIndicator(
+       DEFAULT_METRICVALUE_ID,
+       PercentPrecisionQoCMetricDefinition.MIN_VALUE_DEFAULTVALUE));
+ constraints.add(precision);
+ final QoCMetaData freshness = new QoCMetaData(FreshnessFactory
+       .getInstance().createQoCIndicator(DEFAULT_METRICVALUE_ID,
+	FreshnessQoCMetricDefinition.MIN_VALUE_DEFAULTVALUE));
+ constraints.add(freshness);
+ qocimFilterGenerator.addQoCCriterionConstraints(constraints);
+
+These instructions create a new +QoCMetaData+ for the precision and add it into a list.
+In the same way a new QoCMetaData for the freshness is created and added into the list.
+Then, the final instruction generate the corresponding JavaScript routing filter.
+The JavaScript code looks like this:
+
+ IF the QoC meta-data of does NOT CONTAIN the precision indicator AND 
+    the QoC meta-data of does NOT CONTAIN the freshness indicator THEN
+    RETURN FALSE
+ ELSE
+    RETURN TRUE
+
+As you can see with this translation, the constraints just express what QoC indicator the context collector is able to produce.
+There is no constraint about 'the value' of the QoC meta-data.
+
+In this question, you will have to change the subscription filter of the context application to express requirements concerning the value of the QoC meta-data received by the application.
+The purpose of the question is express a filter that requires a precision indicator with a value upper than 600 and a freshness indicator with a value lower or equals than 4.
+
+To do it, read and edit the class +application.utils.SubscriptionFilterQuestion1+ in the maven project +qocim-lab-application-exercise3+. The instruction to answer to the question are available at the line 71.
+
+To test your code, use the following instructions:
+
+ - verify in the console number 1 the broker is still running otherwise execute the command './startbroker.sh';
+ - hit 'Enter' in the console number 2 to stop the context collector (in the folder +qocim-lab-collector-exercise2+) and re-run it with the command './run.sh';
+ - in the folder +qocim-lab-application-exercise3+, compile your new context application with the command 'mvn clean install -Djsse.enableSNIExtension=false' ;
+ - start the application with the command './run.sh'.
+
+If you made a good job, the context application will only receive context report that contains the precision indicator with a value upper than 600 and a freshness lower than 4 seconds, for example:
+
+ Pushed report number: Report collector XXXX
+  - observation value: xxxx
+  - QoC indicator PrecisionQoCIndicator, value: 658
+  - QoC indicator FreshnessQoCIndicator, value: 2
+
+==== Question 2, combining the constraints
+
+It is possible to combine the QoC-based constraints in the same if statement or in one statement per constraints. For example, with only one if statement the routing filter looks like this:
+
+ IF the QoC meta-data of does NOT CONTAIN the precision indicator AND 
+    the QoC meta-data of does NOT CONTAIN the freshness indicator THEN
+    RETURN FALSE
+ ELSE
+    RETURN TRUE
+
+With one is statement per constraint the routing filter looks like this:
+
+ IF the QoC meta-data of does NOT CONTAIN the precision indicator THEN
+    RETURN FALSE
+ IF the QoC meta-data of does NOT CONTAIN the freshness indicator THEN
+    RETURN FALSE
+ RETURN TRUE
+
+In the first case, if the QoC meta-data respects one of the constraints the filter will return TRUE and the application will receive the context information.
+In the second case, the QoC meta-data have to respect all the constraints to be received by the application.
+
+To observe the difference between this two types of filter, open and read the class +application.utils.SubscriptionFilterQuestion2+ in the maven project +qocim-lab-application-exercise3+.
+The instructions to answer to the question are available at the line 94.
+
+WARNING: Don't forget to change the instruction at the line 59 of the class +application.Main+ in the same project.
+
+To test your modifications, hit 'Enter' in the console number 3, recompile the application with the command 'mvn clean install -Djsse.enableSNIExtension=false', and then, run the application with the command './run.sh'.
+As for the previous question, you have to check if the broker and the context collector are already started.
+
+== Licence
+
+The source code of the QoCIM framework is licensed under the http://www.gnu.org/copyleft/lesser.html[GNU Lesser General Public License].
+

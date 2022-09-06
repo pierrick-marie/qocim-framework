@@ -1,0 +1,135 @@
+:numbered:
+:toc:
+
+= Context and QoC transformations discovery lab
+Pierrick MARIE 
+
+== Objectives of this lab
+
+The objective of this lab is discover advanced features of the QoCIM framework.
+The first part of this lab is related to the QoC management within context collector, capsule and application.
+This lab presents the transformation of context information and QoC meta-data.
+
+== Prerequisite
+
+To play with the QoCIM framework you need to install the following software:
+
+ * Eclipse;
+ * Maven;
+ * Git.
+   
+== Installation
+
+Clone the Git repository that contains the sources with the following command:
+
+ $> git clone http://fusionforge.int-evry.fr/anonscm/git/qocim/qocim.git
+
+Enter into the folder 'qocim-capsule-lab' and install the required maven modules:
+
+ $> cd discoverylab/qocim-capsule-lab
+ $> mvn clean install -Djsse.enableSNIExtension=false
+
+To finish the exercises presented in this discovery lab, four consoles are required.
+For the rest of the tutorial, the consoles will be numbered 1, 2, 3 and 4.
+The console number 1 will handle a broker, the console number 2 will handle a context collector, the console number 3 will handle a capsule, and the console number 4 will handle a context application.
+
+== Context collector, capsule and application
+
+The purpose of this section is to discover how the QoCIM framework apply transformations on context information and QoC meta-data.
+To discover these features, the document proposes one exercise.
+In this document four software entities are manipulated:
+
+ * 'broker': it enables the communications between collectors and applications;
+ * 'collector': it represents the embedded software connected to the sensor to produce low level context information;
+ * 'capsule': it is the software entity used to transform context information and QoC meta-data produced by the collector;
+ * 'application': it represents the application that consumes context information produced by the capsule.
+
+=== Exercise: Executing a QoCIM-based context information and QoC meta-data transformations
+
+This exercise presents the execution of a broker, a context collector, a capsule and an application.
+The purpose of this exercise is to demonstrate how QoCIM can be used to tranformation information.
+For this exercise, no modification of the source code are required.
+
+==== Start a broker
+
+To enable the communications between the collectors, the capsule and the application, a broker have to be started.
+To do it, in the folder 'qocim-capsule-lab', execute in the console number 1 the following command:
+
+ $> cd discoverylab/qocim-capsule-lab
+ $> startbroker.sh
+
+The output of the script should be:
+
+ Start the Broker
+ Hit return when you want to stop the broker
+
+That means the broker have been correctly started.
+Now it is possible to start the collectors and then application.
+
+WARNING: Don't stop the broker before the end of the exercise! The collector and the application require the broker to communicate.
+
+==== Start a collector
+
+In the console number 2, start a collector with the following commands:
+
+ $> cd qocim-capsule-lab-collector
+ $> ./run.sh
+
+The output should look like the following lines:
+
+ Start the percent Collector
+ Hit return when you want to stop the percent collector
+ Pushed report number: Report percent collector xxxx
+  - observation value: yyyy
+  - QoC indicator PrecisionQoCIndicator, value: zzzz
+
+These lines indicates the collector sends a context observation with two QoC meta-data: the precision.
+In that case, the precision is evaluated in percent.
+The next step of this tutorial presents how to start an application that consumes the context information produced by the collector.
+
+==== Start the capsule
+
+In the console number 3, start the application with the following commands:
+
+ $> cd qocim-capsule-lab-capsule
+ $> ./run.sh
+
+The capsule print the following message every time it receive a new context information:
+
+ <date> mucontext.datamodel.qocim.utils.QoCIMLogger hardware
+ HARDWARE: PROCESS_CPU_USAGE: XXX % ; FREE_MEMORY: YYY bytes - Context data flow management function - Adding a new context report.
+
+The XML document _qocim-capsule-lab/qocim-capsule-lab-capsule/qocim_capsule_configuration.xml_ contains all the instructions to configure the transformation functions executed by the capsule.
+To get more information concerning the configuration of the capsule, open and read the XML document.
+
+==== Start the application
+
+In the console number 4, start the application with the following commands:
+
+ $> cd qocim-capsule-lab-application
+ $> ./run.sh
+
+The output should look like the following lines:
+
+ The context application consumes report number: QoCIMCapsule-ContextReport
+         - Observation value: XXX
+         - QoC indicator PrecisionQoCIndicator, value: YYY
+         - QoC indicator FreshnessQoCIndicator, value: ZZZ
+
+The behaviour of the capsule is to compute the mean of ten context information and QoC meta-data and then add the evaluation of the freshness QoC indicator.
+The application is configured to exclusively receive the information comming from the context capsule.
+That is why the application receives one information when the context collector produces ten information.
+The collector produces information with the evaluation of the precision QoC indicator.
+The context capsule adds the evaluation of the freshness QoC indicator.
+
+Compare the information displayed by the collector and the application.
+The application displays the value of the precision and the freshness.
+
+==== Stop the collector and the application
+
+In the console number 1, 2, 3 and 4,hit 'Enter' to respectively stop the broker, the collector and the application.
+
+== Licence
+
+The source code of the QoCIM framework is licensed under the http://www.gnu.org/copyleft/lesser.html[GNU Lesser General Public License].
+
