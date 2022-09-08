@@ -15,7 +15,7 @@
 
 	<groupId>qocim-common</groupId>
 	<artifactId>qocim-common</artifactId>
-	<version>0.14.2-SNAPSHOT</version>
+	<version>0.14.3</version>
 	<name>The QoCIM common model</name>
 	<description>The QoCIM model: Quality of Context Information Model</description>
 	<packaging>jar</packaging>

@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>qocim-tools</groupId>
 		<artifactId>qocim-functions</artifactId>
-		<version>0.14.2-SNAPSHOT</version>
+		<version>0.14.3</version>
 	</parent>
 
 	<artifactId>qocim-cdfm-functions</artifactId>
@@ -40,27 +40,27 @@
 		<dependency>
 			<groupId>qocim-tools</groupId>
 			<artifactId>qocim-qocmanagement-functions</artifactId>
-			<version>0.14.2-SNAPSHOT</version>
+			<version>0.14.3</version>
 		</dependency>
 		<dependency>
 			<groupId>qocim-tools</groupId>
 			<artifactId>qocim-common-functions</artifactId>
-			<version>0.14.2-SNAPSHOT</version>
+			<version>0.14.3</version>
 		</dependency>
 		<dependency>
 			<groupId>qocim-tools</groupId>
 			<artifactId>qocim-routing-filter</artifactId>
-			<version>0.14.2-SNAPSHOT</version>
+			<version>0.14.3</version>
 		</dependency>
 		<dependency>
 			<groupId>qocim-common</groupId>
 			<artifactId>qocim-common</artifactId>
-			<version>0.14.2-SNAPSHOT</version>
+			<version>0.14.3</version>
 		</dependency>
 		<dependency>
 			<groupId>qocim-tools</groupId>
 			<artifactId>qocim-tool-functions</artifactId>
-			<version>0.14.2-SNAPSHOT</version>
+			<version>0.14.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
