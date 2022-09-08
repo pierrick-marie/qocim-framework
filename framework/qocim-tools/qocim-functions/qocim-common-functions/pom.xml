@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>qocim-tools</groupId>
 		<artifactId>qocim-functions</artifactId>
-		<version>0.14.3</version>
+		<version>0.14.2-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>qocim-common-functions</artifactId>
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>muContext.data-model</groupId>
 			<artifactId>muContext-data-model-context</artifactId>
-			<version>0.15.2</version>
+			<version>0.15.4-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

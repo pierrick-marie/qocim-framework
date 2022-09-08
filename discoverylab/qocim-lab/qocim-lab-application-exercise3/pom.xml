@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>muContext</groupId>
 			<artifactId>muContext-application</artifactId>
-			<version>0.15.2</version>
+			<version>0.15.4-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

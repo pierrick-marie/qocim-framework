@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>qocim-tools</groupId>
 		<artifactId>qocim-criteria</artifactId>
-		<version>0.14.3</version>
+		<version>0.14.2-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>qocim-freshnessindicator</artifactId>
@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>qocim-common</groupId>
 			<artifactId>qocim-common</artifactId>
-			<version>0.14.3</version>
+			<version>0.14.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

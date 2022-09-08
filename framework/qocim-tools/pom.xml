@@ -15,7 +15,7 @@
 
 	<groupId>qocim-tools</groupId>
 	<artifactId>qocim-tools</artifactId>
-	<version>0.14.3</version>
+	<version>0.14.2-SNAPSHOT</version>
 	<name>The QoCIM common model</name>
 	<description>The QoCIM model: Quality of Context Information Model</description>
 	<packaging>pom</packaging>
@@ -320,11 +320,6 @@
 	</build>
 
 	<repositories>
-		<repository>
-			<id>qocim-common</id>
-			<name>The QoCIM common model</name>
-			<url>https://fusionforge.int-evry.fr/www/qocim/maven-repository/release/</url>
-		</repository>
 		<repository>
 			<id>muContext-release</id>
 			<name>muContext's release repository</name>

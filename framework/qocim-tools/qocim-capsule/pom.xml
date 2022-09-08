@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>qocim-tools</groupId>
 		<artifactId>qocim-tools</artifactId>
-		<version>0.14.3</version>
+		<version>0.14.2-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>qocim-capsule</artifactId>
@@ -36,42 +36,42 @@
 		<dependency>
 			<groupId>muContext</groupId>
 			<artifactId>muContext-collector</artifactId>
-			<version>0.15.2</version>
+			<version>0.15.4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>muContext</groupId>
 			<artifactId>muContext-application</artifactId>
-			<version>0.15.2</version>
+			<version>0.15.4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>muContext</groupId>
 			<artifactId>muContext-api</artifactId>
-			<version>0.15.2</version>
+			<version>0.15.4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>muContext</groupId>
 			<artifactId>muContext-capsule</artifactId>
-			<version>0.15.2</version>
+			<version>0.15.4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>muContext.data-model</groupId>
 			<artifactId>muContext-data-model-contract</artifactId>
-			<version>0.15.2</version>
+			<version>0.15.4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>muContext.data-model</groupId>
 			<artifactId>muContext-data-model-multiscalability</artifactId>
-			<version>0.15.2</version>
+			<version>0.15.4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>muContext.data-model</groupId>
 			<artifactId>muContext-data-model-recommendation</artifactId>
-			<version>0.15.2</version>
+			<version>0.15.4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>muContext.data-model</groupId>
 			<artifactId>muContext-data-model-context</artifactId>
-			<version>0.15.2</version>
+			<version>0.15.4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-configuration</groupId>
@@ -91,38 +91,38 @@
 		<dependency>
 			<groupId>qocim-common</groupId>
 			<artifactId>qocim-common</artifactId>
-			<version>0.14.3</version>
+			<version>0.14.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>qocim-tools</groupId>
 			<artifactId>qocim-tool-functions</artifactId>
-			<version>0.14.3</version>
+			<version>0.14.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>qocim-tools</groupId>
 			<artifactId>qocim-qocmanagement-functions</artifactId>
-			<version>0.14.3</version>
+			<version>0.14.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>qocim-tools</groupId>
 			<artifactId>qocim-routing-filter</artifactId>
-			<version>0.14.3</version>
+			<version>0.14.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>qocim-tools</groupId>
 			<artifactId>qocim-cdfm-functions</artifactId>
-			<version>0.14.3</version>
+			<version>0.14.2-SNAPSHOT</version>
 		</dependency>
 		<!-- QoC criteria used for the tests -->
 		<dependency>
 			<groupId>qocim-tools</groupId>
 			<artifactId>qocim-precisionindicator</artifactId>
-			<version>0.14.3</version>
+			<version>0.14.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>qocim-tools</groupId>
 			<artifactId>qocim-freshnessindicator</artifactId>
-			<version>0.14.3</version>
+			<version>0.14.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
