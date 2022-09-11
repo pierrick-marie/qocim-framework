@@ -32,8 +32,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import mucontext.datamodel.context.ContextReport;
 import qocim.datamodel.QoCMetricDefinition;
+import qocim.datamodel.information.InformationImpl;
+import qocim.datamodel.information.QInformation;
 import qocim.datamodel.test.criterion.one.TestCriterionOneFactory;
 import qocim.datamodel.test.criterion.one.TestCriterionOneQoCCriterion;
 import qocim.datamodel.test.criterion.one.TestCriterionOneQoCIndicator;
@@ -49,7 +50,6 @@ import qocim.datamodel.test.criterion.zero.TestCriterionZeroQoCMetricDefinition;
 import qocim.datamodel.utils.IQoCIMFactory;
 import qocim.datamodel.utils.QoCIMLogger;
 import qocim.qocmanagement.functions.impl.AddQoCIndicator;
-import qocim.tool.functions.impl.CreateNewMessage;
 
 public class TestAddSingleQoCIndicator {
 
@@ -66,10 +66,9 @@ public class TestAddSingleQoCIndicator {
 	// # # # # # PRIVATE VARIABLES # # # # #
 
 	private static AddQoCIndicator addQoCIndicator;
-	private static CreateNewMessage createNewMessage;
 	private static Map<QoCMetricDefinition, IQoCIMFactory> map_availableQoCIMFacade;
 
-	private ContextReport contextReport;
+	private QInformation<?> information;
 	private Integer qoCIndicatorId;
 	private String qoCCriterionId;
 	private String qoCMetricDefinitionId;
@@ -88,30 +87,26 @@ public class TestAddSingleQoCIndicator {
 		map_availableQoCIMFacade.put(new TestCriterionThreeQoCMetricDefinition(),
 				TestCriterionThreeFactory.getInstance());
 		addQoCIndicator = new AddQoCIndicator(map_availableQoCIMFacade);
-		createNewMessage = new CreateNewMessage();
 	}
 
 	@Before
 	public void setUp() throws Exception {
 		// - - - - - CORE OF THE METHOD - - - - -
-		createNewMessage.setUp(TEST_CONTEXT_ENTITY_NAME + "_1", TEST_CONTEXT_ENTITY_URI + "/1",
-				TEST_CONTEXT_OBSERVABLE_NAME + "_1", TEST_CONTEXT_OBSERVABLE_URI + "/1", "" + contextObservationId,
-				new Date().getTime(), "" + contextObservationValue, TEST_OBSERVATION_UNIT);
-		contextReport = (ContextReport) createNewMessage.exec();
+		information = new InformationImpl<>("Test information", new Integer(42));
 	}
 
 	@After
 	public final void execTest() {
 		// - - - - - CORE OF THE METHOD - - - - -
-		assertEquals(0, contextReport.observations.iterator().next().list_qoCIndicator.size());
+		assertEquals(0, information.indicators().size());
 		addQoCIndicator.setUp(qoCIndicatorId, qoCCriterionId, qoCMetricDefinitionId);
-		addQoCIndicator.exec(contextReport);
-		assertEquals(1, contextReport.observations.iterator().next().list_qoCIndicator.size());
+		addQoCIndicator.exec(information);
+		assertEquals(1, information.indicators().size());
 		assertEquals(qoCIndicatorId,
-				contextReport.observations.iterator().next().list_qoCIndicator.iterator().next().id());
-		assertEquals(qoCMetricDefinitionId, contextReport.observations.iterator().next().list_qoCIndicator.getFirst()
+				information.indicators().iterator().next().id());
+		assertEquals(qoCMetricDefinitionId, information.indicators().get(0)
 				.qoCCriterion().list_qoCMetricDefinition.getFirst().id());
-		assertEquals("0", contextReport.observations.iterator().next().list_qoCIndicator.getFirst().list_qoCMetricValue
+		assertEquals("0", information.indicators().get(0).list_qoCMetricValue
 				.getFirst().id());
 
 	}

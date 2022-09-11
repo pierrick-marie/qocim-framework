@@ -20,12 +20,12 @@
  */
 package qocim.datamodel.freshnessindicator;
 
-import java.util.Date;
-import java.util.List;
-
 import qocim.datamodel.Order;
 import qocim.datamodel.QoCMetaData;
 import qocim.datamodel.QoCMetricDefinition;
+import qocim.datamodel.information.QInformation;
+
+import java.util.List;
 
 public class RandomFreshnessQoCMetricDefinition extends QoCMetricDefinition {
 
@@ -57,9 +57,7 @@ public class RandomFreshnessQoCMetricDefinition extends QoCMetricDefinition {
 
 	// # # # # # PUBLIC METHODS # # # # #
 
-	@Override
-	public Double computeQoCMetricValue(final String _contextEntityUri, final String _contextObservableUri,
-			final Date _contextObservationDate, final Double _contextObservationValue,
+	public Double computeQoCMetricValue(final QInformation<?> information,
 			final List<QoCMetaData> _list_qoCMetaData) {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
 		final Double coefficient = FreshnessQoCMetricDefinition.MAX_VALUE_DEFAULTVALUE

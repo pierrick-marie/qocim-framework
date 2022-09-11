@@ -20,6 +20,8 @@
  */
 package qocim.datamodel;
 
+import qocim.datamodel.information.QInformation;
+
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -190,8 +192,7 @@ public class QoCMetricDefinition extends QoCIM {
 	return id.hashCode();
     }
 
-    public Double computeQoCMetricValue(final String _contextEntityUri, final String _contextObservableUri, final Date _contextObservationDate,
-	    final Double _contextObservationValue, final List<QoCMetaData> _list_qoCMetaData) {
+    public Double computeQoCMetricValue(final QInformation<?> information, final List<QoCMetaData> _list_qoCMetaData) {
 	// - - - - - RETURN STATEMENT - - - - -
 	return DEFAULT_MINVALUE;
     }

@@ -23,11 +23,10 @@ package qocim.qocmanagement.functions.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import mucontext.datamodel.context.ContextObservation;
-import mucontext.datamodel.context.ContextReport;
 import qocim.datamodel.QoCIndicator;
 import qocim.datamodel.QoCMetricDefinition;
 import qocim.datamodel.QoCMetricValue;
+import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
 import qocim.datamodel.utils.IQoCIMFactory;
@@ -42,10 +41,6 @@ import qocim.qocmanagement.functions.utils.LogMessages;
  * QoC management function <i>updateQoCIndicator</i>.
  *
  * @see qocim.qocmanagement.functions.impl.UpdateQoCMetricValue
- * @see mucontext.datamodel.context.ContextReport
- * @see mucontext.datamodel.context.ContextObservation
- * @see mucontext.datamodel.qocim.QoCIndicator
- * @see mucontext.datamodel.qocim.QoCMetricValue
  *
  * @author Pierrick MARIE
  */
@@ -83,26 +78,24 @@ public class UpdateQoCMetaData implements IQoCManagementFunction {
 	 * private method <i>updateQoCIndicator</i>.
 	 */
 	@Override
-	public ContextReport exec(final ContextReport _contextReport) {
+	public QInformation<?> exec(final QInformation<?> information) {
 		// - - - - - CHECK THE VALUE OF THE ARGUMENTS - - - - -
 		try {
-			String message = "UpdateQoCMetaData.exec(ContextReport): the argument _contextReport is null";
-			ConstraintChecker.notNull(_contextReport, message);
-			message = "UpdateQoCMetaData.exec(ContextReport): the argument _contextReport is null.";
-			ConstraintChecker.notNull(_contextReport, message);
+			String message = "UpdateQoCMetaData.exec(ContextReport): the argument information is null";
+			ConstraintChecker.notNull(information, message);
+			message = "UpdateQoCMetaData.exec(ContextReport): the argument information is null.";
+			ConstraintChecker.notNull(information, message);
 		} catch (final ConstraintCheckerException e) {
-			return _contextReport;
+			return information;
 		}
 		// - - - - - CORE OF THE METHOD - - - - -
 		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
-		for (final ContextObservation<?> loop_contextObservation : _contextReport.observations) {
-			for (final QoCIndicator loop_qoCIndicator : loop_contextObservation.list_qoCIndicator) {
-				updateQoCIndicator(_contextReport, loop_qoCIndicator);
+			for (final QoCIndicator loop_qoCIndicator : information.indicators()) {
+				updateQoCIndicator(information, loop_qoCIndicator);
 			}
-		}
 		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
 		// - - - - - RETURN STATEMENT - - - - -
-		return _contextReport;
+		return information;
 	}
 
 	@Override
@@ -130,16 +123,16 @@ public class UpdateQoCMetaData implements IQoCManagementFunction {
 	 * indicator and then uses the QoC management function
 	 * <i>updateQoCIndicator</i> to update the values.
 	 *
-	 * @param _contextReport
-	 *            the context report that is going to be modified
-	 * @param _qoCIndicator
+	 * @param information
+	 *            the context information
+	 * @param indicator
 	 *            the QoCIndicator updated by the method
 	 */
-	private void updateQoCIndicator(final ContextReport _contextReport, final QoCIndicator _qoCIndicator) {
+	private void updateQoCIndicator(final QInformation<?> information, final QoCIndicator indicator) {
 		// - - - - - CORE OF THE METHOD - - - - -
-		for (final QoCMetricValue loop_qoCMetricValue : _qoCIndicator.list_qoCMetricValue) {
-			updateQoCIndicator.setUp(loop_qoCMetricValue.id(), _qoCIndicator.id());
-			updateQoCIndicator.exec(_contextReport);
+		for (final QoCMetricValue loop_qoCMetricValue : indicator.list_qoCMetricValue) {
+			updateQoCIndicator.setUp(loop_qoCMetricValue.id(), indicator.id());
+			updateQoCIndicator.exec(information);
 		}
 	}
 }

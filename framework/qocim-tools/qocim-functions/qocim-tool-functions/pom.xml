@@ -20,7 +20,7 @@
 	</parent>
 
 	<artifactId>qocim-tool-functions</artifactId>
-	<name>The QoCIM-based tools functions</name>
+	<name>QoCIM-based tools functions</name>
 	<description>Low level functions used to manage QoC metadata.</description>
 	<packaging>jar</packaging>
 
@@ -33,11 +33,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>muContext.data-model</groupId>
-			<artifactId>muContext-data-model-context</artifactId>
-			<version>0.15.4-SNAPSHOT</version>
-		</dependency>
-		<dependency>
 			<groupId>qocim-common</groupId>
 			<artifactId>qocim-common</artifactId>
 			<version>0.14.2-SNAPSHOT</version>
@@ -46,6 +41,12 @@
 			<groupId>qocim-tools</groupId>
 			<artifactId>qocim-common-functions</artifactId>
 			<version>0.14.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>qocim</groupId>
+			<artifactId>qocim-common</artifactId>
+			<version>0.14.2-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 

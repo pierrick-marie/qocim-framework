@@ -26,6 +26,7 @@ import java.util.List;
 import qocim.datamodel.Order;
 import qocim.datamodel.QoCMetaData;
 import qocim.datamodel.QoCMetricDefinition;
+import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
 
@@ -65,17 +66,16 @@ public final class PercentPrecisionQoCMetricDefinition extends QoCMetricDefiniti
 	// # # # # # PUBLIC METHODS # # # # #
 
 	@Override
-	public Double computeQoCMetricValue(final String _contextEntityUri, final String _contextObservableUri,
-			final Date _contextObservationDate, final Double _contextObservationValue,
-			final List<QoCMetaData> _list_qoCMetaData) {
+	public Double computeQoCMetricValue(final QInformation<?> information,
+										final List<QoCMetaData> _list_qoCMetaData) {
 		// - - - - - CHECK THE VALUE OF THE ARGUMENTS - - - - -
 		try {
 			final String message = "PercentPrecisionFactory.computeQoCMetricValue(String, String,  Date, Integer,  List<QoCMetaData>): the argument _contextObservationValue is null.";
-			ConstraintChecker.notNull(_contextObservationValue, message);
+			ConstraintChecker.notNull(information.data(), message);
 		} catch (final ConstraintCheckerException e) {
 			return 0.0;
 		}
 		// - - - - - RETURN STATEMENT - - - - -
-		return valueGenerator.generateMetricValue(_contextObservationValue);
+		return valueGenerator.generateMetricValue((Double) information.data());
 	}
 }

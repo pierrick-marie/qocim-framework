@@ -27,6 +27,7 @@ import java.util.logging.Level;
 
 import qocim.datamodel.QoCMetaData;
 import qocim.datamodel.QoCMetricDefinition;
+import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
 import qocim.datamodel.utils.QoCIMLogger;
@@ -41,14 +42,7 @@ import qocim.tool.functions.IToolFunction;
  * comparing the key of the field <i>map_availableQoCIMFacade</i> with the
  * private field <i>qoCMetricDefinitionId</i>.
  *
- * @see mucontext.datamodel.context.ContextEntity
- * @see mucontext.datamodel.context.ContextObservable
- * @see mucontext.datamodel.context.ContextObservation
- * @see mucontext.datamodel.qocim.QoCMetricDefinition
- * @see mucontext.datamodel.qocim.QoCMetricValue
- * @see mucontext.datamodel.qocim.utils.IQoCIMFacade
- *
- * @author Pierrick MARIE
+ *X @author Pierrick MARIE
  */
 public class ComputeQoCMetricValue implements IToolFunction {
 
@@ -68,29 +62,9 @@ public class ComputeQoCMetricValue implements IToolFunction {
 	 */
 	private final List<QoCMetricDefinition> list_availableQoCMetricDefinition;
 	/**
-	 * The URI of the context entity that constitute the evaluated context
-	 * information.
+	 * The context information.
 	 */
-	private String contextEntityUri;
-	/**
-	 * The URI of the context observable that constitute the evaluated context
-	 * information.
-	 */
-	private String contextObservableUri;
-	/**
-	 * The creation date of the context observation that constitute the
-	 * evaluated context information.
-	 */
-	private Long contextObservationDate;
-	/**
-	 * The value of the context observation that constitute the evaluated
-	 * context information.
-	 */
-	private Double contextObservationValue;
-	/**
-	 * The <i>id</i> of the QoC metric definition used to produce the value of
-	 * the QoC.
-	 */
+	private QInformation information;
 	private String qoCMetricDefinitionId;
 	/**
 	 * The list of the <b>QoCMetaData</b> already associated to the context
@@ -113,10 +87,7 @@ public class ComputeQoCMetricValue implements IToolFunction {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
 		setUpIsDone = false;
 		list_availableQoCMetricDefinition = _list_availableQoCMetricDefinition;
-		contextEntityUri = "";
-		contextObservableUri = "";
-		contextObservationDate = Long.valueOf(0);
-		contextObservationValue = 0.0;
+		information = null;
 		qoCMetricDefinitionId = "";
 		list_qoCMetaData = new ArrayList<QoCMetaData>();
 	}
@@ -151,8 +122,7 @@ public class ComputeQoCMetricValue implements IToolFunction {
 		final QoCMetricDefinition qoCMetricDefinition = searchQoCMetricDefinition();
 		// - - - - - CORE OF THE METHOD - - - - -
 		if (qoCMetricDefinition != null) {
-			ret_qoCMetricValue = qoCMetricDefinition.computeQoCMetricValue(contextEntityUri, contextObservableUri,
-					new Date(contextObservationDate), contextObservationValue, list_qoCMetaData);
+			ret_qoCMetricValue = qoCMetricDefinition.computeQoCMetricValue(information, list_qoCMetaData);
 		} else {
 			ret_qoCMetricValue = 0.0;
 		}
@@ -164,50 +134,34 @@ public class ComputeQoCMetricValue implements IToolFunction {
 	 * The method initializes the arguments of the function
 	 * <i>computeQoCMetricValue</i>.
 	 *
-	 * @param _contextEntityUri
-	 *            The URI of the context entity.
-	 * @param _contextObservableUri
-	 *            The URI of the context observable.
-	 * @param _contextObservationDate
-	 *            The creation date of the context observation.
-	 * @param _contextObservationValue
-	 *            The value of the context observation.
-	 * @param _qoCMetricDefinitionId
+	 * @param information
+	 *            The context observation.
+	 * @param qoCMetricDefinitionId
 	 *            The id of the QoCMetricDefinition used to create the new
 	 *            QoCMetricValue.
-	 * @param _list_qoCMetaData
+	 * @param qoCMetaDataList
 	 *            The list of existing QoCMetricValue associated to the context
 	 *            observation.
 	 * @return <b>this</b>
 	 */
-	public ComputeQoCMetricValue setUp(final String _contextEntityUri, final String _contextObservableUri,
-			final Long _contextObservationDate, final Double _contextObservationValue,
-			final String _qoCMetricDefinitionId, final List<QoCMetaData> _list_qoCMetaData) {
+	public ComputeQoCMetricValue setUp(final QInformation information,
+									   final String qoCMetricDefinitionId, final List<QoCMetaData> qoCMetaDataList) {
 		// - - - - - CHECK THE VALUE OF THE ARGUMENTS - - - - -
 		try {
-			String message = "ComputeQoCMetricValue.setUp(String, String, Long, Integer, String, List<QoCMetaData): the argument _contextEntityUri is null";
-			ConstraintChecker.notNull(_contextEntityUri, message);
-			message = "ComputeQoCMetricValue.setUp(String, String, Long, Integer, String, List<QoCMetaData): the argument _contextObservableUri is null";
-			ConstraintChecker.notNull(_contextObservableUri, message);
-			message = "ComputeQoCMetricValue.setUp(String, String, Long, Integer, String, List<QoCMetaData): the argument _contextObservationDate is null";
-			ConstraintChecker.notNull(_contextObservationDate, message);
-			message = "ComputeQoCMetricValue.setUp(String, String, Long, Integer, String, List<QoCMetaData): the argument _contextObservationValue is null";
-			ConstraintChecker.notNull(_contextObservationValue, message);
-			message = "ComputeQoCMetricValue.setUp(String, String, Long, Integer, String, List<QoCMetaData): the argument _qoCMetricDefinitionId is null";
-			ConstraintChecker.notNull(_qoCMetricDefinitionId, message);
-			message = "ComputeQoCMetricValue.setUp(String, String, Long, Integer, String, List<QoCMetaData): the argument _list_qoCMetaData is null";
-			ConstraintChecker.notNull(_list_qoCMetaData, message);
+			String message = "ComputeQoCMetricValue.setUp(QInformation, String, List<QoCMetaData): the argument information is null";
+			ConstraintChecker.notNull(information, message);
+			message = "ComputeQoCMetricValue.setUp(QInformation, String, List<QoCMetaData): the argument _qoCMetricDefinitionId is null";
+			ConstraintChecker.notNull(qoCMetricDefinitionId, message);
+			message = "ComputeQoCMetricValue.setUp(QInformation, String, List<QoCMetaData): the argument _list_qoCMetaData is null";
+			ConstraintChecker.notNull(qoCMetaDataList, message);
 		} catch (final ConstraintCheckerException e) {
 			setUpIsDone = false;
 			return this;
 		}
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
-		contextEntityUri = _contextEntityUri;
-		contextObservableUri = _contextObservableUri;
-		contextObservationDate = _contextObservationDate;
-		contextObservationValue = _contextObservationValue;
-		qoCMetricDefinitionId = _qoCMetricDefinitionId;
-		list_qoCMetaData = _list_qoCMetaData;
+		this.information = information;
+		this.qoCMetricDefinitionId = qoCMetricDefinitionId;
+		list_qoCMetaData = qoCMetaDataList;
 		setUpIsDone = true;
 		// - - - - - RETURN STATEMENT - - - - -
 		return this;

@@ -33,11 +33,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>muContext.data-model</groupId>
-			<artifactId>muContext-data-model-context</artifactId>
-			<version>0.15.4-SNAPSHOT</version>
-		</dependency>
-		<dependency>
 			<groupId>qocim-tools</groupId>
 			<artifactId>qocim-qocmanagement-functions</artifactId>
 			<version>0.14.2-SNAPSHOT</version>

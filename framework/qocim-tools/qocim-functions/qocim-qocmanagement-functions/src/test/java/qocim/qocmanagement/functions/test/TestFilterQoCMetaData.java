@@ -35,11 +35,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import mucontext.datamodel.context.ContextObservation;
-import mucontext.datamodel.context.ContextReport;
 import qocim.datamodel.QoCIndicator;
 import qocim.datamodel.QoCMetricDefinition;
 import qocim.datamodel.QoCMetricValue;
+import qocim.datamodel.information.InformationImpl;
+import qocim.datamodel.information.QInformation;
 import qocim.datamodel.test.criterion.one.TestCriterionOneFactory;
 import qocim.datamodel.test.criterion.one.TestCriterionOneQoCCriterion;
 import qocim.datamodel.test.criterion.one.TestCriterionOneQoCIndicator;
@@ -56,7 +56,6 @@ import qocim.datamodel.utils.IQoCIMFactory;
 import qocim.datamodel.utils.QoCIMLogger;
 import qocim.qocmanagement.functions.impl.AddQoCIndicator;
 import qocim.qocmanagement.functions.impl.FilterQoCMetaData;
-import qocim.tool.functions.impl.CreateNewMessage;
 import qocim.tool.functions.utils.EBinaryComparator;
 import qocim.tool.functions.utils.EBinaryOperator;
 import qocim.tool.functions.utils.EQoCIdentificator;
@@ -77,15 +76,12 @@ public class TestFilterQoCMetaData {
 
 	// # # # # # PRIVATE VARIABLES # # # # #
 
-	private static ContextObservation<?> testedContextObservation;
-	private static ContextObservation<?> expectedContextObservation;
-	private static ContextReport expectedContextReport;
-	private static ContextReport testedContextReport;
+	private static QInformation<Integer> expectedInformation;
+	private static QInformation<Integer> testedInformation;
 	private static List<QoCMetricValue> list_testedQoCMetricValue;
 	private static List<QoCMetricValue> list_expectedQoCMetricValue;
 	private static FilterQoCMetaData filterQoCMetaData;
 	private static AddQoCIndicator addQoCIndicator;
-	private static CreateNewMessage createNewMessage;
 
 	private QoCFilter qoCFilter;
 
@@ -104,23 +100,17 @@ public class TestFilterQoCMetaData {
 				TestCriterionThreeFactory.getInstance());
 		filterQoCMetaData = new FilterQoCMetaData();
 		addQoCIndicator = new AddQoCIndicator(map_availableQoCIMFacade);
-		createNewMessage = new CreateNewMessage();
 		list_testedQoCMetricValue = new ArrayList<QoCMetricValue>();
 		list_expectedQoCMetricValue = new ArrayList<QoCMetricValue>();
-		createNewMessage.setUp(TEST_CONTEXT_ENTITY_NAME + "_1", TEST_CONTEXT_ENTITY_URI + "/1",
-				TEST_CONTEXT_OBSERVABLE_NAME + "_1", TEST_CONTEXT_OBSERVABLE_URI + "/1", "" + contextObservationId,
-				new Date().getTime(), "" + contextObservationValue, TEST_CONTEXT_OBSERVATION_UNIT);
-		testedContextReport = (ContextReport) createNewMessage.exec();
-		expectedContextReport = (ContextReport) createNewMessage.exec();
-		testedContextObservation = testedContextReport.observations.iterator().next();
-		expectedContextObservation = expectedContextReport.observations.iterator().next();
+		testedInformation = new InformationImpl<Integer>("tested information", new Integer(42));
+		expectedInformation = new InformationImpl<Integer>("expected information", new Integer(42));
 	}
 
 	@Before
 	public void setUp() throws Exception {
 		// - - - - - CORE OF THE METHOD - - - - -
-		expectedContextObservation.list_qoCIndicator.clear();
-		testedContextObservation.list_qoCIndicator.clear();
+		expectedInformation.indicators().clear();
+		testedInformation.indicators().clear();
 	}
 
 	@After
@@ -128,10 +118,10 @@ public class TestFilterQoCMetaData {
 		// - - - - - CORE OF THE METHOD - - - - -
 		list_testedQoCMetricValue.clear();
 		list_expectedQoCMetricValue.clear();
-		for (final QoCIndicator loop_qoCIndicator : testedContextObservation.list_qoCIndicator) {
+		for (final QoCIndicator loop_qoCIndicator : testedInformation.indicators()) {
 			list_testedQoCMetricValue.addAll(loop_qoCIndicator.list_qoCMetricValue);
 		}
-		for (final QoCIndicator loop_qoCIndicator : expectedContextObservation.list_qoCIndicator) {
+		for (final QoCIndicator loop_qoCIndicator : expectedInformation.indicators()) {
 			list_expectedQoCMetricValue.addAll(loop_qoCIndicator.list_qoCMetricValue);
 		}
 		assertEquals(list_expectedQoCMetricValue.size(), list_testedQoCMetricValue.size());
@@ -147,11 +137,11 @@ public class TestFilterQoCMetaData {
 		// - - - - - CORE OF THE METHOD - - - - -
 		addQoCIndicator.setUp(TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionZeroQoCCriterion.ID_DEFAULTVALUE, TestCriterionZeroQoCMetricDefinition.ID_DEFAULTVALUE);
-		addQoCIndicator.exec(testedContextReport);
+		addQoCIndicator.exec(testedInformation);
 		qoCFilter.addQocFilterExpression(new QoCFilterExpression(EQoCIdentificator.QOC_INDICATOR_ID,
 				EBinaryComparator.DIFFERENT, TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE.toString()));
 		filterQoCMetaData.setUp(qoCFilter);
-		filterQoCMetaData.exec(testedContextReport);
+		filterQoCMetaData.exec(testedInformation);
 	}
 
 	@Test
@@ -161,12 +151,12 @@ public class TestFilterQoCMetaData {
 		// - - - - - CORE OF THE METHOD - - - - -
 		addQoCIndicator.setUp(TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionZeroQoCCriterion.ID_DEFAULTVALUE, TestCriterionZeroQoCMetricDefinition.ID_DEFAULTVALUE);
-		addQoCIndicator.exec(testedContextReport);
-		expectedContextObservation.list_qoCIndicator.addAll(testedContextObservation.list_qoCIndicator);
+		addQoCIndicator.exec(testedInformation);
+		expectedInformation.indicators().addAll(testedInformation.indicators());
 		qoCFilter.addQocFilterExpression(new QoCFilterExpression(EQoCIdentificator.QOC_INDICATOR_ID,
 				EBinaryComparator.EQUALS, TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE.toString()));
 		filterQoCMetaData.setUp(qoCFilter);
-		filterQoCMetaData.exec(testedContextReport);
+		filterQoCMetaData.exec(testedInformation);
 	}
 
 	@Test
@@ -176,12 +166,12 @@ public class TestFilterQoCMetaData {
 		// - - - - - CORE OF THE METHOD - - - - -
 		addQoCIndicator.setUp(TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionZeroQoCCriterion.ID_DEFAULTVALUE, TestCriterionZeroQoCMetricDefinition.ID_DEFAULTVALUE);
-		addQoCIndicator.exec(testedContextReport);
-		addQoCIndicator.exec(testedContextReport);
+		addQoCIndicator.exec(testedInformation);
+		addQoCIndicator.exec(testedInformation);
 		qoCFilter.addQocFilterExpression(new QoCFilterExpression(EQoCIdentificator.QOC_INDICATOR_ID,
 				EBinaryComparator.DIFFERENT, TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE.toString()));
 		filterQoCMetaData.setUp(qoCFilter);
-		filterQoCMetaData.exec(testedContextReport);
+		filterQoCMetaData.exec(testedInformation);
 	}
 
 	@Test
@@ -191,13 +181,13 @@ public class TestFilterQoCMetaData {
 		// - - - - - CORE OF THE METHOD - - - - -
 		addQoCIndicator.setUp(TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionZeroQoCCriterion.ID_DEFAULTVALUE, TestCriterionZeroQoCMetricDefinition.ID_DEFAULTVALUE);
-		addQoCIndicator.exec(testedContextReport);
-		addQoCIndicator.exec(testedContextReport);
-		expectedContextObservation.list_qoCIndicator.addAll(testedContextObservation.list_qoCIndicator);
+		addQoCIndicator.exec(testedInformation);
+		addQoCIndicator.exec(testedInformation);
+		expectedInformation.indicators().addAll(testedInformation.indicators());
 		qoCFilter.addQocFilterExpression(new QoCFilterExpression(EQoCIdentificator.QOC_INDICATOR_ID,
 				EBinaryComparator.EQUALS, TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE.toString()));
 		filterQoCMetaData.setUp(qoCFilter);
-		filterQoCMetaData.exec(testedContextReport);
+		filterQoCMetaData.exec(testedInformation);
 	}
 
 	@Test
@@ -207,16 +197,16 @@ public class TestFilterQoCMetaData {
 		// - - - - - CORE OF THE METHOD - - - - -
 		addQoCIndicator.setUp(TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionZeroQoCCriterion.ID_DEFAULTVALUE, TestCriterionZeroQoCMetricDefinition.ID_DEFAULTVALUE);
-		addQoCIndicator.exec(testedContextReport);
+		addQoCIndicator.exec(testedInformation);
 		addQoCIndicator.setUp(TestCriterionOneQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionOneQoCCriterion.ID_DEFAULTVALUE, TestCriterionOneQoCMetricDefinition.ID_DEFAULTVALUE);
-		addQoCIndicator.exec(testedContextReport);
+		addQoCIndicator.exec(testedInformation);
 		qoCFilter.addQocFilterExpression(new QoCFilterExpression(EQoCIdentificator.QOC_INDICATOR_ID,
 				EBinaryComparator.EQUALS, TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE.toString()));
 		qoCFilter.addQocFilterExpression(new QoCFilterExpression(EQoCIdentificator.QOC_INDICATOR_ID,
 				EBinaryComparator.EQUALS, TestCriterionOneQoCIndicator.ID_DEFAULTVALUE.toString()));
 		filterQoCMetaData.setUp(qoCFilter);
-		filterQoCMetaData.exec(testedContextReport);
+		filterQoCMetaData.exec(testedInformation);
 	}
 
 	@Test
@@ -226,17 +216,17 @@ public class TestFilterQoCMetaData {
 		// - - - - - CORE OF THE METHOD - - - - -
 		addQoCIndicator.setUp(TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionZeroQoCCriterion.ID_DEFAULTVALUE, TestCriterionZeroQoCMetricDefinition.ID_DEFAULTVALUE);
-		addQoCIndicator.exec(testedContextReport);
+		addQoCIndicator.exec(testedInformation);
 		addQoCIndicator.setUp(TestCriterionOneQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionOneQoCCriterion.ID_DEFAULTVALUE, TestCriterionOneQoCMetricDefinition.ID_DEFAULTVALUE);
-		addQoCIndicator.exec(testedContextReport);
-		expectedContextObservation.list_qoCIndicator.addAll(testedContextObservation.list_qoCIndicator);
+		addQoCIndicator.exec(testedInformation);
+		expectedInformation.indicators().addAll(testedInformation.indicators());
 		qoCFilter.addQocFilterExpression(new QoCFilterExpression(EQoCIdentificator.QOC_INDICATOR_ID,
 				EBinaryComparator.EQUALS, TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE.toString()));
 		qoCFilter.addQocFilterExpression(new QoCFilterExpression(EQoCIdentificator.QOC_INDICATOR_ID,
 				EBinaryComparator.EQUALS, TestCriterionOneQoCIndicator.ID_DEFAULTVALUE.toString()));
 		filterQoCMetaData.setUp(qoCFilter);
-		filterQoCMetaData.exec(testedContextReport);
+		filterQoCMetaData.exec(testedInformation);
 	}
 
 	@Test
@@ -246,18 +236,18 @@ public class TestFilterQoCMetaData {
 		// - - - - - CORE OF THE METHOD - - - - -
 		addQoCIndicator.setUp(TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionZeroQoCCriterion.ID_DEFAULTVALUE, TestCriterionZeroQoCMetricDefinition.ID_DEFAULTVALUE);
-		addQoCIndicator.exec(testedContextReport);
-		addQoCIndicator.exec(testedContextReport);
+		addQoCIndicator.exec(testedInformation);
+		addQoCIndicator.exec(testedInformation);
 		addQoCIndicator.setUp(TestCriterionOneQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionOneQoCCriterion.ID_DEFAULTVALUE, TestCriterionOneQoCMetricDefinition.ID_DEFAULTVALUE);
-		addQoCIndicator.exec(testedContextReport);
-		addQoCIndicator.exec(testedContextReport);
+		addQoCIndicator.exec(testedInformation);
+		addQoCIndicator.exec(testedInformation);
 		qoCFilter.addQocFilterExpression(new QoCFilterExpression(EQoCIdentificator.QOC_INDICATOR_ID,
 				EBinaryComparator.EQUALS, TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE.toString()));
 		qoCFilter.addQocFilterExpression(new QoCFilterExpression(EQoCIdentificator.QOC_INDICATOR_ID,
 				EBinaryComparator.EQUALS, TestCriterionOneQoCIndicator.ID_DEFAULTVALUE.toString()));
 		filterQoCMetaData.setUp(qoCFilter);
-		filterQoCMetaData.exec(testedContextReport);
+		filterQoCMetaData.exec(testedInformation);
 	}
 
 	@Test
@@ -267,19 +257,19 @@ public class TestFilterQoCMetaData {
 		// - - - - - CORE OF THE METHOD - - - - -
 		addQoCIndicator.setUp(TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionZeroQoCCriterion.ID_DEFAULTVALUE, TestCriterionZeroQoCMetricDefinition.ID_DEFAULTVALUE);
-		addQoCIndicator.exec(testedContextReport);
-		addQoCIndicator.exec(testedContextReport);
+		addQoCIndicator.exec(testedInformation);
+		addQoCIndicator.exec(testedInformation);
 		addQoCIndicator.setUp(TestCriterionOneQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionOneQoCCriterion.ID_DEFAULTVALUE, TestCriterionOneQoCMetricDefinition.ID_DEFAULTVALUE);
-		addQoCIndicator.exec(testedContextReport);
-		addQoCIndicator.exec(testedContextReport);
-		expectedContextObservation.list_qoCIndicator.addAll(testedContextObservation.list_qoCIndicator);
+		addQoCIndicator.exec(testedInformation);
+		addQoCIndicator.exec(testedInformation);
+		expectedInformation.indicators().addAll(testedInformation.indicators());
 		qoCFilter.addQocFilterExpression(new QoCFilterExpression(EQoCIdentificator.QOC_INDICATOR_ID,
 				EBinaryComparator.EQUALS, TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE.toString()));
 		qoCFilter.addQocFilterExpression(new QoCFilterExpression(EQoCIdentificator.QOC_INDICATOR_ID,
 				EBinaryComparator.EQUALS, TestCriterionOneQoCIndicator.ID_DEFAULTVALUE.toString()));
 		filterQoCMetaData.setUp(qoCFilter);
-		filterQoCMetaData.exec(testedContextReport);
+		filterQoCMetaData.exec(testedInformation);
 	}
 
 	@Test

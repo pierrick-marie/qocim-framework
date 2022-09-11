@@ -25,10 +25,10 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ TestComputeQoCMetricId.class, TestCreateNewMessage.class, TestContextReportComparable.class, TestGetListQoCPrimitiveMetricDefinition.class,
+@SuiteClasses({ TestComputeQoCMetricId.class, TestGetListQoCPrimitiveMetricDefinition.class,
 	TestGetMostRecentQoCMetaData.class, TestIsCompositeQoCCriterion.class, TestIsCompositeQoCMetricDefinition.class,
-	TestMatchingQoCFilterUnaryOperator.class, TestMatchingQoCFilterBinaryOperator.class, TestMessageComparable.class, TestMessageEqual.class,
-	TestObservationComparable.class, TestObservationEqual.class, TestQoCMetaDataComparable.class, TestQoCMetaDataEqual.class })
+	TestMatchingQoCFilterUnaryOperator.class, TestMatchingQoCFilterBinaryOperator.class,
+	TestQoCMetaDataComparable.class, TestQoCMetaDataEqual.class })
 public class ToolFunctionTests {
 
 }

@@ -20,7 +20,7 @@
 	</parent>
 
 	<artifactId>qocim-common-functions</artifactId>
-	<name>The QoCIM-based data flow management functions</name>
+	<name>QoCIM-based data flow management functions</name>
 	<description>Functions used to manage context data flow.</description>
 	<packaging>jar</packaging>
 
@@ -33,9 +33,15 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>muContext.data-model</groupId>
-			<artifactId>muContext-data-model-context</artifactId>
-			<version>0.15.4-SNAPSHOT</version>
+			<groupId>qocim-common</groupId>
+			<artifactId>qocim-common</artifactId>
+			<version>0.14.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>qocim</groupId>
+			<artifactId>qocim-common</artifactId>
+			<version>0.14.2-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 

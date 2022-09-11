@@ -20,7 +20,8 @@
  */
 package qocim.functions;
 
-import mucontext.datamodel.context.ContextReport;
+
+import qocim.datamodel.information.QInformation;
 
 /**
  * ICDFMFunctionResultListener is the interface used to define the listener that
@@ -38,9 +39,9 @@ public interface IQoCIMFunctionListener {
      * This method is used to notify the listener when a new context reporthas
      * been produced by a function.
      *
-     * @param _newContextReport
+     * @param QInformation
      *            The new information.
      */
-    void newInformation(ContextReport _contextReport);
+    void newInformation(QInformation _information);
 
 }

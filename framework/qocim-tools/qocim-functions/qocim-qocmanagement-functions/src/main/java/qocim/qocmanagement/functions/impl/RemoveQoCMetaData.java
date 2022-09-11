@@ -23,8 +23,7 @@ package qocim.qocmanagement.functions.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import mucontext.datamodel.context.ContextObservation;
-import mucontext.datamodel.context.ContextReport;
+import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
 import qocim.datamodel.utils.QoCIMLogger;
@@ -61,22 +60,20 @@ public class RemoveQoCMetaData implements IQoCManagementFunction {
 	 * report.
 	 */
 	@Override
-	public ContextReport exec(final ContextReport _contextReport) {
+	public QInformation exec(final QInformation information) {
 		// - - - - - CHECK THE VALUE OF THE ARGUMENTS - - - - -
 		try {
-			final String message = "RemoveQoCMetaData.exec(ContextReport): the argument _contextReport is null.";
-			ConstraintChecker.notNull(_contextReport, message);
+			final String message = "RemoveQoCMetaData.exec(ContextReport): the argument information is null.";
+			ConstraintChecker.notNull(information, message);
 		} catch (final ConstraintCheckerException e) {
-			return _contextReport;
+			return information;
 		}
 		// - - - - - CORE OF THE METHOD - - - - -
 		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
-		for (final ContextObservation<?> loop_contextObservation : _contextReport.observations) {
-			loop_contextObservation.list_qoCIndicator.clear();
-		}
+		information.indicators().clear();
 		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
 		// - - - - - RETURN STATEMENT - - - - -
-		return _contextReport;
+		return information;
 	}
 
 	@Override

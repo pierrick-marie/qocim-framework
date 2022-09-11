@@ -51,18 +51,18 @@ public class PercentPrecisionQoCMetricValueGenerator {
 
 	// # # # # # PUBLIC METHODS # # # # #
 
-	public synchronized Double generateMetricValue(final Double _contextObservationValue) {
+	public synchronized Double generateMetricValue(final Double informationValue) {
 		// - - - - - CHECK THE VALUE OF THE ARGUMENTS - - - - -
 		try {
-			final String message = "PercentPrecisionQoCMetricValueGenerator.generateMetricValue(Integer): the argument _contextObservationValue is null";
-			ConstraintChecker.notNull(_contextObservationValue, message);
+			final String message = "PercentPrecisionQoCMetricValueGenerator.generateMetricValue(Integer): the argument informationValue is null";
+			ConstraintChecker.notNull(informationValue, message);
 		} catch (final ConstraintCheckerException e) {
 			return 0.0;
 		}
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
 		Double ret_precisionValue = PercentPrecisionQoCMetricDefinition.MIN_VALUE_DEFAULTVALUE;
 		Double relativeInsertionPosition = 0.0;
-		Integer insertionPositionContextObservationValue = observationValueSortedList.put(_contextObservationValue);
+		Integer insertionPositionContextObservationValue = observationValueSortedList.put(informationValue);
 		// - - - - - CORE OF THE METHOD - - - - -
 		if (insertionPositionContextObservationValue > observationValueSortedList.size() / 2.0) {
 			insertionPositionContextObservationValue = observationValueSortedList.size()

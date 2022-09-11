@@ -20,7 +20,7 @@
 	</parent>
 
 	<artifactId>qocim-functions</artifactId>
-	<name>The QoCIM-based functions.</name>
+	<name>QoCIM-based functions</name>
 	<packaging>pom</packaging>
 	<description>The functions used to manipulate context information and QoC meta-data.</description>
 
@@ -35,7 +35,7 @@
 		<module>qocim-common-functions</module>
 		<module>qocim-tool-functions</module>
 		<module>qocim-qocmanagement-functions</module>
-		<module>qocim-cdfm-functions</module>
+<!--		<module>qocim-cdfm-functions</module>-->
 	</modules>
 
 </project>

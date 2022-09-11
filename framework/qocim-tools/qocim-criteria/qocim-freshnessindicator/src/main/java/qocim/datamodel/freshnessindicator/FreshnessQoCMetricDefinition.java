@@ -26,6 +26,7 @@ import java.util.List;
 import qocim.datamodel.Order;
 import qocim.datamodel.QoCMetaData;
 import qocim.datamodel.QoCMetricDefinition;
+import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
 
@@ -60,19 +61,18 @@ public class FreshnessQoCMetricDefinition extends QoCMetricDefinition {
 	// # # # # # PUBLIC METHODS # # # # #
 
 	@Override
-	public Double computeQoCMetricValue(final String _contextEntityUri, final String _contextObservableUri,
-			final Date _contextObservationDate, final Double _contextObservationValue,
-			final List<QoCMetaData> _list_qoCMetaData) {
+	public Double computeQoCMetricValue(final QInformation<?> informaiton,
+										final List<QoCMetaData> _list_qoCMetaData) {
 		// - - - - - CHECK THE VALUE OF THE ARGUMENTS - - - - -
 		try {
 			final String message = "FreshnessFactory.computeQoCMetricValue(String, String, Date, Integer, List<QoCMetaData>): the argument _contextObservationDate is null.";
-			ConstraintChecker.notNull(_contextObservationDate, message);
+			ConstraintChecker.notNull(informaiton.creationDate(), message);
 		} catch (final ConstraintCheckerException e) {
 			return 0.0;
 		}
 		// - - - - - CORE OF THE METHOD - - - - -
 		final Date currentDate = new Date();
-		final Double ret_value = (currentDate.getTime() - _contextObservationDate.getTime()) / 1000.0;
+		final Double ret_value = (currentDate.getTime() - informaiton.creationDate().getTime()) / 1000.0;
 		// - - - - - RETURN STATEMENT - - - - -
 		return ret_value;
 	}

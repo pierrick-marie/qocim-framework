@@ -20,12 +20,14 @@
  */
 package qocim.datamodel.spatialresolutionindicator;
 
-import java.util.Date;
-import java.util.List;
-
 import qocim.datamodel.Order;
 import qocim.datamodel.QoCMetaData;
 import qocim.datamodel.QoCMetricDefinition;
+import qocim.datamodel.information.QInformation;
+
+import java.util.Date;
+import java.util.List;
+
 
 public final class SpatialResolutionQoCMetricDefinition extends QoCMetricDefinition {
 
@@ -58,9 +60,8 @@ public final class SpatialResolutionQoCMetricDefinition extends QoCMetricDefinit
 	// # # # # # PUBLIC METHODS # # # # #
 
 	@Override
-	public Double computeQoCMetricValue(final String _contextEntityUri, final String _contextObservableUri,
-			final Date _contextObservationDate, final Double _contextObservationValue,
-			final List<QoCMetaData> _list_qoCMetaData) {
+	public Double computeQoCMetricValue(final QInformation<?> information,
+										final List<QoCMetaData> _list_qoCMetaData) {
 		// - - - - - RETURN STATEMENT - - - - -
 		return 0.0;
 	}

@@ -20,7 +20,7 @@
 	</parent>
 
 	<artifactId>qocim-criteria</artifactId>
-	<name>The QoCIM-based QoC criteria</name>
+	<name>QoCIM-based QoC criteria</name>
 	<packaging>pom</packaging>
 	<description>Modelling QoC criteria with the QoCIM model</description>
 

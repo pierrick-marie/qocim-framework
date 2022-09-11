@@ -23,8 +23,8 @@ package qocim.qocmanagement.functions.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import mucontext.datamodel.context.ContextReport;
 import qocim.datamodel.QoCMetricDefinition;
+import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.IQoCIMFactory;
 import qocim.tool.functions.utils.QoCFilter;
 
@@ -44,7 +44,7 @@ public class QoCManagementFunctionFacade {
 	 * This method adds a new QoC indicator into the QoC meta-data of a context
 	 * report.
 	 *
-	 * @param _message
+	 * @param information
 	 *            The context report that will receive the new QoC indicator.
 	 * @param _qoCIndicatorId
 	 *            The <i>id</i> of the QoC indicator inserted into the QoC
@@ -57,54 +57,54 @@ public class QoCManagementFunctionFacade {
 	 *            QoC meta-data of the context report.
 	 * @return The context report modified by the method.
 	 */
-	public static ContextReport addQoCIndicator(final ContextReport _message, final Integer _qoCIndicatorId,
-			final String _qoCCriterionId, final String _qoCMetricDefinitionId) {
+	public static QInformation addQoCIndicator(final QInformation information, final Integer _qoCIndicatorId,
+											   final String _qoCCriterionId, final String _qoCMetricDefinitionId) {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
 		final AddQoCIndicator addQoCIndicator = new AddQoCIndicator(map_availableQoCIMFacade);
 		// - - - - - CORE OF THE METHOD - - - - -
 		addQoCIndicator.setUp(_qoCIndicatorId, _qoCCriterionId, _qoCMetricDefinitionId);
 		// - - - - - RETURN STATEMENT - - - - -
-		return addQoCIndicator.exec(_message);
+		return addQoCIndicator.exec(information);
 	}
 
 	/**
 	 * The method removes the QoC meta-data of a context report that does not
 	 * respect the constraints expressed into a QoC filter.
 	 *
-	 * @param _message
+	 * @param information
 	 *            The context report analyzed by the method.
 	 * @param _qoCFilter
 	 *            The QoC filter that contains the constraints.
 	 * @return The context report modified by the method.
 	 */
-	public static ContextReport filterQoCMetaData(final ContextReport _message, final QoCFilter _qoCFilter) {
+	public static QInformation filterQoCMetaData(final QInformation information, final QoCFilter _qoCFilter) {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
 		final FilterQoCMetaData filterQoCMetaData = new FilterQoCMetaData();
 		// - - - - - CORE OF THE METHOD - - - - -
 		filterQoCMetaData.setUp(_qoCFilter);
 		// - - - - - RETURN STATEMENT - - - - -
-		return filterQoCMetaData.exec(_message);
+		return filterQoCMetaData.exec(information);
 	}
 
 	/**
 	 * The method removes all the QoC meta-data of a context report.
 	 *
-	 * @param _message
+	 * @param information
 	 *            The context report with QoC meta-data.
 	 * @return The context report without QoC meta-data.
 	 */
-	public static ContextReport removeQoCMetaData(final ContextReport _message) {
+	public static QInformation removeQoCMetaData(final QInformation information) {
 		// - - - - - CORE OF THE METHOD - - - - -
 		final RemoveQoCMetaData removeQoCMetaData = new RemoveQoCMetaData();
 		// - - - - - RETURN STATEMENT - - - - -
-		return removeQoCMetaData.exec(_message);
+		return removeQoCMetaData.exec(information);
 	}
 
 	/**
 	 * The method removes one QoC metric value from the QoC meta-data of a
 	 * context report.
 	 *
-	 * @param _message
+	 * @param information
 	 *            The context report that contains the QoC metric value that
 	 *            will be removed.
 	 * @param _qoCMetricValueId
@@ -114,46 +114,46 @@ public class QoCManagementFunctionFacade {
 	 *            metric value that will be removed.
 	 * @return The context report modified by the method.
 	 */
-	public static ContextReport removeQoCMetricValue(final ContextReport _message, final String _qoCMetricValueId,
+	public static QInformation removeQoCMetricValue(final QInformation information, final String _qoCMetricValueId,
 			final Integer _qoCIndicatorId) {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
 		final RemoveQoCMetricValue removeQoCMetricValue = new RemoveQoCMetricValue();
 		// - - - - - CORE OF THE METHOD - - - - -
 		removeQoCMetricValue.setUp(_qoCMetricValueId, _qoCIndicatorId);
 		// - - - - - RETURN STATEMENT - - - - -
-		return removeQoCMetricValue.exec(_message);
+		return removeQoCMetricValue.exec(information);
 	}
 
 	/**
 	 * The method updates the value of all QoC meta-data of a context report.
 	 *
-	 * @param _message
+	 * @param information
 	 *            The context report with QoC meta-data.
 	 * @return The context report with the updated QoC meta-data.
 	 */
-	public static ContextReport updateQoCMetaData(final ContextReport _message) {
+	public static QInformation<?> updateQoCMetaData(final QInformation<?> information) {
 		// - - - - - CORE OF THE METHOD - - - - -
 		final UpdateQoCMetaData updateQoCMetaData = new UpdateQoCMetaData(map_availableQoCIMFacade);
 		// - - - - - RETURN STATEMENT - - - - -
-		return updateQoCMetaData.exec(_message);
+		return updateQoCMetaData.exec(information);
 	}
 
 	/**
 	 * The method updates the value of one QoC metric value from the QoC
 	 * meta-data of a context report.
 	 *
-	 * @param _message
+	 * @param information
 	 * @param _qoCMetricValueId
 	 * @param _qoCIndicatorId
 	 * @return
 	 */
-	public static ContextReport updateQoCMetricValue(final ContextReport _message, final String _qoCMetricValueId,
+	public static QInformation<?> updateQoCMetricValue(final QInformation<?> information, final String _qoCMetricValueId,
 			final Integer _qoCIndicatorId) {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
 		final UpdateQoCMetricValue updateQoCMetricValue = new UpdateQoCMetricValue(map_availableQoCIMFacade);
 		// - - - - - CORE OF THE METHOD - - - - -
 		updateQoCMetricValue.setUp(_qoCMetricValueId, _qoCIndicatorId);
 		// - - - - - RETURN STATEMENT - - - - -
-		return updateQoCMetricValue.exec(_message);
+		return updateQoCMetricValue.exec(information);
 	}
 }

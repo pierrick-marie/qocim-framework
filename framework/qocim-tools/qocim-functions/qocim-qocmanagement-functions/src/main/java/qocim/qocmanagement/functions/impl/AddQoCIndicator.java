@@ -25,14 +25,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import mucontext.datamodel.context.ContextEntity;
-import mucontext.datamodel.context.ContextObservable;
-import mucontext.datamodel.context.ContextObservation;
-import mucontext.datamodel.context.ContextReport;
 import qocim.datamodel.QoCIMFacade;
 import qocim.datamodel.QoCIndicator;
 import qocim.datamodel.QoCMetaData;
 import qocim.datamodel.QoCMetricDefinition;
+import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
 import qocim.datamodel.utils.IQoCIMFactory;
@@ -53,14 +50,6 @@ import qocim.tool.functions.impl.ComputeQoCMetricValue;
  * meta-data, the indicator is inserted, else only the QoC metric value is
  * inserted in the QoC meta-data. To realize it, the function uses the
  * <b>QoCIMFacade</b> provided by the maven module QoCIM-common.
- *
- * @see mucontext.datamodel.qocim.QoCIndicator
- * @see mucontext.datamodel.qocim.QoCCriterion
- * @see mucontext.datamodel.qocim.QoCMetricDefinition
- * @see mucontext.datamodel.qocim.QoCMetricValue
- * @see mucontext.datamodel.qocim.QoCIMFacade
- * @see mucontext.datamodel.context.ContextReport
- * @see mucontext.datamodel.context.ContextObservation
  *
  * @author Pierrick MARIE
  */
@@ -143,27 +132,17 @@ public class AddQoCIndicator implements IQoCManagementFunction {
 	 * indicator in the the corresponding context observation.
 	 */
 	@Override
-	public ContextReport exec(final ContextReport _contextReport) {
+	public QInformation exec(final QInformation information) {
 		// - - - - - CHECK THE VALUE OF THE ARGUMENTS - - - - -
 		try {
 			String message = "AddQoCIndicator.exec() method setup(Integer, String, String) have to be called before.";
 			ConstraintChecker.assertTrue(setUpIsDone, message);
 			message = "AddQoCIndicator.exec(ContextReport): the argument _contextReport is null.";
-			ConstraintChecker.notNull(_contextReport, message);
+			ConstraintChecker.notNull(information, message);
 		} catch (final ConstraintCheckerException e) {
-			return _contextReport;
+			return information;
 		}
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
-		/*
-		 * The context entity associated to the context observation that is
-		 * modified.
-		 */
-		ContextEntity contextEntity;
-		/*
-		 * The context observable associated to the context observation that is
-		 * modified.
-		 */
-		ContextObservable contextObservable;
 		/*
 		 * The list of QoC meta-data associated to the context observation that
 		 * is modified.
@@ -186,19 +165,16 @@ public class AddQoCIndicator implements IQoCManagementFunction {
 		QoCIndicator new_qoCIndicator;
 		// - - - - - CORE OF THE METHOD - - - - -
 		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
-		for (final ContextObservation<?> loop_contextObservation : _contextReport.observations) {
-			contextObservable = loop_contextObservation.observable;
-			contextEntity = contextObservable.entity;
-			list_qoCMetaData = getListQoCMetaData(loop_contextObservation);
+
+			list_qoCMetaData = getListQoCMetaData(information);
 			new_qoCMetricValueId = computeQoCMetricValueId(list_qoCMetaData);
-			new_qoCMetricValueValue = computeQoCMetricValueValue(loop_contextObservation, contextObservable,
-					contextEntity, list_qoCMetaData);
+			new_qoCMetricValueValue = computeQoCMetricValueValue(information, list_qoCMetaData);
 			new_qoCIndicator = createNewQoCIndicator(new_qoCMetricValueId, new_qoCMetricValueValue);
-			insertNewQoCIndicator(loop_contextObservation, new_qoCIndicator);
-		}
+			insertNewQoCIndicator(information, new_qoCIndicator);
+
 		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
 		// - - - - - RETURN STATEMENT - - - - -
-		return _contextReport;
+		return information;
 	}
 
 	/**
@@ -300,23 +276,17 @@ public class AddQoCIndicator implements IQoCManagementFunction {
 	 * have to be inserted. To do it, the method uses the tool functions
 	 * <i>computeQoCMetricId</i> and <i>computeQoCMetricValue</i>.
 	 *
-	 * @param _contextObservation
-	 *            The context observation used to compute the value of the QoC.
-	 * @param contextObservable
-	 *            The context observable associated to the context observation.
-	 * @param contextEntity
-	 *            The context entity associated to the context observable
+	 * @param information
+	 *            The context information
 	 * @param list_qoCMetaData
 	 *            The list of the QoC meta-data associated to the context
 	 *            observation.
 	 * @return
 	 */
-	private Double computeQoCMetricValueValue(final ContextObservation<?> _contextObservation,
-			final ContextObservable contextObservable, final ContextEntity contextEntity,
+	private Double computeQoCMetricValueValue(final QInformation information,
 			final List<QoCMetaData> list_qoCMetaData) {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
-		computeQoCMetricValue.setUp(contextEntity.uri.toString(), contextObservable.uri.toString(),
-				_contextObservation.date.getTime(), Double.valueOf(_contextObservation.value + ""),
+		computeQoCMetricValue.setUp(information,
 				qoCMetricDefinitionId, list_qoCMetaData);
 		// - - - - - RETURN STATEMENT - - - - -
 		return (Double) computeQoCMetricValue.exec();
@@ -365,12 +335,12 @@ public class AddQoCIndicator implements IQoCManagementFunction {
 	 * The method creates a list containing all the QoC meta-data associated to
 	 * a context observation.
 	 *
-	 * @param _contextObservation
+	 * @param information
 	 *            The context observation used to create the list of QoC
 	 *            meta-data.
 	 * @return The list of QoC meta-data.
 	 */
-	private List<QoCMetaData> getListQoCMetaData(final ContextObservation<?> _contextObservation) {
+	private List<QoCMetaData> getListQoCMetaData(final QInformation<?> information) {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
 		/*
 		 * The returned list of the QoC meta-data associated to
@@ -378,7 +348,7 @@ public class AddQoCIndicator implements IQoCManagementFunction {
 		 */
 		final List<QoCMetaData> ret_listQoCMetaData = new ArrayList<QoCMetaData>();
 		// - - - - - CORE OF THE METHOD - - - - -
-		for (final QoCIndicator indicator : _contextObservation.list_qoCIndicator) {
+		for (final QoCIndicator indicator : information.indicators()) {
 			ret_listQoCMetaData.addAll(QoCIMFacade.createListQoCMetaData(indicator));
 		}
 		// - - - - - RETURN STATEMENT - - - - -
@@ -391,13 +361,13 @@ public class AddQoCIndicator implements IQoCManagementFunction {
 	 * QoC meta-data of the context observation, only its associated QoC metric
 	 * value is inserted into the existing QoC indicator.
 	 *
-	 * @param _contextObservation
+	 * @param information
 	 *            The context observation that will receive the QiC indicator.
 	 * @param _qoCIndicator
 	 *            The QoC indicator inserted into the QoC meta-data of the
 	 *            context observation.
 	 */
-	private void insertNewQoCIndicator(final ContextObservation<?> _contextObservation,
+	private void insertNewQoCIndicator(final QInformation<?> information,
 			final QoCIndicator _qoCIndicator) {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
 		/*
@@ -406,14 +376,14 @@ public class AddQoCIndicator implements IQoCManagementFunction {
 		 */
 		Boolean found_qoCIndicator = false;
 		// - - - - - CORE OF THE METHOD - - - - -
-		for (final QoCIndicator loop_qoCIndicator : _contextObservation.list_qoCIndicator) {
+		for (final QoCIndicator loop_qoCIndicator : information.indicators()) {
 			if (loop_qoCIndicator.equals(_qoCIndicator)) {
 				QoCIMFacade.addQoCMetricValue(_qoCIndicator.list_qoCMetricValue.getFirst(), loop_qoCIndicator);
 				found_qoCIndicator = true;
 			}
 		}
 		if (!found_qoCIndicator) {
-			_contextObservation.list_qoCIndicator.add(_qoCIndicator);
+			information.indicators().add(_qoCIndicator);
 		}
 	}
 }

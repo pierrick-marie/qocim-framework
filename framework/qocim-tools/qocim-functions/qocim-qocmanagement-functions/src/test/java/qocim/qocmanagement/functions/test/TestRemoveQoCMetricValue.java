@@ -36,11 +36,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import mucontext.datamodel.context.ContextObservation;
-import mucontext.datamodel.context.ContextReport;
 import qocim.datamodel.QoCIndicator;
 import qocim.datamodel.QoCMetricDefinition;
 import qocim.datamodel.QoCMetricValue;
+import qocim.datamodel.information.InformationImpl;
+import qocim.datamodel.information.QInformation;
 import qocim.datamodel.test.criterion.one.TestCriterionOneFactory;
 import qocim.datamodel.test.criterion.one.TestCriterionOneQoCCriterion;
 import qocim.datamodel.test.criterion.one.TestCriterionOneQoCIndicator;
@@ -57,7 +57,6 @@ import qocim.datamodel.utils.IQoCIMFactory;
 import qocim.datamodel.utils.QoCIMLogger;
 import qocim.qocmanagement.functions.impl.AddQoCIndicator;
 import qocim.qocmanagement.functions.impl.RemoveQoCMetricValue;
-import qocim.tool.functions.impl.CreateNewMessage;
 
 public class TestRemoveQoCMetricValue {
 
@@ -75,12 +74,10 @@ public class TestRemoveQoCMetricValue {
 	private static List<QoCMetricValue> new_list_qoCMetricValue;
 	private static RemoveQoCMetricValue removeQoCMetricValue;
 	private static AddQoCIndicator addQoCIndicator;
-	private static CreateNewMessage createNewMessage;
 	private static Integer contextObservationId = 69;
 	private static Integer contextObservationValue = 42;
 
-	private ContextObservation<?> contextObservation = null;
-	private ContextReport contextReport;
+	private QInformation<?> information = null;
 	private QoCMetricValue removed_QoCMetricValue;
 
 	// # # # # # PUBLIC METHODS # # # # #
@@ -98,7 +95,6 @@ public class TestRemoveQoCMetricValue {
 				TestCriterionThreeFactory.getInstance());
 		removeQoCMetricValue = new RemoveQoCMetricValue();
 		addQoCIndicator = new AddQoCIndicator(map_availableQoCIMFacade);
-		createNewMessage = new CreateNewMessage();
 		old_list_qoCMetricValue = new ArrayList<QoCMetricValue>();
 		new_list_qoCMetricValue = new ArrayList<QoCMetricValue>();
 	}
@@ -106,11 +102,7 @@ public class TestRemoveQoCMetricValue {
 	@Before
 	public void setUp() throws Exception {
 		// - - - - - CORE OF THE METHOD - - - - -
-		createNewMessage.setUp(TEST_CONTEXT_ENTITY_NAME + "_1", TEST_CONTEXT_ENTITY_URI + "/1",
-				TEST_CONTEXT_OBSERVABLE_NAME + "_1", TEST_CONTEXT_OBSERVABLE_URI + "/1", "" + contextObservationId,
-				new Date().getTime(), "" + contextObservationValue, TEST_CONTEXT_OBSERVATION_UNIT);
-		contextReport = (ContextReport) createNewMessage.exec();
-		contextObservation = contextReport.observations.iterator().next();
+		information = new InformationImpl<>("Test information", new Integer(42));
 		old_list_qoCMetricValue.clear();
 		new_list_qoCMetricValue.clear();
 	}
@@ -119,13 +111,13 @@ public class TestRemoveQoCMetricValue {
 	public final void execTest() {
 		// - - - - - CORE OF THE METHOD - - - - -
 		initOldListQoCMetricValue();
-		for (final QoCIndicator loop_qoCIndicator : contextObservation.list_qoCIndicator) {
+		for (final QoCIndicator loop_qoCIndicator : information.indicators()) {
 			if (loop_qoCIndicator.id().equals(TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE)) {
 				removed_QoCMetricValue = loop_qoCIndicator.list_qoCMetricValue.getFirst();
 			}
 		}
 		removeQoCMetricValue.setUp(removed_QoCMetricValue.id(), TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE);
-		contextReport = removeQoCMetricValue.exec(contextReport);
+		information = removeQoCMetricValue.exec(information);
 		initNewListQoCMetricValue();
 		compareListQoCMetricValues();
 	}
@@ -135,7 +127,7 @@ public class TestRemoveQoCMetricValue {
 		// - - - - - CORE OF THE METHOD - - - - -
 		addQoCIndicator.setUp(TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionZeroQoCCriterion.ID_DEFAULTVALUE, TestCriterionZeroQoCMetricDefinition.ID_DEFAULTVALUE);
-		contextReport = addQoCIndicator.exec(contextReport);
+		information = addQoCIndicator.exec(information);
 	}
 
 	@Test
@@ -143,9 +135,9 @@ public class TestRemoveQoCMetricValue {
 		// - - - - - CORE OF THE METHOD - - - - -
 		addQoCIndicator.setUp(TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionZeroQoCCriterion.ID_DEFAULTVALUE, TestCriterionZeroQoCMetricDefinition.ID_DEFAULTVALUE);
-		contextReport = addQoCIndicator.exec(contextReport);
-		contextReport = addQoCIndicator.exec(contextReport);
-		contextReport = addQoCIndicator.exec(contextReport);
+		information = addQoCIndicator.exec(information);
+		information = addQoCIndicator.exec(information);
+		information = addQoCIndicator.exec(information);
 	}
 
 	@Test
@@ -153,12 +145,12 @@ public class TestRemoveQoCMetricValue {
 		// - - - - - CORE OF THE METHOD - - - - -
 		addQoCIndicator.setUp(TestCriterionZeroQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionZeroQoCCriterion.ID_DEFAULTVALUE, TestCriterionZeroQoCMetricDefinition.ID_DEFAULTVALUE);
-		contextReport = addQoCIndicator.exec(contextReport);
-		contextReport = addQoCIndicator.exec(contextReport);
+		information = addQoCIndicator.exec(information);
+		information = addQoCIndicator.exec(information);
 		addQoCIndicator.setUp(TestCriterionOneQoCIndicator.ID_DEFAULTVALUE,
 				TestCriterionOneQoCCriterion.ID_DEFAULTVALUE, TestCriterionOneQoCMetricDefinition.ID_DEFAULTVALUE);
-		contextReport = addQoCIndicator.exec(contextReport);
-		contextReport = addQoCIndicator.exec(contextReport);
+		information = addQoCIndicator.exec(information);
+		information = addQoCIndicator.exec(information);
 	}
 
 	// # # # # # PRIVATE METHODS # # # # #
@@ -176,14 +168,14 @@ public class TestRemoveQoCMetricValue {
 
 	private final void initNewListQoCMetricValue() {
 		// - - - - - CORE OF THE METHOD - - - - -
-		for (final QoCIndicator loop_qoCIndicator : contextObservation.list_qoCIndicator) {
+		for (final QoCIndicator loop_qoCIndicator : information.indicators()) {
 			new_list_qoCMetricValue.addAll(loop_qoCIndicator.list_qoCMetricValue);
 		}
 	}
 
 	private final void initOldListQoCMetricValue() {
 		// - - - - - CORE OF THE METHOD - - - - -
-		for (final QoCIndicator loop_qoCIndicator : contextObservation.list_qoCIndicator) {
+		for (final QoCIndicator loop_qoCIndicator : information.indicators()) {
 			old_list_qoCMetricValue.addAll(loop_qoCIndicator.list_qoCMetricValue);
 		}
 	}

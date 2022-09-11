@@ -20,7 +20,7 @@
  */
 package qocim.qocmanagement.functions;
 
-import mucontext.datamodel.context.ContextReport;
+import qocim.datamodel.information.QInformation;
 import qocim.functions.IQoCIMFunction;
 
 /**
@@ -35,12 +35,12 @@ public interface IQoCManagementFunction extends IQoCIMFunction {
 	/**
 	 * This method is used to execute a QoC management function.
 	 *
-	 * @param _contextReport
+	 * @param information
 	 *            the context report that is modified by the function
 	 *
 	 * @return the context report after its modification by the function
 	 */
-	ContextReport exec(ContextReport _contextReport);
+	QInformation<?> exec(QInformation<?> information);
 
 	/**
 	 * @return The name of the function.
