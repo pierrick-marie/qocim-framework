@@ -14,14 +14,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>qocim-tools</groupId>
+		<groupId>qocim.tools</groupId>
 		<artifactId>qocim-functions</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 	</parent>
 
-	<artifactId>qocim-common-functions</artifactId>
-	<name>QoCIM-based data flow management functions</name>
-	<description>Functions used to manage context data flow.</description>
+	<artifactId>qocim-qoc-management-functions</artifactId>
+	<name>QoCIM-based qoc management functions</name>
+	<description>Functions used to manage QoC metadata.</description>
 	<packaging>jar</packaging>
 
 	<licenses>
@@ -33,9 +33,19 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>qocim-common</groupId>
+			<groupId>qocim.common</groupId>
 			<artifactId>qocim-common</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>qocim.tools</groupId>
+			<artifactId>qocim-basic-functions</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>qocim.tools</groupId>
+			<artifactId>qocim-common-functions</artifactId>
+			<version>1.0.1</version>
 		</dependency>
 	</dependencies>
 

@@ -14,9 +14,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>qocim-tools</groupId>
+		<groupId>qocim.tools</groupId>
 		<artifactId>qocim-tools</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 	</parent>
 
 	<artifactId>qocim-routing-filter</artifactId>
@@ -37,9 +37,9 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>qocim-common</groupId>
+			<groupId>qocim.common</groupId>
 			<artifactId>qocim-common</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 	</dependencies>
 

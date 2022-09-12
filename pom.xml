@@ -14,11 +14,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>qocim</groupId>
-    <artifactId>qocim-framework</artifactId>
-    <version>1.0.0</version>
+    <artifactId>root</artifactId>
+    <version>1.0.1</version>
     <name>QoCIM framework</name>
     <description>The QoCIM model: Quality of Context Information Model</description>
     <packaging>pom</packaging>
+
+    <modules>
+        <module>common</module>
+        <module>tools</module>
+        <module>criteria</module>
+    </modules>
 
     <licenses>
         <license>
@@ -252,10 +258,5 @@
             <url>https://maven.pkg.github.com/pierrick-marie/qocim</url>
         </repository>
     </distributionManagement>
-
-    <modules>
-        <module>qocim-common</module>
-        <module>qocim-tools</module>
-    </modules>
 
 </project>

@@ -14,21 +14,21 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>qocim-tools</groupId>
+		<groupId>qocim.criteria</groupId>
 		<artifactId>qocim-criteria</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 	</parent>
 
-	<artifactId>qocim-spatialresolutionindicator</artifactId>
-	<name>The QoCIM based spatial resolution indicator</name>
-	<description>This is an informal description of the spatial resolution indicator.</description>
+	<artifactId>qocim-precision-indicator</artifactId>
+	<name>The QoCIM based PrecisionIndicator</name>
+	<description>This is an informal description of the precision indicator.</description>
 	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
-			<groupId>qocim-common</groupId>
+			<groupId>qocim.common</groupId>
 			<artifactId>qocim-common</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
     </dependencies>
 

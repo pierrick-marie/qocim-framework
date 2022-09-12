@@ -14,22 +14,21 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>qocim-tools</groupId>
-		<artifactId>qocim-criteria</artifactId>
-		<version>1.0.0</version>
+		<groupId>qocim</groupId>
+		<artifactId>root</artifactId>
+		<version>1.0.1</version>
 	</parent>
 
-	<artifactId>qocim-freshnessindicator</artifactId>
-	<name>The QoCIM based FreshnessIndicator</name>
-	<description>This is an informal description of the freshness indicator.</description>
-	<packaging>jar</packaging>
+	<groupId>qocim.criteria</groupId>
+	<artifactId>qocim-criteria</artifactId>
+	<name>QoCIM-based QoC criteria</name>
+	<packaging>pom</packaging>
+	<description>Modelling QoC criteria with the QoCIM model</description>
 
-	<dependencies>
-		<dependency>
-			<groupId>qocim-common</groupId>
-			<artifactId>qocim-common</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-    </dependencies>
+	<modules>
+		<module>freshness</module>
+		<module>precision</module>
+		<module>spatial-resolution</module>
+	</modules>
 
 </project>

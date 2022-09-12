@@ -15,14 +15,13 @@
 
 	<parent>
 		<groupId>qocim</groupId>
-		<artifactId>qocim-framework</artifactId>
-		<version>1.0.0</version>
+		<artifactId>root</artifactId>
+		<version>1.0.1</version>
 	</parent>
 
-	<groupId>qocim-common</groupId>
+	<groupId>qocim.common</groupId>
 	<artifactId>qocim-common</artifactId>
 	<name>QoCIM common model</name>
-	<version>1.0.0</version>
 	<description>The QoCIM model: Quality of Context Information Model</description>
 	<packaging>jar</packaging>
 
