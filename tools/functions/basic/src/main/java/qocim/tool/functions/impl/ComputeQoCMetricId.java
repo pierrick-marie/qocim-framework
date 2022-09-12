@@ -35,11 +35,6 @@ import qocim.tool.functions.IToolFunction;
  * QoCMetricValue associated to the QoC indicator, the function returns
  * <b>zero</b>.
  *
- * @see mucontext.datamodel.context.ContextObservation
- * @see mucontext.datamodel.qocim.QoCMetricDefinition
- * @see mucontext.datamodel.qocim.QoCMetricValue
- * @see mucontext.datamodel.qocim.utils.QoCIndicator
- *
  * @author Pierrick MARIE
  */
 public class ComputeQoCMetricId implements IToolFunction {

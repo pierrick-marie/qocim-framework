@@ -30,7 +30,6 @@ import qocim.datamodel.utils.QoCIMLogger;
  * QoCFilterExpression represents a constraint about one field of the QoC
  * meta-data.
  *
- * @see mucontext.datamodel.qocim.QoCMetaData
  * @see qocim.tool.functions.utils.EQoCIdentificator
  * @see qocim.tool.functions.utils.EBinaryComparator
  *

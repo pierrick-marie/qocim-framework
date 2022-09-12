@@ -28,8 +28,6 @@ import qocim.tool.functions.IToolFunction;
 /**
  * QoCMetaDataComparable verifies if two QoC meta-data are comparable.
  *
- * @see mucontext.datamodel.qocim.QoCMetaData
- *
  * @author Pierrick MARIE
  */
 public class QoCMetaDataComparable implements IToolFunction {

@@ -45,7 +45,6 @@ import qocim.tool.functions.IToolFunction;
  * <i>value</i> and then the field <i>creation date</i> and finally the field
  * <i>modification date</i>.
  *
- * @see mucontext.datamodel.qocim.QoCMetaData
  * @see qocim.tool.functions.impl.QoCMetaDataComparable
  *
  * @author Pierrick MARIE

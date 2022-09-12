@@ -35,7 +35,6 @@ import qocim.tool.functions.utils.QoCFilterExpression;
  * constraints. If one of them if not match by the values of the QoC meta-data,
  * the function returns <i>False</i>, else the function returns <i>True</i>.
  *
- * @see mucontext.datamodel.qocim.QoCMetaData
  * @see qocim.tool.functions.utils.QoCFilter
  *
  * @author Pierrick MARIE

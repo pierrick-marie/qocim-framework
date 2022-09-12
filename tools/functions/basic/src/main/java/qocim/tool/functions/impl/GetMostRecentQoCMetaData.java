@@ -34,8 +34,6 @@ import qocim.tool.functions.IToolFunction;
  * meta-data and verifies if the field <i>qoCMetricDefinitionId</i> of the QoC
  * meta-data is equal to the expected QoC metric definition <i>id</i>.
  *
- * @see mucontext.datamodel.qocim.QoCMetaData
- *
  * @author Pierrick MARIE
  */
 public class GetMostRecentQoCMetaData implements IToolFunction {

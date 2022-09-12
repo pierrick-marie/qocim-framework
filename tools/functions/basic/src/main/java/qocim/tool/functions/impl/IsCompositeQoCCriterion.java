@@ -42,9 +42,6 @@ import qocim.tool.functions.IToolFunction;
  * associated to the QoC criterion that have to be evaluated and uses for all of
  * them the tool function <i>isCompositeQoCMetricDefinition</i>.
  *
- * @see mucontext.datamodel.qocim.QoCMetricDefinition
- * @see mucontext.datamodel.qocim.QoCIndicator
- * @see mucontext.datamodel.qocim.QoCCriterion
  * @see qocim.tool.functions.impl.IsCompositeQoCCriterion
  *
  * @author Pierrick MARIE

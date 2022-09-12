@@ -34,10 +34,8 @@ import qocim.datamodel.utils.QoCIMLogger;
  * constraints on different values of QoC meta-data. The filter is then
  * evaluated by the function matchingQoCFilter on a QoCMetaData.
  *
- * @see qocim.tool.functions.utils.EBinanryOperator
  * @see qocim.tool.functions.utils.QoCFilterExpression
  * @see qocim.tool.functions.impl.MatchingQoCFilter
- * @see mucontext.datamodel.qocim.QoCMetaData
  *
  * @author Pierrick MARIE
  */

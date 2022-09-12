@@ -39,9 +39,6 @@ import qocim.tool.functions.IToolFunction;
  * into a list of QoC indicators the QoC metric definition that must be compared
  * and then, verifies if is it a composite QoC metric definition.
  *
- * @see mucontext.datamodel.qocim.QoCMetricDefinition
- * @see mucontext.datamodel.qocim.QoCIndicator
- *
  * @author Pierrick MARIE
  */
 public class IsCompositeQoCMetricDefinition implements IToolFunction {
