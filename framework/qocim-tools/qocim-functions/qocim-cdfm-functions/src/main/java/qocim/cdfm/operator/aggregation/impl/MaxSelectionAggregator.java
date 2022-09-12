@@ -26,6 +26,7 @@ import qocim.cdfm.operator.aggregation.SelectionAggregationOperator;
 import qocim.cdfm.operator.utils.EOperator;
 
 import org.apache.commons.math3.stat.descriptive.rank.Max;
+import qocim.datamodel.information.QInformation;
 
 /**
  * MinSelection is the operator used to select the maximal value of a numeric
@@ -35,19 +36,21 @@ import org.apache.commons.math3.stat.descriptive.rank.Max;
  */
 public class MaxSelectionAggregator extends SelectionAggregationOperator {
 
-    @Override
-    public Double aggregateListValue(final List<Double> _listValue) {
-	final Max min = new Max();
-	final double[] arrayValue = new double[_listValue.size()];
-	Integer index_arrayValue = 0;
-	for (final Double loop_value : _listValue) {
-	    arrayValue[index_arrayValue++] = loop_value;
+	@Override
+	public QInformation<?> aggregateInformation(List<QInformation<?>> informationList) {
+		QInformation<?> minData = null;
+		for (QInformation<?> information: informationList) {
+			if (information.data() instanceof Number) {
+				if ( (null == minData) || ( ((Number)information.data()).doubleValue() > ((Number)minData.data()).doubleValue() ) ) {
+					minData = information;
+				}
+			}
+		}
+		return minData;
 	}
-	return min.evaluate(arrayValue);
-    }
 
-    @Override
-    public String getName() {
-	return EOperator.MAX.toString();
-    }
+	@Override
+	public String name() {
+		return EOperator.MAX.toString();
+	}
 }

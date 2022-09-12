@@ -23,14 +23,12 @@ package qocim.cdfm.function;
 import java.util.List;
 import java.util.Map;
 
-import mucontext.datamodel.context.ContextReport;
 import qocim.cdfm.operator.utils.NotValidInformationException;
+import qocim.datamodel.information.QInformation;
 
 /**
  * ICDFMOperator is the interface to define an operator. The operator is used by
  * a context data flow management function to produce new context reports.
- *
- * @see qocim.cdfm.function.SaveICDFMFunction
  *
  * @author Pierrick MARIE
  */
@@ -46,7 +44,7 @@ public interface ICDFMOperator {
      * @throws NotValidInformationException
      *             An exception if it is impossible to execute the operation.
      */
-    List<ContextReport> applyOperator(List<ContextReport> _input) throws NotValidInformationException;
+    List<QInformation<?>> applyOperator(List<QInformation<?>> _input) throws NotValidInformationException;
 
     /**
      * This method sets the parameters of the operator.
@@ -65,5 +63,5 @@ public interface ICDFMOperator {
     /**
      * @return The name of the operator.
      */
-    String getName();
+    String name();
 }

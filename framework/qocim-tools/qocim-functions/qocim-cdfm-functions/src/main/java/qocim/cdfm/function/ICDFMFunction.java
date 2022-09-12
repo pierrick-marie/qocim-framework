@@ -20,7 +20,7 @@
  */
 package qocim.cdfm.function;
 
-import mucontext.datamodel.context.ContextReport;
+import qocim.datamodel.information.QInformation;
 import qocim.functions.IQoCIMFunction;
 import qocim.functions.IQoCIMFunctionListener;
 
@@ -31,12 +31,6 @@ import qocim.functions.IQoCIMFunctionListener;
  * reports are send into a listener.
  *
  * @see qocim.cdfm.function.ICDFMOperator
- * @see qocim.cdfm.function.SaveICDFMFunctionResultListener
- *
- * @param <InputType>
- *            The type of information handled by the function.
- * @param <OutputType>
- *            The type of information produced by the function.
  *
  * @author Pierrick MARIE
  */
@@ -46,11 +40,11 @@ public interface ICDFMFunction extends IQoCIMFunction {
 	 * This method is used to add an information into a buffer. Once the buffer
 	 * is full (@see setNbHandledInformation(Integer)) the operator is executed.
 	 *
-	 * @param _information
-	 *            The context report to add into the buffer.
+	 * @param information
+	 *            The context information to add into the buffer.
 	 * @return this.
 	 */
-	ICDFMFunction addContextReport(ContextReport _contextReport);
+	ICDFMFunction addInformation(QInformation<?> information);
 
 	/**
 	 * This method is the core of the function. It apply the treatment of the
@@ -81,11 +75,11 @@ public interface ICDFMFunction extends IQoCIMFunction {
 	 * This method is used to set the number of context report stored by the
 	 * function before the execution of the operator.
 	 *
-	 * @param _nbHandledContextReport
+	 * @param nbHandledInformation
 	 *            The number of context report stored by the function.
 	 * @return this.
 	 */
-	ICDFMFunction setNbHandledContextReport(Integer _nbHandledContextReport);
+	ICDFMFunction setNbHandledInformation(Integer nbHandledInformation);
 
 	/**
 	 * This method set the number of second to wait before the execution of the
@@ -131,7 +125,7 @@ public interface ICDFMFunction extends IQoCIMFunction {
 	/**
 	 * @return The number of context report stored by the function.
 	 */
-	Integer nbHandledContextReport();
+	Integer nbHandledInformation();
 
 	/**
 	 * @return The operator used by the function.

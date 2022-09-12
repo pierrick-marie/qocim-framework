@@ -24,11 +24,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-import mucontext.datamodel.context.ContextReport;
 import qocim.cdfm.function.ICDFMFunction;
 import qocim.cdfm.function.ICDFMOperator;
 import qocim.cdfm.function.utils.LogMessages;
 import qocim.cdfm.operator.utils.NotValidInformationException;
+import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
 import qocim.datamodel.utils.QoCIMLogger;
@@ -83,7 +83,7 @@ public class CDFMFunction implements ICDFMFunction {
 	/**
 	 * The list of context report buffered before the execution of the operator.
 	 */
-	private final LinkedList<ContextReport> list_contextReport;
+	private final LinkedList<QInformation<?>> informationList;
 	/**
 	 * The thread used to execute <i>functionTimer</i>.
 	 */
@@ -115,7 +115,7 @@ public class CDFMFunction implements ICDFMFunction {
 
 	public CDFMFunction() {
 		// - - - - - CORE OF THE METHOD - - - - -
-		list_contextReport = new LinkedList<ContextReport>();
+		informationList = new LinkedList<QInformation<?>>();
 		functionTimer = new CDFMFunctionTimer(this);
 		functionThread = new Thread(functionTimer);
 		functionThread.setDaemon(IS_A_DEAMON);
@@ -126,11 +126,11 @@ public class CDFMFunction implements ICDFMFunction {
 	// # # # # # PUBLIC METHODS # # # # #
 
 	@Override
-	public CDFMFunction addContextReport(final ContextReport _contextReport) {
+	public CDFMFunction addInformation(final QInformation<?> information) {
 		// - - - - - CHECK THE VALUE OF THE ARGUMENTS - - - - -
 		try {
-			final String message = "CDFMFunction.addContextReport(ContextReport): the argument _contextReport is null.";
-			ConstraintChecker.notNull(_contextReport, message);
+			final String message = "CDFMFunction.addContextReport(ContextReport): the argument information is null.";
+			ConstraintChecker.notNull(information, message);
 		} catch (final ConstraintCheckerException e) {
 			return this;
 		}
@@ -141,16 +141,16 @@ public class CDFMFunction implements ICDFMFunction {
 		 * nbHandledContextReport). By this way, the size of the buffer is not
 		 * more than <i>nbHandledContextReport</i>.
 		 */
-		if (timerOnly && list_contextReport.size() == nbHandledContextReport) {
-			list_contextReport.remove(0);
+		if (timerOnly && informationList.size() == nbHandledContextReport) {
+			informationList.remove(0);
 		}
-		list_contextReport.add(_contextReport);
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.ADD_CONTEXT_REPORT);
+		informationList.add(information);
+		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.ADD_INFORMATION);
 		/*
 		 * Trigger the operator only if <i>timerOnly</i> is False AND the buffer
 		 * is full.
 		 */
-		if (list_contextReport.size() == nbHandledContextReport && !timerOnly) {
+		if (informationList.size() == nbHandledContextReport && !timerOnly) {
 			execFunction();
 		}
 		// - - - - - RETURN STATEMENT - - - - -
@@ -162,13 +162,13 @@ public class CDFMFunction implements ICDFMFunction {
 		// - - - - - CORE OF THE METHOD - - - -
 		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
 		try {
-			for (final ContextReport loop_resultContextReport : operator.applyOperator(list_contextReport)) {
-				resultListener.newInformation(loop_resultContextReport);
+			for (final QInformation<?> information : operator.applyOperator(informationList)) {
+				resultListener.newInformation(information);
 			}
 		} catch (final NotValidInformationException _exception) {
 			// Do nothing.
 		} finally {
-			list_contextReport.clear();
+			informationList.clear();
 		}
 		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
 	}
@@ -254,9 +254,9 @@ public class CDFMFunction implements ICDFMFunction {
 	 * @return The number of context report stored by the function.
 	 */
 	@Override
-	public Integer nbHandledContextReport() {
+	public Integer nbHandledInformation() {
 		// - - - - - RETURN STATEMENT - - - - -
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.GET_NB_HANDLED_MESSAGES + nbHandledContextReport);
+		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.GET_NB_HANDLED_INFORMATION + nbHandledContextReport);
 		return nbHandledContextReport;
 	}
 
@@ -274,17 +274,17 @@ public class CDFMFunction implements ICDFMFunction {
 	}
 
 	@Override
-	public ICDFMFunction setNbHandledContextReport(final Integer _nbHandledContextReport) {
+	public ICDFMFunction setNbHandledInformation(final Integer nbHandledInformation) {
 		// - - - - - CHECK THE VALUE OF THE ARGUMENTS - - - - -
 		try {
 			final String message = "CDFMFunction.setNbHandledContextReport(Integer): the argument _nbHandledContextReport.";
-			ConstraintChecker.notNull(_nbHandledContextReport, message);
+			ConstraintChecker.notNull(nbHandledInformation, message);
 		} catch (final ConstraintCheckerException e) {
 			return this;
 		}
 		// - - - - - CORE OF THE METHOD - - - - -
-		nbHandledContextReport = _nbHandledContextReport;
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.SET_NB_HANDLED_MESSAGES + _nbHandledContextReport);
+		nbHandledContextReport = nbHandledInformation;
+		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.SET_NB_HANDLED_INFORMATION + nbHandledInformation);
 		// - - - - - RETURN STATEMENT - - - - -
 		return this;
 	}
@@ -302,7 +302,7 @@ public class CDFMFunction implements ICDFMFunction {
 		String parameterValue = "";
 		// - - - - - CORE OF THE METHOD - - - - -
 		if ((parameterValue = _map_paramaters.get(PARAM_NB_HANDLED_CONTEXT_REPORT)) != null) {
-			setNbHandledContextReport(new Integer(parameterValue));
+			setNbHandledInformation(new Integer(parameterValue));
 		}
 		if ((parameterValue = _map_paramaters.get(PARAM_TIME_TO_WAIT)) != null) {
 			setTimeToWait(new Integer(parameterValue));

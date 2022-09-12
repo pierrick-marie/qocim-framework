@@ -20,7 +20,7 @@
 	</parent>
 
 	<artifactId>qocim-cdfm-functions</artifactId>
-	<name>The QoCIM-based data flow management functions</name>
+	<name>QoCIM-based data flow management functions</name>
 	<description>Functions used to manage context data flow.</description>
 	<packaging>jar</packaging>
 

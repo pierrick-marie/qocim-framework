@@ -35,7 +35,7 @@
 		<module>qocim-common-functions</module>
 		<module>qocim-tool-functions</module>
 		<module>qocim-qocmanagement-functions</module>
-<!--		<module>qocim-cdfm-functions</module>-->
+		<module>qocim-cdfm-functions</module>
 	</modules>
 
 </project>

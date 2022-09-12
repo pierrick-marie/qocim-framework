@@ -235,7 +235,6 @@
 		<module>qocim-functions</module>
 		<module>qocim-routing-filter</module>
 		<module>qocim-criteria</module>
-<!--		<module>qocim-capsule</module>-->
 	</modules>
 
 </project>

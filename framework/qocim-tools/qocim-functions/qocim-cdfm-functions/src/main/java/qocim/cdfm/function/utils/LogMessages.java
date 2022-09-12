@@ -24,7 +24,7 @@ public class LogMessages {
 
     public final static String NEW_FUNCTION_INSTANCE = " - Creating a new instance.";
 
-    public final static String ADD_CONTEXT_REPORT = " - Adding a new context report.";
+    public final static String ADD_INFORMATION = " - Adding new information";
 
     public final static String BEGIN_EXECUTION_FUNCTION = " - Begin the execution of the function.";
 
@@ -42,7 +42,7 @@ public class LogMessages {
 
     public final static String GET_TIME_TO_WAIT = " - Get result listener: ";
 
-    public final static String SET_NB_HANDLED_MESSAGES = " - Set nb handled messages: ";
+    public final static String SET_NB_HANDLED_INFORMATION = " - Set nb handled information: ";
 
-    public final static String GET_NB_HANDLED_MESSAGES = " - Get nb handled messages: ";
+    public final static String GET_NB_HANDLED_INFORMATION = " - Get nb handled information: ";
 }

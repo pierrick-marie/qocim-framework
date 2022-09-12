@@ -26,13 +26,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import mucontext.datamodel.context.ContextDataModelFacade;
-import mucontext.datamodel.context.ContextObservation;
-import mucontext.datamodel.context.ContextReport;
 import qocim.cdfm.function.ICDFMOperator;
-import qocim.datamodel.QoCIMFacade;
-import qocim.datamodel.QoCIndicator;
-import qocim.datamodel.QoCMetaData;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
 
@@ -40,10 +34,6 @@ public abstract class SelectionAggregationOperator extends ArithmeticAggregation
 
 	// # # # # # CONSTANTS # # # # #
 
-	/**
-	 * The name of the parameter to select the context observables to aggregate.
-	 */
-	public final static String PARAM_CONTEXT_OBSERVABLE_URI_SELECTION = "observable_uri";
 	/**
 	 * The name of the parameter to select the QoC metric definitions to
 	 * aggregate.
@@ -62,11 +52,6 @@ public abstract class SelectionAggregationOperator extends ArithmeticAggregation
 	// # # # # # PROTECTED VARIABLES # # # # #
 
 	/**
-	 * The list of uri of the observable used to aggregate the informations.
-	 */
-	protected final LinkedList<String> list_contextObservableUri;
-
-	/**
 	 * The list of id of QoC metric definition used to aggregate QoC meta-data.
 	 */
 	protected final LinkedList<String> list_qoCMetricDefinitionId;
@@ -75,10 +60,6 @@ public abstract class SelectionAggregationOperator extends ArithmeticAggregation
 
 	protected SelectionAggregationOperator() {
 		// - - - - - CORE OF THE METHOD - - - - -
-		counter_contextObservationId = 0;
-		counter_contextReportId = 0;
-		contextDataFacade = new ContextDataModelFacade("SelectionOperator - context data model facade");
-		list_contextObservableUri = new LinkedList<String>();
 		list_qoCMetricDefinitionId = new LinkedList<String>();
 	}
 
@@ -94,8 +75,6 @@ public abstract class SelectionAggregationOperator extends ArithmeticAggregation
 			return this;
 		}
 		// - - - - - CORE OF THE METHOD - - - - -
-		setListContextObservableUri(
-				splitConfigurationParameter(_map_parameter.get(PARAM_CONTEXT_OBSERVABLE_URI_SELECTION)));
 		setListQoCMetricDefinitionId(
 				splitConfigurationParameter(_map_parameter.get(PARAM_QOC_DEFINITION_ID_SELECTION)));
 		// - - - - - RETURN STATEMENT - - - - -
@@ -110,37 +89,10 @@ public abstract class SelectionAggregationOperator extends ArithmeticAggregation
 		 */
 		final Map<String, String> ret_mapParameter = new HashMap<String, String>();
 		// - - - - - CORE OF THE METHOD - - - - -
-		ret_mapParameter.put(PARAM_CONTEXT_OBSERVABLE_URI_SELECTION,
-				concatConfigurationParameter(list_contextObservableUri));
 		ret_mapParameter.put(PARAM_QOC_DEFINITION_ID_SELECTION,
 				concatConfigurationParameter(list_qoCMetricDefinitionId));
 		// - - - - - RETURN STATEMENT - - - - -
 		return ret_mapParameter;
-	}
-
-	/**
-	 * This method sets the list of the uri os the observable that are aggregate
-	 * by the operator.
-	 *
-	 * @param _list_contextObservableUri
-	 *            The list of the uri.
-	 * @return this.
-	 */
-	public SelectionAggregationOperator setListContextObservableUri(final List<String> _list_contextObservableUri) {
-		// - - - - - CHECK THE VALUE OF THE ARGUMENTS - - - - -
-		try {
-			final String message = "SelectionAggregationOperator setListObservableId(List<String>): the argument _list_observableUri is empty";
-			ConstraintChecker.notNull(_list_contextObservableUri, message);
-		} catch (final ConstraintCheckerException e) {
-			return this;
-		}
-		// - - - - - CORE OF THE METHOD - - - - -
-		list_contextObservableUri.clear();
-		for (final String loop_observableUri : _list_contextObservableUri) {
-			list_contextObservableUri.add(new String(loop_observableUri));
-		}
-		// - - - - - RETURN STATEMENT - - - - -
-		return this;
 	}
 
 	/**
@@ -169,63 +121,6 @@ public abstract class SelectionAggregationOperator extends ArithmeticAggregation
 	}
 
 	// # # # # # PROTECTED METHODS # # # # #
-
-	@Override
-	protected Boolean validateInput(final List<ContextReport> _input) {
-		// - - - - - RETURN STATEMENT - - - - -
-		return !_input.isEmpty();
-	}
-
-	@Override
-	protected void parseContextReport(final ContextReport _contextReport,
-			final List<AggregatorContextDataFacade> _list_contextData) {
-		// - - - - - INITIALIZE THE VARIABLES - - - - -
-		/*
-		 * The <b>AggregatorContextDataFacade</b> used to store the information
-		 * for the aggregation.
-		 */
-		AggregatorContextDataFacade aggregationContextData;
-		// - - - - - CORE OF THE METHOD - - - - -
-		for (final ContextObservation<?> loop_contextObservation : _contextReport.observations) {
-			aggregationContextData = parseContextObservation(loop_contextObservation, _list_contextData);
-			if (aggregationContextData != null) {
-				parseQoCIndicators(loop_contextObservation, aggregationContextData);
-			}
-		}
-	}
-
-	@Override
-	protected AggregatorContextDataFacade parseContextObservation(final ContextObservation<?> _contextObservation,
-			final List<AggregatorContextDataFacade> _list_aggregatorContextFacade) {
-		// - - - - - INITIALIZE THE VARIABLES - - - - -
-		/*
-		 * The <b>AggregatorContextDataFacade</b> returned by the method.
-		 */
-		AggregatorContextDataFacade ret_aggregatorContextFacade = null;
-		// - - - - - CORE OF THE METHOD - - - - -
-		if (list_contextObservableUri.iterator().next().equals(KEYWORD_ALL_ELEMENTS)
-				|| list_contextObservableUri.contains(_contextObservation.observable.uri.toString())) {
-			ret_aggregatorContextFacade = super.parseContextObservation(_contextObservation,
-					_list_aggregatorContextFacade);
-		}
-		// - - - - - RETURN STATEMENT - - - - -
-		return ret_aggregatorContextFacade;
-	}
-
-	@Override
-	protected void parseQoCIndicators(final ContextObservation<?> _contextObservation,
-			final AggregatorContextDataFacade _aggregatorContextFacade) {
-		// - - - - - CORE OF THE METHOD - - - - -
-		for (final QoCIndicator loop_qoCIndicator : _contextObservation.list_qoCIndicator) {
-			for (final QoCMetaData loop_qoCMetaData : QoCIMFacade.createListQoCMetaData(loop_qoCIndicator)) {
-				if (list_qoCMetricDefinitionId.iterator().next().equals(KEYWORD_ALL_ELEMENTS)
-						|| list_qoCMetricDefinitionId.contains(loop_qoCMetaData.qoCMetricDefinitionId())) {
-					_aggregatorContextFacade.addQoCMetricValue(loop_qoCMetaData.qoCMetricDefinition(),
-							loop_qoCMetaData.qoCMetricValue());
-				}
-			}
-		}
-	}
 
 	/**
 	 * This method analyze the value of a configuration parameter.
