@@ -36,7 +36,7 @@ import qocim.tool.functions.IToolFunction;
 /**
  * ComputeQoCMetricValue computes and returns the value of the filed
  * <i>value</i> of the class <b>QoCMetricValue</b>. The class requires a map of
- * <b>String</b>, <b>IQoCIMFactory</b>>: <i>map_availableQoCIMFacade</i>. The
+ * <b>String</b>, <b>IQoCIMFactory</b>: <i>map_availableQoCIMFacade</i>. The
  * function searched and delegates to the right QoCIM factory the task of
  * computing the value of the QoC. The class find the right QoCIM factory by
  * comparing the key of the field <i>map_availableQoCIMFacade</i> with the
