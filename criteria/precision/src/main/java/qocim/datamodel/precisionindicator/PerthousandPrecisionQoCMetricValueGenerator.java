@@ -80,6 +80,8 @@ public class PerthousandPrecisionQoCMetricValueGenerator {
 	 * The method evaluates the precision of a next value from a list of
 	 * previous value. Once the precision is estimated, the next value is
 	 * inserted into the list of values.
+	 *
+	 * @return the generated value
 	 */
 	public synchronized Double generateMetricValue(final Double _contextObservationValue) {
 		// - - - - - CHECK THE VALUE OF THE ARGUMENTS - - - - -
