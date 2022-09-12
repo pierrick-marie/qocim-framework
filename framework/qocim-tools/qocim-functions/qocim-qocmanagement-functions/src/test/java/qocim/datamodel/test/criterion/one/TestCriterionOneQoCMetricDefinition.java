@@ -26,7 +26,7 @@ import java.util.List;
 import qocim.datamodel.Order;
 import qocim.datamodel.QoCMetaData;
 import qocim.datamodel.QoCMetricDefinition;
-import qocim.datamodel.information.QInformation;;
+import qocim.datamodel.information.QInformation;
 
 public class TestCriterionOneQoCMetricDefinition extends QoCMetricDefinition {
 

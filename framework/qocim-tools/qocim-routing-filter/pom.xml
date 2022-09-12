@@ -20,8 +20,8 @@
 	</parent>
 
 	<artifactId>qocim-routing-filter</artifactId>
-	<name>The QoCIM-based routing filter</name>
-	<description>Generation of QoCIM-based routing filters</description>
+	<name>QoCIM-based routing filter</name>
+	<description>QoCIM-based routing filters</description>
 	<packaging>jar</packaging>
 
 	<licenses>
@@ -33,14 +33,13 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>qocim-common</groupId>
 			<artifactId>qocim-common</artifactId>
 			<version>0.14.2-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>muContext.data-model</groupId>
-			<artifactId>muContext-data-model-context</artifactId>
-			<version>0.15.4-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

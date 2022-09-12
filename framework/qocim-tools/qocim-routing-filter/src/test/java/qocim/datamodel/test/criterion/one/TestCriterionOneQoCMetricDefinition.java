@@ -26,6 +26,7 @@ import java.util.List;
 import qocim.datamodel.Order;
 import qocim.datamodel.QoCMetaData;
 import qocim.datamodel.QoCMetricDefinition;
+import qocim.datamodel.information.QInformation;
 
 public class TestCriterionOneQoCMetricDefinition extends QoCMetricDefinition {
 
@@ -61,8 +62,7 @@ public class TestCriterionOneQoCMetricDefinition extends QoCMetricDefinition {
 	}
 
 	@Override
-	public Double computeQoCMetricValue(final String _contextEntityUri, final String _contextObservableUri,
-			final Date _contextObservationDate, final Double _contextObservationValue,
+	public Double computeQoCMetricValue(final QInformation<?> information,
 			final List<QoCMetaData> _list_qoCMetaData) {
 		// - - - - - RETURN STATEMENT - - - - -
 		return ++currentQoCValue;
