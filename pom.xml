@@ -244,9 +244,14 @@
 		</plugins>
 	</build>
 
-	<!-- deployment: mvn deploy -->
-	<distributionManagement>
-	</distributionManagement>
+	 <!-- deployment: mvn deploy -->
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/pierrick-marie/qocim</url>
+        </repository>
+    </distributionManagement>
 
 	<modules>
 	        <module>qocim-common</module>
