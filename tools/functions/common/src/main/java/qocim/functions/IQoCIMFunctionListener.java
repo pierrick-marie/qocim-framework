@@ -28,8 +28,6 @@ import qocim.datamodel.information.QInformation;
  * will receive the new context reports produced by a context data flow
  * management function.
  *
- * @see mucontext.datamodel.qocim.cdfm.function.SaveICDFMFunction
- *
  * @author Pierrick MARIE
  *
  */
@@ -39,9 +37,9 @@ public interface IQoCIMFunctionListener {
      * This method is used to notify the listener when a new context reporthas
      * been produced by a function.
      *
-     * @param QInformation
+     * @param information
      *            The new information.
      */
-    void newInformation(QInformation _information);
+    void newInformation(QInformation<?> information);
 
 }
