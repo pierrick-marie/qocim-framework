@@ -33,8 +33,6 @@ import qocim.datamodel.utils.ConstraintCheckerException;
 /**
  * <!-- begin-user-doc --> A representation of the model object
  * <em><b>PerthousandQoCMetricDefinition</b></em>. <!-- end-user-doc -->
- *
- * @generated
  **/
 public class PerthousandPrecisionQoCMetricDefinition extends QoCMetricDefinition {
 
@@ -54,9 +52,6 @@ public class PerthousandPrecisionQoCMetricDefinition extends QoCMetricDefinition
 
 	// # # # # # CONSTRUCTORS # # # # #
 
-	/**
-	 * @generated
-	 **/
 	public PerthousandPrecisionQoCMetricDefinition() {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
 		super();

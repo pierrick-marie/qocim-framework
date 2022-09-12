@@ -97,7 +97,7 @@ public class IsCompositeQoCCriterion implements IToolFunction {
 	 * the appropriate QoC criterion and then, verifies if the criterion is
 	 * composite.
 	 *
-	 * @return <True> if <i>_qoCCriterion</i> is a composite criterion, else
+	 * @return <b>True</b> if <i>_qoCCriterion</i> is a composite criterion, else
 	 *         <i>False</i>
 	 */
 	@Override

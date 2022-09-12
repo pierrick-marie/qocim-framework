@@ -173,8 +173,6 @@ public class ToolFunctionFacade {
      *            The <i>id</i> of the QoC criterion that should be checked.
      * @return A boolean: <i>True</i> means the QoC criterion is composite,
      *         <i>False</i> means the criterion is primitive (not composite).
-     *
-     * @see qocim.tool.functions.impl.isCompositeQoCCriterion
      */
     public static Boolean isCompositeCriterion(final String _qoCCriterionId) {
         // - - - - - INITIALIZE THE VARIABLES - - - - -

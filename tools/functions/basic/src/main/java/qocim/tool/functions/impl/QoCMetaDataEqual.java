@@ -150,10 +150,6 @@ public class QoCMetaDataEqual implements IToolFunction {
 	 * @param _qoCMetaData2
 	 *            The second QoC meta-data that have to be compared.
 	 * @return <b>this</b>
-	 * @throws Exception
-	 *             if the arguments <i>_qoCMetaData1</i> and
-	 *             <i>_qoCMetaData2</i> are not comparable (see the tool
-	 *             function <i>qoCMetaDataComparable</i>)
 	 */
 	public QoCMetaDataEqual setUp(final QoCMetaData _qoCMetaData1, final QoCMetaData _qoCMetaData2) {
 		// - - - - - CHECK THE VALUE OF THE ARGUMENTS - - - - -

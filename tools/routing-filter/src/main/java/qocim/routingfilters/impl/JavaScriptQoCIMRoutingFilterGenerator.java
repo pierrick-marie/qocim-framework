@@ -71,19 +71,6 @@ public class JavaScriptQoCIMRoutingFilterGenerator implements IQoCIMRoutingFilte
 	 * The constraints are XPath regular expressions stored into the variable
 	 * stringBufferConstraints.
 	 *
-	 * Example of QoC-criterion constraints produced by the method: <emph> if(
-	 * (xpath.evaluate("//qocindicator[@id='10' and
-	 * qoccriterion[@id='[10.1][10.2]']/qocmetricdefinition[@id='10.1']]", doc,
-	 * XPathConstants.NODESET).length == 0) &&
-	 * (xpath.evaluate("//qocindicator[@id='10' and
-	 * qoccriterion[@id='[10.1][10.2]']/qocmetricdefinition[@id='10.2']]", doc,
-	 * XPathConstants.NODESET).length == 0)) { return false; } </emph>
-	 *
-	 * In this example two constraints have been handled, both require
-	 * qocim.QoCIndicator.id = 10 and qocim.QoCCriterion.id = [10.1][10.2]. The
-	 * first one also requires qocim.QoCMetricDefinition.id = 10.1 and the
-	 * second one requires qocim.QoCMetricDefinition.id = 10.2.
-	 *
 	 * @param _qoCCriterionConstraints
 	 *            The list of QoCMetaData transformed into constraints and added
 	 *            into the routing filter. All the constraints are gather within
@@ -92,11 +79,6 @@ public class JavaScriptQoCIMRoutingFilterGenerator implements IQoCIMRoutingFilte
 	 *            globally acts as an OR operator between all constraints.
 	 *            Indeed, the if statement returns false if any QoC metadata
 	 *            respects all the constraints.
-	 *
-	 *
-	 * @see qocim.QoCIndicator
-	 * @see qocim.QoCCriterion
-	 * @see qocim.QoCMetricDefinition
 	 */
 	@Override
 	public void addQoCCriterionConstraints(final List<QoCMetaData> _qoCCriterionConstraints) {
@@ -141,22 +123,7 @@ public class JavaScriptQoCIMRoutingFilterGenerator implements IQoCIMRoutingFilte
 	 * The constraints are XPath regular expressions stored into the variable
 	 * stringBufferConstraints.
 	 *
-	 * Example of QoC-criterion constraints produced by the method: <emph> if(
-	 * (xpath.evaluate("//qocindicator[@id='10' and
-	 * qoccriterion[@id='[10.1][10.2]']/qocmetricdefinition[@id='10.1'] and
-	 * qocmetricvalue[@value>='10']]", doc, XPathConstants.NODESET).length == 0)
-	 * && (xpath.evaluate("//qocindicator[@id='10' and
-	 * qoccriterion[@id='[10.1][10.2]']/qocmetricdefinition[@id='10.2'] and
-	 * qocmetricvalue[@value>='100']]", doc, XPathConstants.NODESET).length ==
-	 * 0)) { return false; } </emph>
-	 *
-	 * In this example two constraints have been handled, both require
-	 * qocim.QoCIndicator.id = 10 and qocim.QoCCriterion.id = [10.1][10.2]. The
-	 * first one also requires qocim.QoCMetricDefinition.id = 10.1 with
-	 * qocim.QoCMetricValue.value = 10 and the second one requires
-	 * qocim.QoCMetricDefinition.id = 10.2 and qocim.QoCMetricValue.value = 100.
-	 *
-	 * @param _qoCCriterionConstraints
+	 * @param qocConstraints
 	 *            The list of QoCMetaData transformed into constraints and added
 	 *            into the routing filter. All the constraints are gather within
 	 *            one if and separated with the AND logical operator.
@@ -164,24 +131,19 @@ public class JavaScriptQoCIMRoutingFilterGenerator implements IQoCIMRoutingFilte
 	 *            globally acts as an OR operator between all constraints.
 	 *            Indeed, the if statement returns false if any QoC metadata
 	 *            respects all the constraints.
-	 *
-	 * @see qocim.QoCIndicator
-	 * @see qocim.QoCCriterion
-	 * @see qocim.QoCMetricDefinition
-	 * @see qocim.QoCMetricValue
 	 */
 	@Override
-	public void addQoCValueConstraints(final Map<QoCMetaData, EComparator> _qocValueConstraints) {
+	public void addQoCValueConstraints(final Map<QoCMetaData, EComparator> qocConstraints) {
 		// - - - - - CHECK THE VALUE OF THE ARGUMENTS - - - - -
 		try {
 			final String message = "JavaScriptQoCIMRoutingFilterGenerator.addCriterionConstraints(List<QoCMetaData>): the parameter _qoCValueConstraints is null";
-			ConstraintChecker.notNull(_qocValueConstraints, message);
+			ConstraintChecker.notNull(qocConstraints, message);
 		} catch (final ConstraintCheckerException _exception) {
 			return;
 		}
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
 		Map.Entry<QoCMetaData, EComparator> constraint;
-		final Iterator<Map.Entry<QoCMetaData, EComparator>> constraintIterator = _qocValueConstraints.entrySet()
+		final Iterator<Map.Entry<QoCMetaData, EComparator>> constraintIterator = qocConstraints.entrySet()
 				.iterator();
 		// - - - - - CORE OF THE METHOD - - - - -
 		stringBufferConstraints.append("if( ");
