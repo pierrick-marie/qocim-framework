@@ -129,7 +129,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <deploy.dir>/tmp</deploy.dir>
     </properties>
 
     <dependencyManagement>
