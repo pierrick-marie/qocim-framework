@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>qocim-tools</groupId>
 		<artifactId>qocim-functions</artifactId>
-		<version>0.14.2-SNAPSHOT</version>
+		<version>1.0.0</version>
 	</parent>
 
 	<artifactId>qocim-common-functions</artifactId>
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>qocim-common</groupId>
 			<artifactId>qocim-common</artifactId>
-			<version>0.14.2-SNAPSHOT</version>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 
