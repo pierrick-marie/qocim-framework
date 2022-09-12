@@ -21,7 +21,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>common</module>
+        <module>model</module>
         <module>tools</module>
         <module>criteria</module>
     </modules>

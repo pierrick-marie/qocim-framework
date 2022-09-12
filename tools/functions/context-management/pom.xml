@@ -48,8 +48,8 @@
 			<version>1.0.1</version>
 		</dependency>
 		<dependency>
-			<groupId>qocim.common</groupId>
-			<artifactId>qocim-common</artifactId>
+			<groupId>qocim.model</groupId>
+			<artifactId>qocim-model</artifactId>
 			<version>1.0.1</version>
 		</dependency>
 		<dependency>
