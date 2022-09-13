@@ -14,12 +14,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>qocim.tools</groupId>
-		<artifactId>qocim-tools</artifactId>
+		<groupId>qocim</groupId>
+		<artifactId>tools</artifactId>
 		<version>1.0.1</version>
 	</parent>
 
-	<artifactId>qocim-routing-filter</artifactId>
+	<groupId>qocim.tools</groupId>
+	<artifactId>routing-filter</artifactId>
 	<name>QoCIM-based routing filter</name>
 	<description>QoCIM-based routing filters</description>
 	<packaging>jar</packaging>
@@ -33,13 +34,13 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<groupId>qocim</groupId>
+			<artifactId>model</artifactId>
+			<version>1.0.1</version>
 		</dependency>
 		<dependency>
-			<groupId>qocim.model</groupId>
-			<artifactId>qocim-model</artifactId>
-			<version>1.0.1</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
 

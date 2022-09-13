@@ -19,8 +19,7 @@
 		<version>1.0.1</version>
 	</parent>
 
-	<groupId>qocim.model</groupId>
-	<artifactId>qocim-model</artifactId>
+	<artifactId>model</artifactId>
 	<name>QoCIM model</name>
 	<description>The QoCIM model: Quality of Context Information Model</description>
 	<packaging>jar</packaging>

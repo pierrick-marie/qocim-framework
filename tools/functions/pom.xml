@@ -14,12 +14,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>qocim.tools</groupId>
-		<artifactId>qocim-tools</artifactId>
+		<groupId>qocim</groupId>
+		<artifactId>tools</artifactId>
 		<version>1.0.1</version>
 	</parent>
 
-	<artifactId>qocim-functions</artifactId>
+	<groupId>qocim.tools</groupId>
+	<artifactId>functions</artifactId>
 	<name>QoCIM-based functions</name>
 	<packaging>pom</packaging>
 	<description>The functions used to manipulate context information and QoC meta-data.</description>

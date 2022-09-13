@@ -15,11 +15,12 @@
 
     <parent>
         <groupId>qocim.tools</groupId>
-        <artifactId>qocim-functions</artifactId>
+        <artifactId>functions</artifactId>
         <version>1.0.1</version>
     </parent>
 
-    <artifactId>qocim-qoc-management-functions</artifactId>
+    <groupId>qocim.tools.functions</groupId>
+    <artifactId>qoc-management</artifactId>
     <name>QoCIM-based qoc management functions</name>
     <description>Functions used to manage QoC metadata.</description>
     <packaging>jar</packaging>
@@ -33,18 +34,18 @@
 
     <dependencies>
         <dependency>
-            <groupId>qocim.model</groupId>
-            <artifactId>qocim-model</artifactId>
+            <groupId>qocim</groupId>
+            <artifactId>model</artifactId>
             <version>1.0.1</version>
         </dependency>
         <dependency>
-            <groupId>qocim.tools</groupId>
-            <artifactId>qocim-basic-functions</artifactId>
+            <groupId>qocim.tools.functions</groupId>
+            <artifactId>basic</artifactId>
             <version>1.0.1</version>
         </dependency>
         <dependency>
-            <groupId>qocim.tools</groupId>
-            <artifactId>qocim-common-functions</artifactId>
+            <groupId>qocim.tools.functions</groupId>
+            <artifactId>common</artifactId>
             <version>1.0.1</version>
         </dependency>
     </dependencies>

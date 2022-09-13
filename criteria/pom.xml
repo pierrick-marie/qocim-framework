@@ -19,8 +19,7 @@
 		<version>1.0.1</version>
 	</parent>
 
-	<groupId>qocim.criteria</groupId>
-	<artifactId>qocim-criteria</artifactId>
+	<artifactId>criteria</artifactId>
 	<name>QoCIM-based QoC criteria</name>
 	<packaging>pom</packaging>
 	<description>Modelling QoC criteria with the QoCIM model</description>

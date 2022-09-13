@@ -19,8 +19,7 @@
 		<version>1.0.1</version>
 	</parent>
 
-	<groupId>qocim.tools</groupId>
-	<artifactId>qocim-tools</artifactId>
+	<artifactId>tools</artifactId>
 	<name>QoCIM tools</name>
 	<description>The QoCIM model: Quality of Context Information Model</description>
 	<packaging>pom</packaging>

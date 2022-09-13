@@ -185,7 +185,6 @@
         </pluginManagement>
 
         <plugins>
-
             <!-- java compiler configuration -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -196,7 +195,6 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-
             <!-- source packaging configuration -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -210,7 +208,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <!-- javadoc packaging in jar configuration -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -232,7 +229,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <!-- surefire configuration -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -245,7 +241,6 @@
                     </includes>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 

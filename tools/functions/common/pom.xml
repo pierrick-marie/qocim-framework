@@ -15,11 +15,12 @@
 
 	<parent>
 		<groupId>qocim.tools</groupId>
-		<artifactId>qocim-functions</artifactId>
+		<artifactId>functions</artifactId>
 		<version>1.0.1</version>
 	</parent>
 
-	<artifactId>qocim-common-functions</artifactId>
+	<groupId>qocim.tools.functions</groupId>
+	<artifactId>common</artifactId>
 	<name>QoCIM-based data flow management functions</name>
 	<description>Functions used to manage context data flow.</description>
 	<packaging>jar</packaging>
@@ -33,8 +34,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>qocim.model</groupId>
-			<artifactId>qocim-model</artifactId>
+			<groupId>qocim</groupId>
+			<artifactId>model</artifactId>
 			<version>1.0.1</version>
 		</dependency>
 	</dependencies>

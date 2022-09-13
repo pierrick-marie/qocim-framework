@@ -15,11 +15,12 @@
 
 	<parent>
 		<groupId>qocim.tools</groupId>
-		<artifactId>qocim-functions</artifactId>
+		<artifactId>functions</artifactId>
 		<version>1.0.1</version>
 	</parent>
 
-	<artifactId>qocim-context-management-functions</artifactId>
+	<groupId>qocim.tools.functions</groupId>
+	<artifactId>context-management</artifactId>
 	<name>QoCIM-based data flow management functions</name>
 	<description>Functions used to manage context data flow.</description>
 	<packaging>jar</packaging>
@@ -33,28 +34,28 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>qocim.tools</groupId>
-			<artifactId>qocim-qoc-management-functions</artifactId>
+			<groupId>qocim.tools.functions</groupId>
+			<artifactId>qoc-management</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>qocim.tools.functions</groupId>
+			<artifactId>common</artifactId>
 			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>qocim.tools</groupId>
-			<artifactId>qocim-common-functions</artifactId>
+			<artifactId>routing-filter</artifactId>
 			<version>1.0.1</version>
 		</dependency>
 		<dependency>
-			<groupId>qocim.tools</groupId>
-			<artifactId>qocim-routing-filter</artifactId>
+			<groupId>qocim</groupId>
+			<artifactId>model</artifactId>
 			<version>1.0.1</version>
 		</dependency>
 		<dependency>
-			<groupId>qocim.model</groupId>
-			<artifactId>qocim-model</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>qocim.tools</groupId>
-			<artifactId>qocim-basic-functions</artifactId>
+			<groupId>qocim.tools.functions</groupId>
+			<artifactId>basic</artifactId>
 			<version>1.0.1</version>
 		</dependency>
 		<dependency>

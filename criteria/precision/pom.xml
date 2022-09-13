@@ -14,20 +14,21 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>qocim.criteria</groupId>
-		<artifactId>qocim-criteria</artifactId>
+		<groupId>qocim</groupId>
+		<artifactId>criteria</artifactId>
 		<version>1.0.1</version>
 	</parent>
 
-	<artifactId>qocim-precision-indicator</artifactId>
+	<groupId>qocim.criteria</groupId>
+	<artifactId>precision</artifactId>
 	<name>The QoCIM based PrecisionIndicator</name>
 	<description>This is an informal description of the precision indicator.</description>
 	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
-			<groupId>qocim.model</groupId>
-			<artifactId>qocim-model</artifactId>
+			<groupId>qocim</groupId>
+			<artifactId>model</artifactId>
 			<version>1.0.1</version>
 		</dependency>
     </dependencies>
