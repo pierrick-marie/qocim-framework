@@ -3,7 +3,9 @@
 
 name: Maven QoCIM Package Publish v2
 
-on: [push]
+on:  
+  release:
+    types: [created]
 
 jobs:
   build:
