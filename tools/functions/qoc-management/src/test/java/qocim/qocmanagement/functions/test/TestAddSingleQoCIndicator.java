@@ -22,7 +22,6 @@ package qocim.qocmanagement.functions.test;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -48,7 +47,7 @@ import qocim.datamodel.test.criterion.zero.TestCriterionZeroQoCCriterion;
 import qocim.datamodel.test.criterion.zero.TestCriterionZeroQoCIndicator;
 import qocim.datamodel.test.criterion.zero.TestCriterionZeroQoCMetricDefinition;
 import qocim.datamodel.utils.IQoCIMFactory;
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 import qocim.qocmanagement.functions.impl.AddQoCIndicator;
 
 public class TestAddSingleQoCIndicator {

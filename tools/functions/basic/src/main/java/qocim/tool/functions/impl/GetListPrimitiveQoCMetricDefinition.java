@@ -28,7 +28,7 @@ import qocim.datamodel.QoCIndicator;
 import qocim.datamodel.QoCMetricDefinition;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 import qocim.tool.functions.IToolFunction;
 
 /**

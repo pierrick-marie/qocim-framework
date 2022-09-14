@@ -26,7 +26,7 @@ import java.util.Map;
 import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 import qocim.qocmanagement.functions.IQoCManagementFunction;
 import qocim.qocmanagement.functions.utils.EQoCManagementFunction;
 import qocim.qocmanagement.functions.utils.LogMessages;
@@ -50,7 +50,7 @@ public class RemoveQoCMetaData implements IQoCManagementFunction {
 
 	public RemoveQoCMetaData() {
 		// - - - - - CORE OF THE METHOD - - - - -
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.NEW_FUNCTION_INSTANCE);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.NEW_FUNCTION_INSTANCE);
 	}
 
 	/**
@@ -69,9 +69,9 @@ public class RemoveQoCMetaData implements IQoCManagementFunction {
 			return information;
 		}
 		// - - - - - CORE OF THE METHOD - - - - -
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
 		information.indicators().clear();
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
 		// - - - - - RETURN STATEMENT - - - - -
 		return information;
 	}

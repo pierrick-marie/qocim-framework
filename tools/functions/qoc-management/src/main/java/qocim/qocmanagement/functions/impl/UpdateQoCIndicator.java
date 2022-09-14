@@ -35,7 +35,7 @@ import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
 import qocim.datamodel.utils.IQoCIMFactory;
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 import qocim.qocmanagement.functions.IQoCManagementFunction;
 import qocim.qocmanagement.functions.utils.EQoCManagementFunction;
 import qocim.qocmanagement.functions.utils.LogMessages;
@@ -102,7 +102,7 @@ public class UpdateQoCIndicator implements IQoCManagementFunction {
         computeQoCMetricValue = new ComputeQoCMetricValue(
                 new ArrayList<QoCMetricDefinition>(_map_availableQoCIMFacade.keySet()));
         currentDate = new CurrentDate();
-        QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.NEW_FUNCTION_INSTANCE);
+        QoCIMLogger.function(FUNCTION_NAME, LogMessages.NEW_FUNCTION_INSTANCE);
     }
 
     // # # # # # PUBLIC METHODS # # # # #
@@ -124,9 +124,9 @@ public class UpdateQoCIndicator implements IQoCManagementFunction {
             return information;
         }
         // - - - - - CORE OF THE METHOD - - - - -
-        QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
+        QoCIMLogger.function(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
         updateQoCIndicator(information);
-        QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
+        QoCIMLogger.function(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
         // - - - - - RETURN STATEMENT - - - - -
         return information;
     }
@@ -153,7 +153,7 @@ public class UpdateQoCIndicator implements IQoCManagementFunction {
         qoCIndicatorId = _qoCIndicatorId;
         setUpIsDone = true;
         // - - - - - RETURN STATEMENT - - - - -
-        QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.SETUP_FUNCTION);
+        QoCIMLogger.function(FUNCTION_NAME, LogMessages.SETUP_FUNCTION);
         return this;
     }
 

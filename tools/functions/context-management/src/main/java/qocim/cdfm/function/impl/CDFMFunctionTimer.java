@@ -21,8 +21,7 @@
 package qocim.cdfm.function.impl;
 
 import java.util.logging.Level;
-
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 
 /**
  * TemporalCDFMFunctionTimer is used by the class <b>TemporalCDFMFunction</b> to

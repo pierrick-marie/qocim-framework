@@ -49,7 +49,7 @@ import qocim.datamodel.test.criterion.zero.TestCriterionZeroQoCCriterion;
 import qocim.datamodel.test.criterion.zero.TestCriterionZeroQoCIndicator;
 import qocim.datamodel.test.criterion.zero.TestCriterionZeroQoCMetricDefinition;
 import qocim.datamodel.utils.IQoCIMFactory;
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 import qocim.qocmanagement.functions.impl.AddQoCIndicator;
 
 public class TestAddMultipleQoCIndicator {

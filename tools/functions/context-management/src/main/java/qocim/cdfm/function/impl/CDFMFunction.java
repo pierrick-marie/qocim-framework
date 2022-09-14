@@ -31,7 +31,7 @@ import qocim.cdfm.operator.utils.NotValidInformationException;
 import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 import qocim.functions.IQoCIMFunctionListener;
 
 /**
@@ -120,7 +120,7 @@ public class CDFMFunction implements ICDFMFunction {
 		functionThread = new Thread(functionTimer);
 		functionThread.setDaemon(IS_A_DEAMON);
 		timerOnly = false;
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.NEW_FUNCTION_INSTANCE);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.NEW_FUNCTION_INSTANCE);
 	}
 
 	// # # # # # PUBLIC METHODS # # # # #
@@ -145,7 +145,7 @@ public class CDFMFunction implements ICDFMFunction {
 			informationList.remove(0);
 		}
 		informationList.add(information);
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.ADD_INFORMATION);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.ADD_INFORMATION);
 		/*
 		 * Trigger the operator only if <i>timerOnly</i> is False AND the buffer
 		 * is full.
@@ -160,7 +160,7 @@ public class CDFMFunction implements ICDFMFunction {
 	@Override
 	public synchronized void execFunction() {
 		// - - - - - CORE OF THE METHOD - - - -
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
 		try {
 			for (final QInformation<?> information : operator.applyOperator(informationList)) {
 				resultListener.newInformation(information);
@@ -170,7 +170,7 @@ public class CDFMFunction implements ICDFMFunction {
 		} finally {
 			informationList.clear();
 		}
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
 	}
 
 	@Override
@@ -183,7 +183,7 @@ public class CDFMFunction implements ICDFMFunction {
 			return this;
 		}
 		// - - - - - CORE OF THE METHOD - - - - -
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.SET_OPERATOR + _operator);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.SET_OPERATOR + _operator);
 		operator = _operator;
 		// - - - - - RETURN STATEMENT - - - - -
 		return this;
@@ -199,7 +199,7 @@ public class CDFMFunction implements ICDFMFunction {
 			return this;
 		}
 		// - - - - - CORE OF THE METHOD - - - - -
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.SET_RESULT_LISTENER + _resultListener);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.SET_RESULT_LISTENER + _resultListener);
 		resultListener = _resultListener;
 		// - - - - - RETURN STATEMENT - - - - -
 		return this;
@@ -217,7 +217,7 @@ public class CDFMFunction implements ICDFMFunction {
 			return this;
 		}
 		// - - - - - CORE OF THE METHOD - - - - -
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.SET_TIME_TO_WAIT + _timeToWait);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.SET_TIME_TO_WAIT + _timeToWait);
 		if (_timeToWait.equals(VALUE_TO_STOP_TIMER_FUNCTION)) {
 			functionTimer.run = false;
 		} else {
@@ -232,21 +232,21 @@ public class CDFMFunction implements ICDFMFunction {
 	@Override
 	public ICDFMOperator operator() {
 		// - - - - - RETURN STATEMENT - - - - -
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.GET_OPERATOR + operator);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.GET_OPERATOR + operator);
 		return operator;
 	}
 
 	@Override
 	public IQoCIMFunctionListener resultListener() {
 		// - - - - - RETURN STATEMENT - - - - -
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.GET_RESULT_LISTENER + resultListener);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.GET_RESULT_LISTENER + resultListener);
 		return resultListener;
 	}
 
 	@Override
 	public Integer timeToWait() {
 		// - - - - - RETURN STATEMENT - - - - -
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.GET_TIME_TO_WAIT + functionTimer.nbWaintingMiliSecond);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.GET_TIME_TO_WAIT + functionTimer.nbWaintingMiliSecond);
 		return functionTimer.nbWaintingMiliSecond;
 	}
 
@@ -256,7 +256,7 @@ public class CDFMFunction implements ICDFMFunction {
 	@Override
 	public Integer nbHandledInformation() {
 		// - - - - - RETURN STATEMENT - - - - -
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.GET_NB_HANDLED_INFORMATION + nbHandledContextReport);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.GET_NB_HANDLED_INFORMATION + nbHandledContextReport);
 		return nbHandledContextReport;
 	}
 
@@ -284,7 +284,7 @@ public class CDFMFunction implements ICDFMFunction {
 		}
 		// - - - - - CORE OF THE METHOD - - - - -
 		nbHandledContextReport = nbHandledInformation;
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.SET_NB_HANDLED_INFORMATION + nbHandledInformation);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.SET_NB_HANDLED_INFORMATION + nbHandledInformation);
 		// - - - - - RETURN STATEMENT - - - - -
 		return this;
 	}

@@ -30,7 +30,7 @@ import qocim.datamodel.QoCIndicator;
 import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 import qocim.qocmanagement.functions.IQoCManagementFunction;
 import qocim.qocmanagement.functions.utils.EQoCManagementFunction;
 import qocim.qocmanagement.functions.utils.LogMessages;
@@ -71,7 +71,7 @@ public class RemoveQoCIndicator implements IQoCManagementFunction {
     public RemoveQoCIndicator() {
         // - - - - - INITIALIZE THE VARIABLES - - - - -
         setUpIsDone = false;
-        QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.NEW_FUNCTION_INSTANCE);
+        QoCIMLogger.function(FUNCTION_NAME, LogMessages.NEW_FUNCTION_INSTANCE);
     }
 
     // # # # # # PUBLIC METHODS # # # # #
@@ -93,9 +93,9 @@ public class RemoveQoCIndicator implements IQoCManagementFunction {
             return information;
         }
         // - - - - - CORE OF THE METHOD - - - - -
-        QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
+        QoCIMLogger.function(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
         removeQoCIndicator(information);
-        QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
+        QoCIMLogger.function(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
         // - - - - - RETURN STATEMENT - - - - -
         return information;
     }
@@ -183,7 +183,7 @@ public class RemoveQoCIndicator implements IQoCManagementFunction {
         // - - - - - INITIALIZE THE VARIABLES - - - - -
         qoCIndicatorId = _qoCIndicatorId;
         setUpIsDone = true;
-        QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.SETUP_FUNCTION);
+        QoCIMLogger.function(FUNCTION_NAME, LogMessages.SETUP_FUNCTION);
         // - - - - - RETURN STATEMENT - - - - -
         return this;
     }

@@ -21,7 +21,6 @@
 package qocim.tool.functions.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -30,7 +29,7 @@ import qocim.datamodel.QoCMetricDefinition;
 import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 import qocim.tool.functions.IToolFunction;
 
 /**

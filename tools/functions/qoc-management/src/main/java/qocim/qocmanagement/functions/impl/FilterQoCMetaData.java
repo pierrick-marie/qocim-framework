@@ -31,7 +31,7 @@ import qocim.datamodel.QoCMetaData;
 import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 import qocim.qocmanagement.functions.IQoCManagementFunction;
 import qocim.qocmanagement.functions.utils.EQoCManagementFunction;
 import qocim.qocmanagement.functions.utils.LogMessages;
@@ -83,7 +83,7 @@ public class FilterQoCMetaData implements IQoCManagementFunction {
 		setUpIsDone = false;
 		matchingQoCFilter = new MatchingQoCFilter();
 		removeQoCIndicator = new RemoveQoCMetricValue();
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.NEW_FUNCTION_INSTANCE);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.NEW_FUNCTION_INSTANCE);
 	}
 
 	// # # # # # PUBLIC METHODS # # # # #
@@ -112,12 +112,12 @@ public class FilterQoCMetaData implements IQoCManagementFunction {
 		 */
 		List<QoCMetaData> list_qoCMetaData;
 		// - - - - - CORE OF THE METHOD - - - - -
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
 			list_qoCMetaData = getListQoCMetaData(information);
 			for (final QoCMetaData loop_qoCMetaData : list_qoCMetaData) {
 				filterQoCMetaData(information, loop_qoCMetaData);
 			}
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
 		// - - - - - RETURN STATEMENT - - - - -
 		return information;
 	}
@@ -143,7 +143,7 @@ public class FilterQoCMetaData implements IQoCManagementFunction {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
 		qoCFilter = _qoCFilter;
 		setUpIsDone = true;
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.SETUP_FUNCTION);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.SETUP_FUNCTION);
 		// - - - - - RETURN STATEMENT - - - - -
 		return this;
 	}

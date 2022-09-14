@@ -12,13 +12,13 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * See the GNU Lesser General Public License 
+ * See the GNU Lesser General Public License
  * for more details: http://www.gnu.org/licenses
  *
  * Initial developer(s): Pierrick MARIE
- * Contributor(s): 
+ * Contributor(s):
  */
-package qocim.datamodel.utils;
+package qocim.datamodel.utils.log;
 
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
@@ -32,8 +32,8 @@ import java.util.logging.LogRecord;
  */
 public class LogFormatter extends Formatter {
 
-    @Override
-    public String format(final LogRecord record) {
-	return record.getMessage() + "\n\n";
-    }
+	@Override
+	public String format(final LogRecord record) {
+		return "\n";
+	}
 }

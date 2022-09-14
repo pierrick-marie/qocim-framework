@@ -23,7 +23,6 @@ package qocim.qocmanagement.functions.test;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +52,7 @@ import qocim.datamodel.test.criterion.zero.TestCriterionZeroQoCCriterion;
 import qocim.datamodel.test.criterion.zero.TestCriterionZeroQoCIndicator;
 import qocim.datamodel.test.criterion.zero.TestCriterionZeroQoCMetricDefinition;
 import qocim.datamodel.utils.IQoCIMFactory;
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 import qocim.qocmanagement.functions.impl.AddQoCIndicator;
 import qocim.qocmanagement.functions.impl.FilterQoCMetaData;
 import qocim.tool.functions.utils.EBinaryComparator;

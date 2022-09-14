@@ -33,7 +33,7 @@ import qocim.datamodel.information.QInformation;
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
 import qocim.datamodel.utils.IQoCIMFactory;
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 import qocim.qocmanagement.functions.IQoCManagementFunction;
 import qocim.qocmanagement.functions.utils.EQoCManagementFunction;
 import qocim.qocmanagement.functions.utils.LogMessages;
@@ -120,7 +120,7 @@ public class AddQoCIndicator implements IQoCManagementFunction {
 		computeQoCMetricValue = new ComputeQoCMetricValue(
 				new ArrayList<QoCMetricDefinition>(map_availableQoCIMFacade.keySet()));
 		computeQoCMetricId = new ComputeQoCMetricId();
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.NEW_FUNCTION_INSTANCE);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.NEW_FUNCTION_INSTANCE);
 	}
 
 	// # # # # # PUBLIC METHODS # # # # #
@@ -164,7 +164,7 @@ public class AddQoCIndicator implements IQoCManagementFunction {
 		 */
 		QoCIndicator new_qoCIndicator;
 		// - - - - - CORE OF THE METHOD - - - - -
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.BEGIN_EXECUTION_FUNCTION);
 
 			list_qoCMetaData = getListQoCMetaData(information);
 			new_qoCMetricValueId = computeQoCMetricValueId(list_qoCMetaData);
@@ -172,7 +172,7 @@ public class AddQoCIndicator implements IQoCManagementFunction {
 			new_qoCIndicator = createNewQoCIndicator(new_qoCMetricValueId, new_qoCMetricValueValue);
 			insertNewQoCIndicator(information, new_qoCIndicator);
 
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.END_EXECUTION_FUNCTION);
 		// - - - - - RETURN STATEMENT - - - - -
 		return information;
 	}
@@ -211,7 +211,7 @@ public class AddQoCIndicator implements IQoCManagementFunction {
 		qoCCriterionId = _qoCCriterionId;
 		qoCMetricDefinitionId = _qoCMetricDefinitionId;
 		setUpIsDone = true;
-		QoCIMLogger.functionLog(FUNCTION_NAME, LogMessages.SETUP_FUNCTION);
+		QoCIMLogger.function(FUNCTION_NAME, LogMessages.SETUP_FUNCTION);
 		// - - - - - RETURN STATEMENT - - - - -
 		return this;
 	}

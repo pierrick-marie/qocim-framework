@@ -24,7 +24,7 @@ import java.util.logging.Level;
 
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 
 /**
  * This facade used to handle QoC meta-data. The class manage one QoCIndicator,

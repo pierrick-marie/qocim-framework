@@ -22,7 +22,7 @@ package qocim.qocmanagement.functions.utils;
 
 import java.util.logging.Level;
 
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 
 /**
  * An exception to inform the expected operator is not supported.

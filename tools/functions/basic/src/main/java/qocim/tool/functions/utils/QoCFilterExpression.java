@@ -24,7 +24,7 @@ import java.util.logging.Level;
 
 import qocim.datamodel.utils.ConstraintChecker;
 import qocim.datamodel.utils.ConstraintCheckerException;
-import qocim.datamodel.utils.QoCIMLogger;
+import qocim.datamodel.utils.log.QoCIMLogger;
 
 /**
  * QoCFilterExpression represents a constraint about one field of the QoC
