@@ -16,7 +16,7 @@
     <parent>
         <groupId>qocim.tools</groupId>
         <artifactId>functions</artifactId>
-        <version>1.0.1</version>
+        <version>1.1.1</version>
     </parent>
 
     <groupId>qocim.tools.functions</groupId>
@@ -36,17 +36,17 @@
         <dependency>
             <groupId>qocim</groupId>
             <artifactId>model</artifactId>
-            <version>1.0.1</version>
+            <version>1.1.1</version>
         </dependency>
         <dependency>
             <groupId>qocim.tools.functions</groupId>
             <artifactId>basic</artifactId>
-            <version>1.0.1</version>
+            <version>1.1.1</version>
         </dependency>
         <dependency>
             <groupId>qocim.tools.functions</groupId>
             <artifactId>common</artifactId>
-            <version>1.0.1</version>
+            <version>1.1.1</version>
         </dependency>
     </dependencies>
 

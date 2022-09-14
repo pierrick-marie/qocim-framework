@@ -15,7 +15,7 @@
 
     <groupId>qocim</groupId>
     <artifactId>root</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.1</version>
     <name>QoCIM framework</name>
     <description>The QoCIM model: Quality of Context Information Model</description>
     <packaging>pom</packaging>

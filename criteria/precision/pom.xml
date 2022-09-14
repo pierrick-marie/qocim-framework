@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>qocim</groupId>
 		<artifactId>criteria</artifactId>
-		<version>1.0.1</version>
+		<version>1.1.1</version>
 	</parent>
 
 	<groupId>qocim.criteria</groupId>
@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>qocim</groupId>
 			<artifactId>model</artifactId>
-			<version>1.0.1</version>
+			<version>1.1.1</version>
 		</dependency>
     </dependencies>
 
