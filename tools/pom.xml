@@ -96,40 +96,40 @@
 		</dependency>
 	</dependencies>
 
-	<build>
+	<!--<build>
 		<pluginManagement>
 			<plugins>
-				<!-- osgi felix bundlelisation -->
+				&lt;!&ndash; osgi felix bundlelisation &ndash;&gt;
 				<plugin>
 					<groupId>org.apache.felix</groupId>
 					<artifactId>maven-bundle-plugin</artifactId>
 					<version>2.3.7</version>
 				</plugin>
-				<!-- java compiler -->
+				&lt;!&ndash; java compiler &ndash;&gt;
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>2.3.2</version>
 				</plugin>
-				<!-- jar packaging -->
+				&lt;!&ndash; jar packaging &ndash;&gt;
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>2.4</version>
 				</plugin>
-				<!-- source packaging configuration -->
+				&lt;!&ndash; source packaging configuration &ndash;&gt;
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
 					<version>2.2.1</version>
 				</plugin>
-				<!-- javadoc packaging in jar configuration -->
+				&lt;!&ndash; javadoc packaging in jar configuration &ndash;&gt;
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>2.9.1</version>
 				</plugin>
-				<!-- surefire -->
+				&lt;!&ndash; surefire &ndash;&gt;
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
@@ -140,7 +140,7 @@
 
 		<plugins>
 
-			<!-- java compiler configuration -->
+			&lt;!&ndash; java compiler configuration &ndash;&gt;
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -151,7 +151,7 @@
 				</configuration>
 			</plugin>
 
-			<!-- source packaging configuration -->
+			&lt;!&ndash; source packaging configuration &ndash;&gt;
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -165,7 +165,7 @@
 				</executions>
 			</plugin>
 
-			<!-- javadoc packaging in jar configuration -->
+			&lt;!&ndash; javadoc packaging in jar configuration &ndash;&gt;
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -187,7 +187,7 @@
 				</executions>
 			</plugin>
 
-			<!-- surefire configuration -->
+			&lt;!&ndash; surefire configuration &ndash;&gt;
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -200,7 +200,7 @@
 				</configuration>
 			</plugin>
 
-			<!-- jar package generation configuration -->
+			&lt;!&ndash; jar package generation configuration &ndash;&gt;
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -232,6 +232,6 @@
 			</plugin>
 
 		</plugins>
-	</build>
+	</build>-->
 
 </project>
