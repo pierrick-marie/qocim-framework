@@ -1,0 +1,126 @@
+:Date: 18/09/2022
+:Revision:
+
+= The QoCIM framework
+A framework to handle the Quality of Context information
+
+++++
+<div class="my_image" style="display: inline-block; text-align: center; width: 100%; padding-bottom: 10px">
+      <a href="http://www.irit.fr/?lang=en"> <img src="pictures/irit.png" alt="irit" style="margin-left: 10px"> </a>
+      <a href="http://www.univ-tlse3.fr/home-page-en-379161.kjsp"> <img src="pictures/ups.png" alt="ups" style="margin-left: 10px"> </a>
+</div>
+<div class="my_image" style="display: inline-block; text-align: center; width: 100%; padding-bottom: 10px">
+      <a href="http://www.telecom-sudparis.eu/en_accueil.html"> <img src="pictures/tsp.png" alt="tsp" style="margin-left: 10px"> </a>
+      <a href="http://www.agence-nationale-recherche.fr/en/"> <img src="pictures/anr.png" alt="anr" style="margin-left: 10px"> </a>
+      <a href="http://www.irit.fr/income/index.php?page=home"> <img src="pictures/income.png" alt="income" style="margin-left: 10px"> </a>
+      <a href="http://www.cnrs.fr/index.php"> <img src="pictures/cnrs.png" alt="cnrs" style="margin-left: 10px"> </a>
+</div>
+++++
+
+The QoCIM (Quality of Context Information Model) framework provides a solution to handle the meta-data of context information concerning their quality.
+"Context information is any information that can be used to characterize the situation of an entity.
+An entity is a person, place, or object that is considered relevant to the interaction between a user and an application, including the user and application themselves" (1).
+The term QoC (Quality of Context) refers to "any information that describes the quality of information that is used as context information" (2).
+The QoCIM framework contains a meta-model able to represent heterogeneous, primitive or composite Quality of Context criteria used to evaluate the quality of context information.
+The framework also provides functions and tools to analyse and transform the QoC meta-data all along the life cycle of the context information from their production to their consumption.
+The framework QoCIM is part of the contributions of the http://www.irit.fr/income/[INCOME] project.
+
+(1) A.K. Dey. Architectural Support for Building Context-Aware Applications.
+    PhD thesis, College of Computing, Georgia Institute of Technology, December 2000.
+    http://www.cc.gatech.edu/fce/ctk/pubs/dey-thesis.pdf
+
+(2) Thomas Buchholz, Axel Kpper, and Michael Schiffers.
+    Quality of context: What it is and why we need it.
+    Proceedings of the 10th International Workshop of the HP OpenView University Association(HPOVUA). Hewlet-Packard OpenView University Association, 2003.
+    http://www.nm.ifi.lmu.de/pub/Publikationen/bks03/PDF-Version/bks03.pdf
+
+
+== Contributors
+
+ * Pierrick MARIE - contact _at_ pierrickmarie _dot_ fr
+
+== Publications
+
+ * Pierrick Marie, Thierry Desprats, Sophie Chabridon, Michelle Sibilla.
+   The QoCIM Framework: Concepts and Tools for Quality of Context Management.
+   Context in Computing. Patrick Brézillon, Avelino J Gonzalez (Eds.), Springer, 11, p. 155-172
+   http://link.springer.com/chapter/10.1007/978-1-4939-1887-4_11
+ * Pierrick Marie, Léon Lim, Atif Manzoor, Sophie Chabridon, Denis Conan, Thierry Desprats.
+   QoC-aware context data distribution in the Internet of Things (regular paper).
+   ACM Workshop on Middleware for Context-Aware Applications in the IoT (in conjunction with Middleware 2014) (M4IOT 2014), Bordeaux, 08/12/2014-12/12/2014, ACM, p. 13-18
+   http://doi.acm.org/10.1145/2676743.2676746
+ * Pierrick Marie, Thierry Desprats, Sophie Chabridon, Michelle Sibilla.
+   Extending Ambient Intelligence to the Internet of Things: New Challenges for QoC Management (regular paper).
+   International Conference on Ubiquitous Computing and Ambient Intelligence on Personalisation and User Adapted Services (UCAmI 2014), Belfast, UK, 02/12/2014-05/12/2014, Ramon Hervas, Sungyoung Lee, Chris D. Nugent, Jose Bravo (Eds.), Springer, Lecture Notes in Computer Science 8867, p. 224-231
+   http://dx.doi.org/10.1007/978-3-319-13102-3_37
+
+== Licence
+
+The source code of the QoCIM framework is licensed under the http://www.gnu.org/copyleft/lesser.html[GNU Lesser General Public License].
+
+== Developer's corner
+
+=== Get the source code
+
+To get a public, and anonymous, access to the http://git-scm.com/[Git] repository of the source code:
+
+ $> git clone https://github.com/pierrick-marie/qocim.git
+
+=== Use maven modules
+
+QoCIM uses http://maven.apache.org/[Maven] for software project management.
+We suggest using also Maven for software management of projects using QoCIM.
+Then, we provide a maven repository.
+Add the following code as Maven repository to use QoCIM (in a POM file):
+
+  <!-- QoCIM framework -->
+  <repositories>
+    <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/pierrick-marie/qocim</url>
+    </repository>
+  </repositories>
+
+You can use many module from QoCIM framework as for example the main QoC model with the following code in your `pom.xml` file
+<dependency>
+  <groupId>qocim.criteria</groupId>
+  <artifactId>precision</artifactId>
+  <version>1.1.1</version>
+</dependency>
+  <!-- QoCIM main model -->
+  <dependency>
+    <groupId>qocim</groupId>
+    <artifactId>model</artifactId>
+    <version>1.1.1</version>
+  </dependency>
+
+If you explore the precision criterion, you can use this dependency:
+
+  <dependency>
+    <groupId>qocim.criteria</groupId>
+    <artifactId>precision</artifactId>
+    <version>1.1.1</version>
+    </dependency>
+
+All the packages are listed here: https://github.com/pierrick-marie?tab=packages&repo_name=qocim
+
+Because the packages are distributed on GitHub, you also need to configure the file `settings.xml` in your `$HOME/.m2/` folder with the following code:
+
+
+  <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+			      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <servers>
+    <server>
+      <id>github</id>
+      <username>YOUR_GITHUB_USER_NAME</username>
+      <password>YOUR_GITHUB_TOKEN</password>
+    </server>
+  </servers>
+</settings>
+
+
+Don't forget to replace `YOUR_GITHUB_USER_NAME` and `YOUR_GITHUB_TOKEN` with your personal information!
+
+Please feel free to send any comments of review at: contact _at_ pierrickmarie _dot_ fr
