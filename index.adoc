@@ -81,28 +81,23 @@ Add the following code as Maven repository to use QoCIM (in a POM file):
     </repository>
   </repositories>
 
-You can use many module from QoCIM framework as for example the main QoC model with the following code in your `pom.xml` file
-<dependency>
-  <groupId>qocim.criteria</groupId>
-  <artifactId>precision</artifactId>
-  <version>1.1.1</version>
-</dependency>
-  <!-- QoCIM main model -->
-  <dependency>
-    <groupId>qocim</groupId>
-    <artifactId>model</artifactId>
-    <version>1.1.1</version>
-  </dependency>
-
-If you explore the precision criterion, you can use this dependency:
+You can use many module from QoCIM framework. For example, add the following code in your `pom.xml` file to get the main QoC model.
 
   <dependency>
     <groupId>qocim.criteria</groupId>
     <artifactId>precision</artifactId>
     <version>1.1.1</version>
-    </dependency>
+  </dependency>
 
-All the packages are listed here: https://github.com/pierrick-marie?tab=packages&repo_name=qocim
+If you want to explore the precision criterion, you can use this dependency:
+
+  <dependency>
+    <groupId>qocim.criteria</groupId>
+    <artifactId>precision</artifactId>
+    <version>1.1.1</version>
+  </dependency>
+
+All the packages are listed https://github.com/pierrick-marie?tab=packages&repo_name=qocim[here].
 
 Because the packages are distributed on GitHub, you also need to configure the file `settings.xml` in your `$HOME/.m2/` folder with the following code:
 
