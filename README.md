@@ -4,7 +4,7 @@ The original project is available here : https://fusionforge.int-evry.fr/www/qoc
 For more information about the origin of the project, please visite this web page : https://pierrick-marie.github.io/qocim/
 
 This is the version 1.0.1 of the project. 
-This version is completely freed of its original dependencies to muContext and muDEBS projects.
+This version has no more dependencies to muContext and muDEBS projects.
 @see muContext: https://fusionforge.int-evry.fr/www/mucontext/
 @see muDEBS:  https://fusionforge.int-evry.fr/www/mudebs/
 
