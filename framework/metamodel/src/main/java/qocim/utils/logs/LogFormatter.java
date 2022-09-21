@@ -18,37 +18,22 @@
  * Initial developer(s): Pierrick MARIE
  * Contributor(s):
  */
-package qocim.model;
+package qocim.utils.logs;
+
+import java.util.logging.Formatter;
+import java.util.logging.LogRecord;
 
 /**
- *
- * Order represents the direction of the QoC criterion. It brings semantic
- * interpretation of the value of the QoC.
- *
- * <ul>
- * <li>LOWER means when the value of the attribute QoCMetricValue.value
- * increases, the QoC decreases.</li>
- * <li>UPPER means when the value of the attribute QoCMetricValue.value
- * increases, the QoC increases.</li>
- * <li>UNKNOWN is a default value when no direction is set</li>
- * </ul>
- *
- * @see qocim.model.QoCMetricDefinition
- * @see qocim.model.QoCMetricValue
+ * This class is the formatter of the log messages produced by the class
+ * <b>QoCIMLogger</b>. The class adds to the end of messages a double new line
+ * to easily read the logs.
  *
  * @author Pierrick MARIE
  */
-public enum Order {
-	LOWER("Lower"), UPPER("Upper"), UNKNOWN("Unknown");
-
-	String order;
-
-	private Order(final String _order) {
-		order = _order;
-	}
+public class LogFormatter extends Formatter {
 
 	@Override
-	public String toString() {
-		return order;
+	public String format(final LogRecord record) {
+		return "\n";
 	}
 }

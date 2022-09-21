@@ -16,27 +16,228 @@
     Contributor(s):
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 			     http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-			<groupId>qocim</groupId>
-			<artifactId>root</artifactId>
-			<version>2.0.0</version>
-	</parent>
+    <groupId>qocim</groupId>
+    <artifactId>criteria</artifactId>
+    <version>2.0.0</version>
 
-	<artifactId>criteria</artifactId>
+    <name>A demo of manipulating QoCIM-based models</name>
+    <description>This project is a demonstration of how use QoCIM models.</description>
+    <packaging>pom</packaging>
 
-	<name>A demo of manipulating QoCIM-based models</name>
-	<description>This project is a demonstration of how use QoCIM models.</description>
-	<packaging>pom</packaging>
+    <modules>
+        <module>freshness</module>
+        <module>precision</module>
+        <!-- <module>demo</module> -->
+    </modules>
 
+    <licenses>
+        <license>
+            <name>LGPL</name>
+            <url>http://www.gnu.org/licenses/lgpl</url>
+        </license>
+    </licenses>
 
-	<modules>
-		<module>freshness</module>
-		<module>precision</module>
-		<!-- <module>demo</module> -->
-	</modules>
+    <organization>
+        <name>IRIT - Universite Paul SABATIER</name>
+        <url>http://irit.fr/</url>
+    </organization>
+
+    <inceptionYear>2013</inceptionYear>
+    <developers>
+        <developer>
+            <id>conan</id>
+            <name>Denis Conan</name>
+            <email>Denis.Conan[at]telecom-sudparis.eu</email>
+            <url>http://www-public.telecom-sudparis.eu/~conan</url>
+            <organization>Institut Mines Télécom, Télécom SudParis</organization>
+            <organizationUrl>http://www.telecom-sudparis.eu</organizationUrl>
+            <roles>
+                <role>Architect</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>lim</id>
+            <name>Léon Lim</name>
+            <email>Leon.Lim[at]telecom-sudparis.eu</email>
+            <url>http://www-public.telecom-sudparis.eu/~lim_leon</url>
+            <organization>Institut Mines Télécom, Télécom SudParis</organization>
+            <organizationUrl>http://www.telecom-sudparis.eu</organizationUrl>
+            <roles>
+                <role>Architect</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>chabridon</id>
+            <name>Sophie Chabridon</name>
+            <email>Sophie.Chabridon[at]telecom-sudparis.eu</email>
+            <url>http://www-public.telecom-sudparis.eu/~chabrido</url>
+            <organization>Institut Mines Télécom, Télécom SudParis</organization>
+            <organizationUrl>http://www.telecom-sudparis.eu</organizationUrl>
+            <roles>
+                <role>Architect</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>taconet</id>
+            <name>Chantal Taconet</name>
+            <email>Chantal.Taconet[at]telecom-sudparis.eu</email>
+            <url>http://www-public.telecom-sudparis.eu/~taconet</url>
+            <organization>Institut Mines Télécom, Télécom SudParis</organization>
+            <organizationUrl>http://www.telecom-sudparis.eu</organizationUrl>
+            <roles>
+                <role>Architect</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>manzoor</id>
+            <name>Atif Manzoor</name>
+            <email>Atif.Manzoor[at]telecom-sudparis.eu</email>
+            <organization>Institut Mines Télécom, Télécom SudParis</organization>
+            <organizationUrl>http://www.telecom-sudparis.eu</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>pierrick</id>
+            <name>Pierrick MARIE</name>
+            <email>Pierrick.MARIE@irit.fr</email>
+            <organization>Institut de Recherche en Informatique de Toulouse; Service IntEgration and netwoRk Administration</organization>
+            <organizationUrl>http://www.irit.fr/SIERA</organizationUrl>
+            <roles>
+                <role>Architect</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>desprats</id>
+            <name>Thierry Desprats</name>
+            <email>Thierry.Desprats@irit.fr</email>
+            <organization>Institut de Recherche en Informatique de Toulouse; Service IntEgration and netwoRk Administration</organization>
+            <organizationUrl>http://www.irit.fr/SIERA</organizationUrl>
+            <roles>
+                <role>Architect</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <contributors>
+        <contributor>
+            <name>Elliot FELGINES</name>
+            <email>felgines.elliot[at]gmail.com</email>
+            <organization>Universite Paul SABATIER student</organization>
+        </contributor>
+    </contributors>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- source packaging configuration -->
+            <dependency>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- osgi felix bundlelisation -->
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>5.1.8</version>
+                </plugin>
+                <!-- java compiler -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.10.1</version>
+                </plugin>
+                <!-- jar packaging -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.3.0</version>
+                </plugin>
+                <!-- source packaging configuration -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.2.1</version>
+                </plugin>
+                <!-- javadoc packaging in jar configuration -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.4.1</version>
+                </plugin>
+                <!-- surefire -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <!-- javadoc packaging in jar configuration -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <docfilessubdirs>true</docfilessubdirs>
+                            <excludedocfilessubdir>.svn</excludedocfilessubdir>
+                            <detectOfflineLinks>false</detectOfflineLinks>
+                            <detectJavaApiLink>false</detectJavaApiLink>
+                            <overview>${basedir}/src/main/javadoc/overview.html</overview>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- surefire configuration -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>
+                            **/Test*.java
+                        </include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- deployment: mvn deploy -->
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/pierrick-marie/qocim</url>
+        </repository>
+    </distributionManagement>
 
 </project>

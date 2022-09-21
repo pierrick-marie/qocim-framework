@@ -19,10 +19,9 @@ public class QoCMetricValue extends QClass implements Comparable<QoCMetricValue>
 
 		super();
 
-		setId(new QAttribut<Integer>("id", this, (Integer) inspectField("ID")));
-		setCreationDate(new QAttribut("creation date", this, (Date) inspectField("CREATION_DATE")));
-		setModificationDate(new QAttribut("modification date", this, (Date) inspectField("CREATION_DATE")));
-		setValue(new QAttribut("metric value", this, inspectField("VALUE")));
+		setId(new QAttribut<Integer>("id", this, 0));
+		setCreationDate(new QAttribut<>("creation date", this, new Date()));
+		setModificationDate(new QAttribut<>("modification date", this, new Date()));
 	}
 
 	public QoCMetricValue(final QAttribut<Integer> id, final QAttribut<Date> creationDate, final QAttribut<Date> modificationDate,

@@ -34,23 +34,17 @@ public class QoCMetricDefinition extends QClass {
 
 		super();
 
-		setName(new QAttribut<String>("name", this, (String) inspectField("NAME")));
-		setId(new QAttribut<String>("id", this, (String) inspectField("ID")));
-		setIsInvariant(new QAttribut<Boolean>("is invariant", this, (Boolean) inspectField("IS_INVARIANT")));
-		setUnit(new QAttribut<Unit>("unit", this, (Unit) inspectField("UNIT")));
-		setProviderUri(new QAttribut<URI>("provider uri", this, parseURI((String) inspectField("PROVIDER_URI"))));
-		setDirection(new QAttribut<Order>("direction", this, (Order) inspectField("DIRECTION")));
-		setDefaultDefinition(new QAttribut<Boolean>("default definition", this, (Boolean) inspectField("DEFAULT_DEFINITION")));
+		setName(new QAttribut<String>("name", this, ""));
+		setId(new QAttribut<String>("id", this, ""));
+		setIsInvariant(new QAttribut<Boolean>("is invariant", this, false));
+		setUnit(new QAttribut<Unit>("unit", this, Unit.ONE));
+		setProviderUri(new QAttribut<URI>("provider uri", this, parseURI("")));
+		setDirection(new QAttribut<Order>("direction", this, Order.UNKNOWN));
+		setDefaultDefinition(new QAttribut<Boolean>("default definition", this, false));
 
-		setMinValue((QoCMetricValue) inspectField("MIN_VALUE"));
-		setMaxValue((QoCMetricValue) inspectField("MAX_VALUE"));
-
-		setDescription((QoCDescription) inspectField("DESCRIPTION"));
-		description.setDefinition(this);
-
-		setMetricValues(new QList("metric-values"));
-		setPrimitiveDefinitions(new QList("primitive-definitions"));
-		setCompositeDefinitions(new QList("composite-definitions"));
+		setMetricValues(new QList<>("metric-values"));
+		setPrimitiveDefinitions(new QList<>("primitive-definitions"));
+		setCompositeDefinitions(new QList<>("composite-definitions"));
 	}
 
 

@@ -77,21 +77,21 @@ public class QoCIMPerformanceLogLevel extends Level {
 		QoCIMPerformanceLogLevel ret_logLevel = null;
 		// - - - - - CORE OF THE METHOD - - - - -
 		switch (EQoCIMPerformanceLogLevel.valueOf(_value)) {
-		case EVENT:
-			ret_logLevel = EVENT;
-			break;
-		case TIME:
-			ret_logLevel = TIME;
-			break;
-		case HARDWARE:
-			ret_logLevel = HARDWARE;
-			break;
-		case ALL:
-			ret_logLevel = ALL;
-			break;
-		default:
-			ret_logLevel = NONE;
-			break;
+			case EVENT:
+				ret_logLevel = EVENT;
+				break;
+			case TIME:
+				ret_logLevel = TIME;
+				break;
+			case HARDWARE:
+				ret_logLevel = HARDWARE;
+				break;
+			case ALL:
+				ret_logLevel = ALL;
+				break;
+			default:
+				ret_logLevel = NONE;
+				break;
 		}
 		// - - - - - RETURN STATEMENT - - - - -
 		return ret_logLevel;

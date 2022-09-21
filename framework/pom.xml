@@ -22,8 +22,7 @@
 
     <modules>
         <module>metamodel</module>
-        <!-- <module>tools</module> -->
-        <module>criteria</module>
+        <module>tools</module>
     </modules>
 
     <licenses>

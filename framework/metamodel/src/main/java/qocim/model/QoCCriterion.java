@@ -16,9 +16,8 @@ public class QoCCriterion extends QClass {
 
 		super();
 
-		setName(new QAttribut<String>("name", this, (String) inspectField("NAME")));
-		setId(new QAttribut<String>("id", this, parseID((String[]) inspectField("ID"))));
-
+		setName(new QAttribut<String>("name", this, ""));
+		setId(new QAttribut<String>("id", this, ""));
 		setMetricDefinitions(new QList<QoCMetricDefinition>("definitions"));
 	}
 
@@ -27,18 +26,19 @@ public class QoCCriterion extends QClass {
 
 		super();
 
+		setName(name);
 		setId(id);
 		setIndicator(indicator);
 		setMetricDefinitions(metricDefinitions);
 	}
 
-	private String parseID(final String id[]){
+	private String parseID(final String[] id){
 
 		StringBuilder textID = new StringBuilder();
 
 		textID.append("{");
 		for(String i : id) {
-			textID.append("\"" + i + "\"");
+			textID.append("\"").append(i).append("\"");
 			if(!i.equals(id[id.length-1])){
 				textID.append(",");
 			}

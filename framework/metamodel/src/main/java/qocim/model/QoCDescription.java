@@ -19,11 +19,8 @@ public class QoCDescription extends QClass {
 
 		super();
 
-		setInformalDescription(new QAttribut<String>("informalDescription", this, (String) inspectField("INFORMAL_DESCRIPTION")));
-
-		setListKeywords(new QList("listKeywords"));
-
-		parseKeywords((String[]) inspectField("KEYWORDS"));
+		setInformalDescription(new QAttribut<String>("informalDescription", this, ""));
+		setListKeywords(new QList<>("listKeywords"));
 	}
 
 	public QoCDescription(final QList<String> listKeyword, final QAttribut<String> informationDescription,
@@ -32,11 +29,10 @@ public class QoCDescription extends QClass {
 
 		setListKeywords(listKeyword);
 		setInformalDescription(informationDescription);
-
 		setDefinition(definition);
 	}
 
-	private void parseKeywords(final String keywords[]){
+	private void parseKeywords(final String[] keywords){
 		for(String keyword : keywords) {
 			addKeyword(keyword);
 		}

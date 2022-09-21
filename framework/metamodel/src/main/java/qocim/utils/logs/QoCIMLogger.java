@@ -20,9 +20,9 @@
  */
 package qocim.utils.logs;
 
+import com.sun.management.OperatingSystemMXBean;
+
 import java.lang.management.ManagementFactory;
-import java.lang.management.OperatingSystemMXBean;
-import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
@@ -121,27 +121,12 @@ public class QoCIMLogger {
 	 * This method provides information concerning a part of the system.
 	 *
 	 * @return The value corresponding to the expected information.
-	 *
-	 * @see java.lang.management.OperatingSystemMXBean
 	 */
 	private static String getJvmCpuUsage() {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
-		Object jvCpuUsage;
-		final OperatingSystemMXBean operatingSystemMXBean = ManagementFactory.getOperatingSystemMXBean();
-		// - - - - - CORE OF THE METHOD - - - - -
-		for (final Method method : operatingSystemMXBean.getClass().getDeclaredMethods()) {
-			method.setAccessible(true);
-			if (method.getName().equals(JVM_CPU_USAGE_METHOD_NAME)) {
-				try {
-					jvCpuUsage = method.invoke(operatingSystemMXBean);
-				} catch (final Exception _exception) {
-					return "";
-				}
-				return "" + (Double) jvCpuUsage * 100.0d;
-			}
-		}
+		final OperatingSystemMXBean operatingSystemMXBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		// - - - - - RETURN STATEMENT - - - - -
-		return "";
+		return "" + (operatingSystemMXBean.getCpuLoad() * 100.0);
 	}
 
 	/**
