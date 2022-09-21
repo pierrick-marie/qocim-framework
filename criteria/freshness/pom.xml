@@ -32,6 +32,14 @@
     <description>This is a QoCIM-based definition of the freshness indicator.</description>
     <packaging>jar</packaging>
 
+    <repositories>
+  		<repository>
+  				<id>github</id>
+  				<name>GitHub Packages</name>
+  				<url>https://maven.pkg.github.com/pierrick-marie/qocim</url>
+  		</repository>
+  	</repositories>
+
     <dependencies>
         <dependency>
             <groupId>qocim</groupId>
