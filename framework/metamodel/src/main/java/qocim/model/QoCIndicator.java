@@ -7,6 +7,7 @@ import qocim.metamodel.QList;
 
 public class QoCIndicator extends QClass {
 
+    /*
     private QAttribut<String> name;
     private QAttribut<Integer> id;
 
@@ -66,7 +67,7 @@ public class QoCIndicator extends QClass {
     }
 
     public Integer id() {
-        return (Integer) id.getObject();
+        return (Integer) id.value();
     }
 
     public QInformation getInformation() {
@@ -74,7 +75,7 @@ public class QoCIndicator extends QClass {
     }
 
     public Object information() {
-        return information.getData();
+        return information.data();
     }
 
     public QList<QoCMetricValue> getMetricValues() {
@@ -86,7 +87,7 @@ public class QoCIndicator extends QClass {
     }
 
     public String name() {
-        return (String) name.getObject();
+        return (String) name.value();
     }
 
     public void setCriteria(final QList<QoCCriterion> criteria) {
@@ -94,7 +95,7 @@ public class QoCIndicator extends QClass {
     }
 
     public void setId(final Integer id) {
-        this.id.setObject(id);
+        this.id.setValue(id);
     }
 
     public void setId(final QAttribut<Integer> id) {
@@ -114,11 +115,13 @@ public class QoCIndicator extends QClass {
     }
 
     public void setName(final String name) {
-        this.name.setObject(name);
+        this.name.setValue(name);
     }
 
     @Override
     public String toString() {
-        return "QoC indicator: " + getId().getObject().toString();
+        return "QoC indicator: " + getId().value().toString();
     }
+
+     */
 }

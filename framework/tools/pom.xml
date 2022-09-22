@@ -9,25 +9,25 @@
 	License along with the INCOME platform. If not, see <http://www.gnu.org/licenses/>.
 	Initial developer(s): Pierrick MARIE Contributor(s): -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 			     http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-			<groupId>qocim</groupId>
-			<artifactId>root</artifactId>
-			<version>2.0.0</version>
-	</parent>
+    <parent>
+        <groupId>qocim</groupId>
+        <artifactId>root</artifactId>
+        <version>2.0.0</version>
+    </parent>
 
-	<artifactId>tools</artifactId>
-	<name>QoCIM tools</name>
-	<description>The QoCIM model: Quality of Context Information Model</description>
-	<packaging>pom</packaging>
+    <artifactId>tools</artifactId>
+    <name>QoCIM tools</name>
+    <description>The QoCIM model: Quality of Context Information Model</description>
+    <packaging>pom</packaging>
 
-	<modules>
-		<!-- <module>functions</module> -->
-		<!-- <module>routing-filter</module> -->
-		<module>formats</module>
-	</modules>
+    <modules>
+        <!-- <module>functions</module> -->
+        <!-- <module>routing-filter</module> -->
+        <!-- <module>formats</module>-->
+    </modules>
 
 </project>

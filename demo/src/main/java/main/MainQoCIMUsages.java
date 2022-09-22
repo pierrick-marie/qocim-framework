@@ -16,7 +16,9 @@ public class MainQoCIMUsages {
 
 		QoCIMLogger.loadDefaultConfig();
 
+		System.out.println(" ================== Start QoCIM demo ================== ");
 		new MainQoCIMUsages();
+		System.out.println(" ================== End QoCIM demo ================== ");
 	}
 
 	public MainQoCIMUsages() {
@@ -25,16 +27,16 @@ public class MainQoCIMUsages {
 		syncEvaluation();
 
 		// Asynchronous freshness evaluation of an information
-		asyncEvaluation();
+//		asyncEvaluation();
 
 		// Synchronous random freshness evaluation of an information
-		randomSyncEvaluation();
+//		randomSyncEvaluation();
 
 		// Asynchronous random freshness evaluation of an information
-		randomAsyncEvaluation();
+//		randomAsyncEvaluation();
 
 		// Synchronous random freshness evaluation of a string
-		randomSyncStringEvaluation();
+//		randomSyncStringEvaluation();
 	}
 
 	public void asyncEvaluation() {

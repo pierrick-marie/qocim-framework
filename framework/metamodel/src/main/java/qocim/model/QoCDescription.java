@@ -8,6 +8,7 @@ import qocim.metamodel.QClass;
 
 public class QoCDescription extends QClass {
 
+	/*
 	private QList<String> listKeywords;
 
 	private QAttribut<String> name;
@@ -67,7 +68,7 @@ public class QoCDescription extends QClass {
 	}
 
 	public String informalDescription() {
-		return (String) informalDescription.getObject();
+		return (String) informalDescription.value();
 	}
 
 	public QList<String> getListKeywords() {
@@ -80,7 +81,7 @@ public class QoCDescription extends QClass {
 		return name;
 	}
 
-	public String name() { return (String) name.getObject();}
+	public String name() { return (String) name.value();}
 
 	public void setDefinition(final QoCMetricDefinition definition) {
 		this.definition = definition;
@@ -91,7 +92,7 @@ public class QoCDescription extends QClass {
 	}
 
 	public void setInformalDescription(final String informalDescription) {
-		this.informalDescription.setObject(informalDescription);
+		this.informalDescription.setValue(informalDescription);
 	}
 
 	public void setName(final QAttribut<String> name) {
@@ -99,7 +100,7 @@ public class QoCDescription extends QClass {
 	}
 
 	public void setName(final String name) {
-		this.name.setObject(name);
+		this.name.setValue(name);
 	}
 
 	public void setListKeywords(final QList<String> listKeywords) {
@@ -109,6 +110,8 @@ public class QoCDescription extends QClass {
 
 	@Override
 	public String toString() {
-		return "QoC description: " + getInformalDescription().getObject().toString();
+		return "QoC description: " + getInformalDescription().value().toString();
 	}
+
+	 */
 }

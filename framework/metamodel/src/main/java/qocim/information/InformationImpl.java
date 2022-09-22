@@ -1,85 +1,86 @@
 package qocim.information;
 
+import qocim.model.QoCIndicator;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import qocim.model.QoCIndicator;
+public class InformationImpl<T> implements QInformation<T> {
 
-public class InformationImpl implements QInformation {
+    private T data;
+    private Date creationDate;
+    private List<QoCIndicator> indicators;
+    private String name;
 
-	private Object data;
-	private Date creationDate;
-	private List<QoCIndicator> indicators;
-	private String name;
+    public InformationImpl() {
+        creationDate = new Date();
+        data = null;
+        name = "";
+        indicators = new ArrayList<>();
+    }
 
-	public InformationImpl() {
-		setCreationDate(new Date());
-		setData(new Object());
-		indicators = new ArrayList<>();
-		setName("");
-	}
+    public InformationImpl(final String name, final T data) {
+        creationDate = new Date();
+        this.data = data;
+        this.name = name;
+        indicators = new ArrayList<>();
+    }
 
-	public InformationImpl(final Object data) {
-		setData(data);
-		setCreationDate(new Date());
-		indicators = new ArrayList<>();
-		setName("");
-	}
+    @Override
+    public int compareTo(final QInformation<T> information) {
 
-	@Override
-	public int compareTo(final QInformation information) {
+        if (!information.data().equals(data)) { return -1; }
+        if (!information.name().equals(name)) { return -2; }
+        if (!information.creationDate().equals(creationDate)) { return -3; }
 
-		if (information.getData().equals(data) && information.getName().equals(name)) {
-			return 0;
-		}
+        // information are equal
+        return 0;
+    }
 
-		return 1;
-	}
+    @Override
+    public Date creationDate() {
+        return creationDate;
+    }
 
-	@Override
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    @Override
+    public T data() {
+        return data;
+    }
 
-	@Override
-	public Object getData() {
-		return data;
-	}
+    @Override
+    public List<QoCIndicator> indicators() {
+        return indicators;
+    }
 
-	@Override
-	public List<QoCIndicator> getIndicators() {
-		return indicators;
-	}
+    @Override
+    public String name() {
+        return name;
+    }
 
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 
-	@Override
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    @Override
+    public void setData(T data) {
+        this.data = data;
+    }
 
-	@Override
-	public void setData(Object data) {
-		this.data = data;
-	}
+    @Override
+    public void setIndicators(List<QoCIndicator> indicators) {
+        this.indicators = indicators;
+    }
 
-	@Override
-	public void setIndicators(List<QoCIndicator> indicators) {
-		this.indicators = indicators;
-	}
+    @Override
+    public void setName(String name) {
+        this.name = name;
 
-	@Override
-	public void setName(String name) {
-		this.name = name;
+    }
 
-	}
-
-	@Override
-	public String toString() {
-		return name.toString();
-	}
+    @Override
+    public String toString() {
+        return name.toString();
+    }
 }

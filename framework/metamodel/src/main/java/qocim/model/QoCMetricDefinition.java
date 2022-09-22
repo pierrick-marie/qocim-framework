@@ -11,7 +11,7 @@ import qocim.metamodel.QAttribut;
 import qocim.utils.logs.QoCIMLogger;
 
 public class QoCMetricDefinition extends QClass {
-
+/*
 	private QAttribut<String> name;
 	private QAttribut<String> id;
 	private QAttribut<Boolean> isInvariant;
@@ -129,7 +129,7 @@ public class QoCMetricDefinition extends QClass {
 		return defaultDefinition;
 	}
 
-	public Boolean defaultDefinition(){return (Boolean) defaultDefinition.getObject();}
+	public Boolean defaultDefinition(){return (Boolean) defaultDefinition.value();}
 
 	public QoCDescription getDescription() {
 		return description;
@@ -139,19 +139,19 @@ public class QoCMetricDefinition extends QClass {
 		return direction;
 	}
 
-	public Order direction() { return (Order) direction.getObject(); }
+	public Order direction() { return (Order) direction.value(); }
 
 	public QAttribut<String> getId() {
 		return id;
 	}
 
-	public String id() {return (String) id.getObject(); }
+	public String id() {return (String) id.value(); }
 
 	public QAttribut<Boolean> getIsInvariant() {
 		return isInvariant;
 	}
 
-	public Boolean isInvariant() { return (Boolean) isInvariant.getObject(); }
+	public Boolean isInvariant() { return (Boolean) isInvariant.value(); }
 
 	public QoCMetricValue getMaxValue() {
 		return maxValue;
@@ -169,7 +169,7 @@ public class QoCMetricDefinition extends QClass {
 		return name;
 	}
 
-	public String name() { return (String) name.getObject(); }
+	public String name() { return (String) name.value(); }
 
 	public QList<QoCMetricDefinition> getPrimitiveDefinitions() {
 		return primitiveDefinitions;
@@ -179,13 +179,13 @@ public class QoCMetricDefinition extends QClass {
 		return providerUri;
 	}
 
-	public URI providerUri() { return (URI) providerUri.getObject(); }
+	public URI providerUri() { return (URI) providerUri.value(); }
 
 	public QAttribut<Unit> getUnit() {
 		return unit;
 	}
 
-	public Unit unit() { return (Unit) unit.getObject(); }
+	public Unit unit() { return (Unit) unit.value(); }
 
 	public void setCompositeDefinitions(final QList<QoCMetricDefinition> compositeDefinitions) {
 		this.compositeDefinitions = compositeDefinitions;
@@ -196,7 +196,7 @@ public class QoCMetricDefinition extends QClass {
 	}
 
 	public void setDefaultDefinition(final Boolean defaultDefinition) {
-		this.defaultDefinition.setObject(defaultDefinition);
+		this.defaultDefinition.setValue(defaultDefinition);
 	}
 
 	public void setDefaultDefinition(final QAttribut<Boolean> defaultDefinition) {
@@ -208,7 +208,7 @@ public class QoCMetricDefinition extends QClass {
 	}
 
 	public void setDirection(final Order direction) {
-		this.direction.setObject(direction);
+		this.direction.setValue(direction);
 	}
 
 	public void setDirection(final QAttribut<Order> direction) {
@@ -220,11 +220,11 @@ public class QoCMetricDefinition extends QClass {
 	}
 
 	public void setId(final String id) {
-		this.id.setObject(id);
+		this.id.setValue(id);
 	}
 
 	public void setIsInvariant(final Boolean isInvariant) {
-		this.isInvariant.setObject(isInvariant);
+		this.isInvariant.setValue(isInvariant);
 	}
 
 	public void setIsInvariant(final QAttribut<Boolean> isInvariant) {
@@ -248,7 +248,7 @@ public class QoCMetricDefinition extends QClass {
 	}
 
 	public void setName(final String name) {
-		this.name.setObject(name);
+		this.name.setValue(name);
 	}
 
 	public void setPrimitiveDefinitions(final QList<QoCMetricDefinition> primitiveDefinitions) {
@@ -260,7 +260,7 @@ public class QoCMetricDefinition extends QClass {
 	}
 
 	public void setProviderUri(final URI providerUri) {
-		this.providerUri.setObject(providerUri);
+		this.providerUri.setValue(providerUri);
 	}
 
 	public void setUnit(final QAttribut<Unit> unit) {
@@ -268,11 +268,13 @@ public class QoCMetricDefinition extends QClass {
 	}
 
 	public void setUnit(final Unit<?> unit) {
-		this.unit.setObject(unit);
+		this.unit.setValue(unit);
 	}
 
 	@Override
 	public String toString() {
-		return "QoC metric definition: " + getId().getObject().toString();
+		return "QoC metric definition: " + getId().value().toString();
 	}
+
+ */
 }

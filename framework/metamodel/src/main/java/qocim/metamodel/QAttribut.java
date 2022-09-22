@@ -1,71 +1,51 @@
 package qocim.metamodel;
 
-import qocim.utils.logs.QoCIMLogger;
-
 public class QAttribut<T> {
 
-	private String name;
-	private T object;
-	private Object container;
+    public final String name;
+    private T value;
+    public final QClass container;
 
-	public QAttribut() {
-		setName("");
-		setObject(null);
-		setContainer(null);
-	}
+    public QAttribut() {
+        name = "";
+        container = null;
+        value = null;
+    }
 
-	public QAttribut(final String name, final Object container, final T value) {
-		setName(name);
-		setContainer(container);
-		setObject(value);
-	}
+    public QAttribut(final String name, final QClass container, final T value) {
+        this.name = name;
+        this.container = container;
+        this.value = value;
+    }
 
-	@Override
-	public boolean equals(final Object comparable) {
+    @Override
+    public boolean equals(final Object comparable) {
 
-		QAttribut attribut;
+        QAttribut<?> qAttribut = null;
+        String name = "";
 
-		if (comparable instanceof QAttribut) {
-			attribut = (QAttribut) comparable;
-			return attribut.name.equals(name) && attribut.object.equals(object)
-					&& attribut.container.equals(container);
-		}
+        if (comparable instanceof QAttribut<?>) {
+            qAttribut = (QAttribut<?>) comparable;
+            return qAttribut.name.equals(this.name);
+        }
 
-		return false;
-	}
+        if (comparable instanceof String) {
+            name = (String) comparable;
+            return this.name.equals(name);
+        }
 
-	public Object getContainer() {
-		if (null == container) {
-			QoCIMLogger.info("QAttribut.getContainer: trying to access to a null object");
-		}
-		return container;
-	}
+        return false;
+    }
 
-	public String getName() {
-		if (null == name) {
-			QoCIMLogger.info("QAttribut.getName: trying to access to a null object");
-		}
-		return name;
-	}
+    public T value() {
+        return value;
+    }
 
-	public Object getObject() {
-		if (null == object) {
-			QoCIMLogger.info("QAttribut.getObject: trying to access to a null object");
-		}
-		return object;
-	}
+    public void setValue(final T value) {
+        this.value = value;
+    }
 
-	public void setContainer(final Object container) {
-		this.container = container;
-	}
-
-	public void setName(final String name) {
-		if (null == this.name || this.name.isEmpty()) {
-			this.name = name;
-		}
-	}
-
-	public void setObject(final T object) {
-		this.object = object;
-	}
+    public String toString() {
+        return name;
+    }
 }

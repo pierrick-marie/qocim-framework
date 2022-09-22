@@ -5,19 +5,19 @@ import java.util.List;
 
 import qocim.model.QoCIndicator;
 
-public interface QInformation extends Comparable<QInformation> {
+public interface QInformation<T> extends Comparable<QInformation<T>> {
 
-	Date getCreationDate();
+	Date creationDate();
 
-	Object getData();
+	T data();
 
-	List<QoCIndicator> getIndicators();
+	List<QoCIndicator> indicators();
 
-	String getName();
+	String name();
 
 	void setCreationDate(Date creationDate);
 
-	void setData(Object data);
+	void setData(T data);
 
 	void setIndicators(List<QoCIndicator> indicators);
 

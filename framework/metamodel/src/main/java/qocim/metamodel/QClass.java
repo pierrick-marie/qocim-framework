@@ -1,21 +1,23 @@
 package qocim.metamodel;
 
-import qocim.utils.logs.QoCIMLogger;
-
-import java.lang.reflect.Field;
-
 public class QClass {
 
-	private String qName;
+	public final String name;
+	private final QList attributs;
+	public final QClass container;
 
 	public QClass() {
 
-		setQName(this.getClass().getSimpleName());
+		this.name = this.getClass().getSimpleName();
+		attributs = new QList("Test list", this);
+		container = this;
 	}
 
-	public QClass(final String qName) {
+	public QClass(final String name) {
 
-		setQName(qName);
+		this.name = name;
+		attributs = new QList("Test list", this);
+		container = this;
 	}
 
 	@Override
@@ -25,33 +27,26 @@ public class QClass {
 
 		if (comparable instanceof QClass) {
 			classComparable = (QClass) comparable;
-			return classComparable.qName.equals(qName);
+			return classComparable.name.equals(name);
 		}
 
 		return false;
 	}
 
-	public String getQName() {
-		if (null == qName) {
-			QoCIMLogger.debug("QClass.getQName: trying to access to a null object");
-		}
-		return qName;
+	public boolean add(final String name, final Object value) {
+		return attributs.add(new QAttribut<>(name, this, value));
 	}
 
-	public void setQName(final String qName) {
-		this.qName = qName;
+	public QAttribut<?> get(final String name) {
+		return attributs.get(name);
 	}
 
-	protected Object inspectField(final String fieldName){
+	public boolean remove(final String name) {
+		QAttribut<?> attribut = get(name);
+		return attributs.remove(attribut);
+	}
 
-		try {
-			Field field = this.getClass().getDeclaredField(fieldName);
-			return field.get(this);
-		} catch (NoSuchFieldException exception) {
-			QoCIMLogger.info(exception.getMessage());
-		} catch (IllegalAccessException exception) {
-			QoCIMLogger.info(exception.getMessage());
-		}
-		return null;
+	public String toString() {
+		return name;
 	}
 }

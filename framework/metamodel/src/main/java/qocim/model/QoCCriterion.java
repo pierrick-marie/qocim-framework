@@ -6,6 +6,7 @@ import qocim.metamodel.QClass;
 
 public class QoCCriterion extends QClass {
 
+	/*
 	private QAttribut<String> name;
 	private QAttribut<String> id;
 	private QoCIndicator indicator;
@@ -69,7 +70,7 @@ public class QoCCriterion extends QClass {
 		return id;
 	}
 
-	public String id(){ return (String) id.getObject();}
+	public String id(){ return (String) id.value();}
 
 	public QoCIndicator getIndicator() {
 		return indicator;
@@ -83,14 +84,14 @@ public class QoCCriterion extends QClass {
 		return name;
 	}
 
-	public String name() {return (String) name.getObject(); }
+	public String name() {return (String) name.value(); }
 
 	public void setId(final QAttribut<String> id) {
 		this.id = id;
 	}
 
 	public void setId(final String id) {
-		this.id.setObject(id);
+		this.id.setValue(id);
 	}
 
 	public void setIndicator(final QoCIndicator indicator) {
@@ -106,11 +107,12 @@ public class QoCCriterion extends QClass {
 	}
 
 	public void setName(final String name) {
-		this.name.setObject(name);
+		this.name.setValue(name);
 	}
 
 	@Override
 	public String toString() {
-		return "QoC criterion: " + getId().getObject().toString();
+		return "QoC criterion: " + getId().value().toString();
 	}
+	*/
 }

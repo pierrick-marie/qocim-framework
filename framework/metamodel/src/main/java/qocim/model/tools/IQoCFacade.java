@@ -1,24 +1,23 @@
-package qocim.model;
+package qocim.model.tools;
 
 import java.util.List;
 
 import qocim.information.QInformation;
+import qocim.model.QoCMetricValue;
 
 public interface IQoCFacade {
 
-	void addQoCListener(final Object qocListener);
+	void addQoCListener(final IQoCListener qocListener);
 
-	void fireNewInformation(final QInformation information);
+	void fireNewInformation(final QInformation<?> information);
 
-	String getListenerMethodName();
+	QoCMetricValue maxQoCMetricValue();
 
-	QoCMetricValue getMaxQoCMetricValue();
+	QoCMetricValue minQoCMetricValue();
 
-	QoCMetricValue getMinQoCMetricValue();
+	IQoCEvaluator qoCEvaluator();
 
-	IQoCEvaluator getQoCEvaluator();
-
-	List<Object> getQoCListeners();
+	List<IQoCListener> qoCListeners();
 
 	QoCMetricValue newQoCMetricValue(final Object value);
 
