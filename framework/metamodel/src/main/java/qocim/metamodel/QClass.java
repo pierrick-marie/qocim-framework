@@ -4,7 +4,7 @@ public class QClass {
 
 	public final String name;
 	private final QList attributs;
-	public final QClass container;
+	private QClass container;
 
 	public QClass() {
 
@@ -48,5 +48,14 @@ public class QClass {
 
 	public String toString() {
 		return name;
+	}
+
+	public QClass container() {
+		return container;
+	}
+
+	public QClass setContainer(final QClass container) {
+		this.container = container;
+		return this;
 	}
 }

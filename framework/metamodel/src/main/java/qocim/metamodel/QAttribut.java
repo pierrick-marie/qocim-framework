@@ -4,9 +4,9 @@ public class QAttribut<T> {
 
     public final String name;
     private T value;
-    public final QClass container;
+    private QClass container;
 
-    public QAttribut() {
+    private QAttribut() {
         name = "";
         container = null;
         value = null;
@@ -41,11 +41,21 @@ public class QAttribut<T> {
         return value;
     }
 
-    public void setValue(final T value) {
+    public QAttribut<?> setValue(final T value) {
         this.value = value;
+        return this;
     }
 
     public String toString() {
         return name;
+    }
+
+    public QAttribut<?> setContainer(final QClass container) {
+        this.container = container;
+        return this;
+    }
+
+    public QClass container() {
+        return container;
     }
 }

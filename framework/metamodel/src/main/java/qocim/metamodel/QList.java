@@ -21,22 +21,22 @@ public class QList extends LinkedList<QAttribut<?>> {
     @Override
     public boolean equals(final Object comparable) {
 
-        QList aggregation;
+        QList compareList;
 
         if (comparable instanceof QList) {
-            aggregation = (QList) comparable;
+            compareList = (QList) comparable;
 
-            if (!aggregation.name.equals(name)) {
+            if (!compareList.name.equals(name)) {
                 return false;
             }
 
             for (final QAttribut<?> object : this) {
-                if (!aggregation.contains(object)) {
+                if (!compareList.contains(object)) {
                     return false;
                 }
             }
 
-            for (final QAttribut<?> object : aggregation) {
+            for (final QAttribut<?> object : compareList) {
                 if (!this.contains(object)) {
                     return false;
                 }

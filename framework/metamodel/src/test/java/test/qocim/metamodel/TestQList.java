@@ -1,0 +1,72 @@
+package test.qocim.metamodel;
+
+import org.junit.Before;
+import org.junit.Test;
+import qocim.metamodel.QAttribut;
+import qocim.metamodel.QClass;
+import qocim.metamodel.QList;
+import test.qocim.metamodel.log.Messages;
+
+import static org.junit.Assert.*;
+
+public class TestQList {
+
+	private final static String CONTAINER_NAME = "test container";
+	private final static String ATTRIBUT_NAME = "test attribut";
+	private final static String QLIST_NAME = "test list";
+
+	private QList testList;
+	private QClass container;
+
+	@Before
+	public final void before() {
+		System.out.println(Messages.BEFORE);
+		container = new QClass(CONTAINER_NAME);
+		testList = new QList(QLIST_NAME, container);
+
+		addAttributs(testList);
+	}
+
+	private void addAttributs(QList list) {
+		for (int i = 0; i < 5; i++) {
+			list.add(new QAttribut<>(ATTRIBUT_NAME + " " + i, container, i));
+		}
+	}
+
+	@Test
+	public final void testToString() {
+		assertEquals(QLIST_NAME, testList.name);
+		assertEquals(QLIST_NAME, testList.toString());
+	}
+
+	@Test
+	public final void testContainer() {
+		assertTrue(container == testList.container);
+	}
+
+	@Test
+	public final void testEquals() {
+		assertTrue(testList.equals(testList));
+		QList testList2 = new QList(QLIST_NAME, container);
+		// Same name but different element in the lists
+		assertFalse(testList2.equals(testList));
+		addAttributs(testList2);
+		// Same name and same element in the lists
+		assertTrue(testList2.equals(testList));
+		// Same name but different element in the lists
+		testList2.remove(0);
+		assertFalse(testList2.equals(testList));
+		// Different name and different element in the lists
+		QList testList3 = new QList(QLIST_NAME + " FALSE ", container);
+		assertFalse(testList3.equals(testList));
+
+		// TODO test with elements in the list
+	}
+
+	@Test
+	public final void testGet() {
+		assertEquals(
+			new QAttribut<>(ATTRIBUT_NAME + " " + 0, container, 0), testList.get(ATTRIBUT_NAME + " " + 0)
+		);
+	}
+}
