@@ -2,60 +2,68 @@ package qocim.metamodel;
 
 public class QAttribut<T> {
 
-    public final String name;
-    private T value;
-    private QClass container;
+	public final String name;
+	private T value;
+	private QClass container;
 
-    private QAttribut() {
-        name = "";
-        container = null;
-        value = null;
-    }
+	private QAttribut() {
+		name = "";
+		container = null;
+		value = null;
+	}
 
-    public QAttribut(final String name, final QClass container, final T value) {
-        this.name = name;
-        this.container = container;
-        this.value = value;
-    }
+	public QAttribut(final String name, final QClass container, final T value) {
+		this.name = name;
+		this.container = container;
+		this.value = value;
+	}
 
-    @Override
-    public boolean equals(final Object comparable) {
+	@Override
+	public boolean equals(final Object comparable) {
 
-        QAttribut<?> qAttribut = null;
-        String name = "";
+		QAttribut<?> qAttribut = null;
+		String name = "";
 
-        if (comparable instanceof QAttribut<?>) {
-            qAttribut = (QAttribut<?>) comparable;
-            return qAttribut.name.equals(this.name);
-        }
+		if (comparable instanceof QAttribut<?>) {
+			qAttribut = (QAttribut<?>) comparable;
+			return qAttribut.name.equals(this.name);
+		}
 
-        if (comparable instanceof String) {
-            name = (String) comparable;
-            return this.name.equals(name);
-        }
+		if (comparable instanceof String) {
+			name = (String) comparable;
+			return this.name.equals(name);
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    public T value() {
-        return value;
-    }
+	public T value() {
+		return value;
+	}
 
-    public QAttribut<?> setValue(final T value) {
-        this.value = value;
-        return this;
-    }
+	public QAttribut<?> setTValue(final T value) {
+		this.value = value;
+		return this;
+	}
 
-    public String toString() {
-        return name;
-    }
+	public Boolean setObjectValue(final Object value) {
+		if (value.getClass().isInstance(this.value)) {
+			this.value = (T) value;
+			return true;
+		}
+		return false;
+	}
 
-    public QAttribut<?> setContainer(final QClass container) {
-        this.container = container;
-        return this;
-    }
+	public String toString() {
+		return name;
+	}
 
-    public QClass container() {
-        return container;
-    }
+	public QAttribut<?> setContainer(final QClass container) {
+		this.container = container;
+		return this;
+	}
+
+	public QClass container() {
+		return container;
+	}
 }

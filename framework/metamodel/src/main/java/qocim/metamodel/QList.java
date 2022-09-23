@@ -1,5 +1,7 @@
 package qocim.metamodel;
 
+import qocim.utils.logs.QoCIMLogger;
+
 import java.util.LinkedList;
 
 public class QList {
@@ -33,13 +35,13 @@ public class QList {
 			}
 
 			for (final QAttribut<?> object : elements) {
-				if (null == compareList.get(object.name)) {
+				if (null == compareList.getElement(object.name)) {
 					return false;
 				}
 			}
 
-			for (final QAttribut<?> object : compareList.all()) {
-				if (null == get(object.name)) {
+			for (final QAttribut<?> object : compareList.elements) {
+				if (null == getElement(object.name)) {
 					return false;
 				}
 			}
@@ -50,7 +52,7 @@ public class QList {
 		return false;
 	}
 
-	public QAttribut<?> get(final String elementName) {
+	public QAttribut<?> getElement(final String elementName) {
 
 		for (QAttribut<?> attribut : elements) {
 			if (attribut.name.equals(elementName)) {
@@ -61,20 +63,32 @@ public class QList {
 		return null;
 	}
 
-	public Boolean add(final QAttribut<?> element) {
+	public Boolean addElement(final QAttribut<?> element) {
 		return elements.add(element);
 	}
 
-	public Boolean remove(final String elementName) {
-		QAttribut<?> searchedElement = get(elementName);
+	public Boolean removeElement(final String elementName) {
+		QAttribut<?> searchedElement = getElement(elementName);
 		if (null != searchedElement) {
 			return elements.remove(searchedElement);
 		}
 		return false;
 	}
 
-	public LinkedList<QAttribut<?>> all() {
-		return elements;
+	public Boolean setElement(final String elementName, final Object value) {
+		QAttribut<?> attribut;
+		attribut = getElement(elementName);
+		if (null != attribut) {
+			attribut.setObjectValue(value);
+			return true;
+		} else {
+			QoCIMLogger.error("QList.setAttribut: access to null object");
+			return false;
+		}
+	}
+
+	public int nbElements() {
+		return elements.size();
 	}
 
 	public String toString() {

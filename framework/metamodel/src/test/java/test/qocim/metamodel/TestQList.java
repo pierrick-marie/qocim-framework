@@ -11,9 +11,9 @@ import static org.junit.Assert.*;
 
 public class TestQList {
 
-	private final static String CONTAINER_NAME = "test container";
-	private final static String ATTRIBUT_NAME = "test attribut";
-	private final static String QLIST_NAME = "test list";
+	private final String CONTAINER_NAME = "test container";
+	private final String ATTRIBUT_NAME = "test attribut";
+	private final String QLIST_NAME = "test list";
 
 	private QList testList;
 	private QClass container;
@@ -29,15 +29,15 @@ public class TestQList {
 
 	private void addAttributs(QList list) {
 		for (int i = 0; i < 5; i++) {
-			list.add(new QAttribut<>(ATTRIBUT_NAME + " " + i, container, i));
+			list.addElement(new QAttribut<>(ATTRIBUT_NAME + " " + i, container, i));
 		}
 	}
 
 	@Test
 	public final void testAdd() {
-		assertEquals(5, testList.all().size());
+		assertEquals(5, testList.nbElements());
 		for (int i = 0; i < 5; i++) {
-			assertTrue(null != testList.get(ATTRIBUT_NAME + " " + i));
+			assertTrue(null != testList.getElement(ATTRIBUT_NAME + " " + i));
 		}
 	}
 
@@ -62,7 +62,7 @@ public class TestQList {
 		// Same name and same element in the lists
 		assertTrue(testList2.equals(testList));
 		// Same name but different element in the lists
-		testList2.remove(ATTRIBUT_NAME + " " + 0);
+		testList2.removeElement(ATTRIBUT_NAME + " " + 0);
 		assertFalse(testList2.equals(testList));
 		// Different name and different element in the lists
 		QList testList3 = new QList(QLIST_NAME + " FALSE ", container);
@@ -74,14 +74,14 @@ public class TestQList {
 	@Test
 	public final void testGet() {
 		assertEquals(
-			new QAttribut<>(ATTRIBUT_NAME + " " + 0, container, 0), testList.get(ATTRIBUT_NAME + " " + 0)
+			new QAttribut<>(ATTRIBUT_NAME + " " + 0, container, 0), testList.getElement(ATTRIBUT_NAME + " " + 0)
 		);
-		assertTrue(null == testList.get(ATTRIBUT_NAME + " NULL"));
+		assertTrue(null == testList.getElement(ATTRIBUT_NAME + " NULL"));
 	}
 
 	@Test
 	public final void testRemove() {
-		testList.remove(ATTRIBUT_NAME + " " + 0);
-		assertEquals(4, testList.all().size());
+		testList.removeElement(ATTRIBUT_NAME + " " + 0);
+		assertEquals(4, testList.nbElements());
 	}
 }

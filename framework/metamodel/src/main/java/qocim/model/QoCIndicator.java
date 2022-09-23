@@ -4,124 +4,42 @@ import qocim.information.QInformation;
 import qocim.metamodel.QAttribut;
 import qocim.metamodel.QClass;
 import qocim.metamodel.QList;
+import qocim.utils.logs.QoCIMLogger;
 
 public class QoCIndicator extends QClass {
 
-    /*
-    private QAttribut<String> name;
-    private QAttribut<Integer> id;
+	private static final String ID = "id";
+	private static final String INFORMATION = "informaiton";
+	private static final String CRITERIA = "criteria";
+	private static final String VALUES = "values";
+	private static final String TO_STRING = "QoC Indicator: ";
 
-    private QList<QoCCriterion> criteria;
-    private QList<QoCMetricValue> metricValues;
+	public QoCIndicator(final String name, final Integer id) {
+		super(name);
+		add(ID, id);
+		add(INFORMATION, null);
+		add(CRITERIA, new QList("list " + CRITERIA, this));
+		add(VALUES, new QList("list " + VALUES, this));
+	}
 
-    private QInformation information;
+	public Integer id() {
+		return (Integer) get(ID);
+	}
 
-    public QoCIndicator() {
+	public QInformation<?> information() {
+		return (QInformation<?>) get(INFORMATION);
+	}
 
-        super();
+	public QList criteria() {
+		return (QList) get(CRITERIA);
+	}
 
-        setName(new QAttribut<String>("name", this, ""));
-        setId(new QAttribut<Integer>("id", this, 0));
+	public QList values() {
+		return (QList) get(VALUES);
+	}
 
-        setCriteria(new QList<QoCCriterion>("criteria"));
-        setMetricValues(new QList<QoCMetricValue>("metric-values"));
-    }
-
-    protected QoCIndicator(final QAttribut<Integer> id, final QList<QoCCriterion> criterion, final QList<QoCMetricValue> metricValues) {
-
-        super();
-
-        setId(id);
-        setCriteria(criterion);
-        setMetricValues(metricValues);
-    }
-
-    public void addCriterion(final QoCCriterion criterion) {
-        criteria.add(criterion);
-    }
-
-
-    public void addMetricValue(final QoCMetricValue metricValue) {
-        metricValues.add(metricValue);
-    }
-
-    @Override
-    public boolean equals(final Object comparable) {
-
-        QoCIndicator indicator;
-
-        if (comparable instanceof QoCIndicator) {
-            indicator = (QoCIndicator) comparable;
-            return indicator.id.equals(id);
-        }
-
-        return false;
-    }
-
-    public QList<QoCCriterion> getCriteria() {
-        return criteria;
-    }
-
-    public QAttribut<Integer> getId() {
-        return id;
-    }
-
-    public Integer id() {
-        return (Integer) id.value();
-    }
-
-    public QInformation getInformation() {
-        return information;
-    }
-
-    public Object information() {
-        return information.data();
-    }
-
-    public QList<QoCMetricValue> getMetricValues() {
-        return metricValues;
-    }
-
-    public QAttribut<String> getName() {
-        return name;
-    }
-
-    public String name() {
-        return (String) name.value();
-    }
-
-    public void setCriteria(final QList<QoCCriterion> criteria) {
-        this.criteria = criteria;
-    }
-
-    public void setId(final Integer id) {
-        this.id.setValue(id);
-    }
-
-    public void setId(final QAttribut<Integer> id) {
-        this.id = id;
-    }
-
-    public void setInformation(QInformation information) {
-        this.information = information;
-    }
-
-    public void setMetricValues(final QList<QoCMetricValue> metricValues) {
-        this.metricValues = metricValues;
-    }
-
-    public void setName(final QAttribut<String> name) {
-        this.name = name;
-    }
-
-    public void setName(final String name) {
-        this.name.setValue(name);
-    }
-
-    @Override
-    public String toString() {
-        return "QoC indicator: " + getId().value().toString();
-    }
-
-     */
+	@Override
+	public String toString() {
+		return TO_STRING + id();
+	}
 }

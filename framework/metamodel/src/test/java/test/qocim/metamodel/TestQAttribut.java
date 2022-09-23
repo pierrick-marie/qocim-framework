@@ -10,8 +10,8 @@ import static org.junit.Assert.*;
 
 public class TestQAttribut {
 
-	private static final String ATTRIBUT_NAME = "test attribut";
-	private static final Integer VALUE = 2;
+	private final String ATTRIBUT_NAME = "test attribut";
+	private final Integer VALUE = 2;
 	private QAttribut<Integer> testAttribut;
 	private QClass container;
 
@@ -48,7 +48,13 @@ public class TestQAttribut {
 		assertEquals(VALUE, testAttribut.value());
 
 		Integer newValue = 3;
-		assertEquals(testAttribut, testAttribut.setValue(newValue));
+		assertTrue(testAttribut.setObjectValue(newValue));
 		assertEquals(newValue, testAttribut.value());
+
+		newValue = 4;
+		assertEquals(testAttribut, testAttribut.setTValue(newValue));
+		assertEquals(newValue, testAttribut.value());
+
+		assertFalse(testAttribut.setObjectValue("Test False, type error, expected Integer"));
 	}
 }

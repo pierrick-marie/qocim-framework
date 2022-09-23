@@ -3,7 +3,7 @@ package qocim.metamodel;
 public class QClass {
 
 	public final String name;
-	public final QList attributs;
+	private final QList attributs;
 	private QClass container;
 
 	public QClass() {
@@ -33,8 +33,25 @@ public class QClass {
 		return false;
 	}
 
-	public boolean add(final String name, final Object value) {
-		return attributs.add(new QAttribut<>(name, this, value));
+	public Boolean add(final String name, final Object value) {
+		return attributs.addElement(new QAttribut<>(name, this, value));
+	}
+
+	public Object get(final String name) {
+
+		QAttribut<?> element = attributs.getElement(name);
+		if (null != element) {
+			return element.value();
+		}
+		return null;
+	}
+
+	public Boolean set(final String name, final Object value) {
+		return attributs.setElement(name, value);
+	}
+
+	public Boolean remove(final String name) {
+		return attributs.removeElement(name);
 	}
 
 	public String toString() {
