@@ -3,7 +3,7 @@ package qocim.model.tools;
 import java.util.List;
 
 import qocim.information.QInformation;
-import qocim.model.QoCMetricValue;
+import qocim.model.QoCValue;
 
 public interface IQoCFacade {
 
@@ -11,19 +11,19 @@ public interface IQoCFacade {
 
 	void fireNewInformation(final QInformation<?> information);
 
-	QoCMetricValue maxQoCMetricValue();
+	QoCValue maxQoCMetricValue();
 
-	QoCMetricValue minQoCMetricValue();
+	QoCValue minQoCMetricValue();
 
 	IQoCEvaluator qoCEvaluator();
 
 	List<IQoCListener> qoCListeners();
 
-	QoCMetricValue newQoCMetricValue(final Object value);
+	QoCValue newQoCMetricValue(final Object value);
 
-	QoCMetricValue newQoCMetricValue(final QInformation information, final Object metricValue);
+	QoCValue newQoCMetricValue(final QInformation information, final Object metricValue);
 
-	QoCMetricValue qualifyInformation(final QInformation information);
+	QoCValue qualifyInformation(final QInformation information);
 
 	Boolean setEvaluator(final IQoCEvaluator qocEvaluator);
 

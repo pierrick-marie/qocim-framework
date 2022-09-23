@@ -1,22 +1,29 @@
 package qocim.metamodel;
 
+import qocim.utils.logs.QoCIMLogger;
+
+import java.util.LinkedList;
+import java.util.List;
+
 public class QClass {
 
 	public final String name;
-	private final QList attributs;
+//	private final QList attributs;
+
+	private final List<QAttribut<?>> attributs;
 	private QClass container;
 
 	public QClass() {
 
 		this.name = this.getClass().getSimpleName();
-		attributs = new QList("QClass attributs", this);
+		attributs = new LinkedList<>();
 		container = this;
 	}
 
 	public QClass(final String name) {
 
 		this.name = name;
-		attributs = new QList(name + " attributs", this);
+		attributs = new LinkedList<>();
 		container = this;
 	}
 
@@ -34,12 +41,12 @@ public class QClass {
 	}
 
 	public Boolean add(final String name, final Object value) {
-		return attributs.addElement(new QAttribut<>(name, this, value));
+		return attributs.add(new QAttribut<>(name, this, value));
 	}
 
 	public Object get(final String name) {
 
-		QAttribut<?> element = attributs.getElement(name);
+		QAttribut<?> element = getAttribut(name);
 		if (null != element) {
 			return element.value();
 		}
@@ -47,11 +54,23 @@ public class QClass {
 	}
 
 	public Boolean set(final String name, final Object value) {
-		return attributs.setElement(name, value);
+		QAttribut<?> attribut;
+		attribut = getAttribut(name);
+		if (null != attribut) {
+			attribut.setObjectValue(value);
+			return true;
+		} else {
+			QoCIMLogger.error("QList.setAttribut: access to null object");
+			return false;
+		}
 	}
 
 	public Boolean remove(final String name) {
-		return attributs.removeElement(name);
+		QAttribut<?> searchedElement = getAttribut(name);
+		if (null != searchedElement) {
+			return attributs.remove(searchedElement);
+		}
+		return false;
 	}
 
 	public String toString() {
@@ -65,5 +84,14 @@ public class QClass {
 	public QClass setContainer(final QClass container) {
 		this.container = container;
 		return this;
+	}
+
+	private QAttribut<?> getAttribut(final String elementName) {
+		for (QAttribut<?> attribut : attributs) {
+			if (attribut.name.equals(elementName)) {
+				return attribut;
+			}
+		}
+		return null;
 	}
 }

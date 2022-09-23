@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import qocim.information.QInformation;
-import qocim.model.QoCMetricValue;
+import qocim.model.QoCValue;
 
-public interface IQoCEvaluator extends Callable<QoCMetricValue> {
+public interface IQoCEvaluator extends Callable<QoCValue> {
 
 	@Override
-	QoCMetricValue call();
+	QoCValue call();
 
 	void fireNewInformation(QInformation information);
 

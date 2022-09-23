@@ -1,117 +1,52 @@
 package qocim.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
-import qocim.metamodel.QList;
-import qocim.metamodel.QAttribut;
 import qocim.metamodel.QClass;
 
 public class QoCDescription extends QClass {
 
-	/*
-	private QList<String> listKeywords;
+	private static final String NAME = "qoc value";
+	private static final String KEYWORDS = "keywords";
+	private static final String DESCRIPTION = "description";
 
-	private QAttribut<String> name;
-	private QAttribut<String> informalDescription;
-
-	private QoCMetricDefinition definition;
-
-	public QoCDescription() {
-
-		super();
-
-		setInformalDescription(new QAttribut<String>("informalDescription", this, ""));
-		setListKeywords(new QList<>("listKeywords"));
+	public QoCDescription(final String name) {
+		super(name);
+		add(NAME, name);
+		add(KEYWORDS, new LinkedList<String>());
+		add(DESCRIPTION, "");
 	}
 
-	public QoCDescription(final QList<String> listKeyword, final QAttribut<String> informationDescription,
-                          final QoCMetricDefinition definition) {
-		super();
-
-		setListKeywords(listKeyword);
-		setInformalDescription(informationDescription);
-		setDefinition(definition);
+	public String name() {
+		return (String) get(NAME);
 	}
 
-	private void parseKeywords(final String[] keywords){
-		for(String keyword : keywords) {
-			addKeyword(keyword);
-		}
+	public QoCDescription setName(final String name) {
+		set(NAME, name);
+		return this;
 	}
 
-	public void addKeyword(final String keyWord) {
-		listKeywords.add(keyWord);
-
+	public List<String> keywords() {
+		return (List<String>) get(KEYWORDS);
 	}
 
-	@Override
-	public boolean equals(final Object comparable) {
-
-		QoCDescription description;
-
-		if (comparable instanceof QoCDescription) {
-			description = (QoCDescription) comparable;
-			return description.listKeywords.equals(listKeywords)
-					&& description.informalDescription.equals(informalDescription)
-					&& description.definition.equals(definition);
-		}
-
-		return false;
+	public QoCDescription addKeyword(final String name) {
+		keywords().add(name);
+		return this;
 	}
 
-	public QoCMetricDefinition getDefinition() {
-		return definition;
+	public QoCDescription removeKeyword(final String name) {
+		keywords().remove(name);
+		return this;
 	}
 
-	public QAttribut<String> getInformalDescription() {
-		return informalDescription;
+	public String description() {
+		return (String) get(DESCRIPTION);
 	}
 
-	public String informalDescription() {
-		return (String) informalDescription.value();
+	public QoCDescription setDescription(final String description) {
+		set(DESCRIPTION, description);
+		return this;
 	}
-
-	public QList<String> getListKeywords() {
-		return listKeywords;
-	}
-
-	public List<String> listKeywords() { return listKeywords; }
-
-	public QAttribut<String> getName() {
-		return name;
-	}
-
-	public String name() { return (String) name.value();}
-
-	public void setDefinition(final QoCMetricDefinition definition) {
-		this.definition = definition;
-	}
-
-	public void setInformalDescription(final QAttribut<String> informalDescription) {
-		this.informalDescription = informalDescription;
-	}
-
-	public void setInformalDescription(final String informalDescription) {
-		this.informalDescription.setValue(informalDescription);
-	}
-
-	public void setName(final QAttribut<String> name) {
-		this.name = name;
-	}
-
-	public void setName(final String name) {
-		this.name.setValue(name);
-	}
-
-	public void setListKeywords(final QList<String> listKeywords) {
-		this.listKeywords = listKeywords;
-
-	}
-
-	@Override
-	public String toString() {
-		return "QoC description: " + getInformalDescription().value().toString();
-	}
-
-	 */
 }

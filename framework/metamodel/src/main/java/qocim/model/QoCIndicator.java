@@ -1,10 +1,10 @@
 package qocim.model;
 
 import qocim.information.QInformation;
-import qocim.metamodel.QAttribut;
 import qocim.metamodel.QClass;
-import qocim.metamodel.QList;
-import qocim.utils.logs.QoCIMLogger;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class QoCIndicator extends QClass {
 
@@ -18,8 +18,8 @@ public class QoCIndicator extends QClass {
 		super(name);
 		add(ID, id);
 		add(INFORMATION, null);
-		add(CRITERIA, new QList("list " + CRITERIA, this));
-		add(VALUES, new QList("list " + VALUES, this));
+		add(CRITERIA, new LinkedList<QoCCriterion>());
+		add(VALUES, new LinkedList<QoCValue>());
 	}
 
 	public Integer id() {
@@ -30,12 +30,41 @@ public class QoCIndicator extends QClass {
 		return (QInformation<?>) get(INFORMATION);
 	}
 
-	public QList criteria() {
-		return (QList) get(CRITERIA);
+	public QoCIndicator setInformation(final QInformation<?> information) {
+		set(INFORMATION, information);
+		return this;
 	}
 
-	public QList values() {
-		return (QList) get(VALUES);
+	public List<QoCCriterion> criteria() {
+		return (List<QoCCriterion>) get(CRITERIA);
+	}
+
+	public QoCIndicator addCriteria(final QoCCriterion criterion) {
+		criterion.setContainer(this);
+		criteria().add(criterion);
+		return this;
+	}
+
+	public QoCIndicator removeCriteria(final QoCCriterion criterion) {
+		criterion.setContainer(null);
+		criteria().remove(criterion);
+		return this;
+	}
+
+	public List<QoCValue> qocValues() {
+		return (List<QoCValue>) get(VALUES);
+	}
+
+	public QoCIndicator addQoCValue(final QoCValue value) {
+		value.setContainer(this);
+		qocValues().add(value);
+		return this;
+	}
+
+	public QoCIndicator removeQoCValue(final QoCValue value) {
+		value.setContainer(null);
+		qocValues().remove(value);
+		return this;
 	}
 
 	@Override

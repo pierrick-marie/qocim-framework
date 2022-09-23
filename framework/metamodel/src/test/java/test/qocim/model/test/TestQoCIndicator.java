@@ -6,6 +6,9 @@ import qocim.model.QoCIndicator;
 import test.qocim.metamodel.log.Messages;
 import test.qocim.model.MyIndicator;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 public class TestQoCIndicator {
@@ -25,8 +28,8 @@ public class TestQoCIndicator {
 		assertEquals(INDICATOR_ID, testIndicator.id());
 		assertEquals(INDICATOR_NAME, testIndicator.name);
 		assertEquals("QoC Indicator: " + INDICATOR_ID, testIndicator.toString());
-		assertEquals(0, testIndicator.criteria().nbElements());
-		assertEquals(0, testIndicator.values().nbElements());
+		assertEquals(0, testIndicator.criteria().size());
+		assertEquals(0, testIndicator.qocValues().size());
 		assertEquals(null, testIndicator.information());
 	}
 
@@ -45,5 +48,20 @@ public class TestQoCIndicator {
 
 		myIndicator.remove(name);
 		assertEquals(null, myIndicator.get(name));
+	}
+
+	@Test
+	public final void testQoCIndicatorUsage() {
+		final String name = "Precision";
+		final Integer id = 1;
+		QoCIndicator precision = new QoCIndicator(name, id);
+
+		precision.add("value", "42");
+		List<String> elements = new LinkedList<>();
+		elements.add("list element value");
+		precision.add("list criteria", elements);
+
+		assertEquals("42", precision.get("value"));
+		assertEquals(elements, precision.get("list criteria"));
 	}
 }

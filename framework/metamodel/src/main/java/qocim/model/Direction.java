@@ -33,17 +33,17 @@ package qocim.model;
  * <li>UNKNOWN is a default value when no direction is set</li>
  * </ul>
  *
- * @see qocim.model.QoCMetricDefinition
- * @see qocim.model.QoCMetricValue
+ * @see QoCDefinition
+ * @see QoCValue
  *
  * @author Pierrick MARIE
  */
-public enum Order {
+public enum Direction {
 	LOWER("Lower"), UPPER("Upper"), UNKNOWN("Unknown");
 
 	final String order;
 
-	private Order(final String _order) {
+	private Direction(final String _order) {
 		order = _order;
 	}
 
