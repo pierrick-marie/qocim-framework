@@ -34,6 +34,14 @@ public class TestQList {
 	}
 
 	@Test
+	public final void testAdd() {
+		assertEquals(5, testList.all().size());
+		for (int i = 0; i < 5; i++) {
+			assertTrue(null != testList.get(ATTRIBUT_NAME + " " + i));
+		}
+	}
+
+	@Test
 	public final void testToString() {
 		assertEquals(QLIST_NAME, testList.name);
 		assertEquals(QLIST_NAME, testList.toString());
@@ -54,7 +62,7 @@ public class TestQList {
 		// Same name and same element in the lists
 		assertTrue(testList2.equals(testList));
 		// Same name but different element in the lists
-		testList2.remove(0);
+		testList2.remove(ATTRIBUT_NAME + " " + 0);
 		assertFalse(testList2.equals(testList));
 		// Different name and different element in the lists
 		QList testList3 = new QList(QLIST_NAME + " FALSE ", container);
@@ -68,5 +76,12 @@ public class TestQList {
 		assertEquals(
 			new QAttribut<>(ATTRIBUT_NAME + " " + 0, container, 0), testList.get(ATTRIBUT_NAME + " " + 0)
 		);
+		assertTrue(null == testList.get(ATTRIBUT_NAME + " NULL"));
+	}
+
+	@Test
+	public final void testRemove() {
+		testList.remove(ATTRIBUT_NAME + " " + 0);
+		assertEquals(4, testList.all().size());
 	}
 }

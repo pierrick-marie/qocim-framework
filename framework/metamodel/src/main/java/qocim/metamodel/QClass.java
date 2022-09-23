@@ -3,20 +3,20 @@ package qocim.metamodel;
 public class QClass {
 
 	public final String name;
-	private final QList attributs;
+	public final QList attributs;
 	private QClass container;
 
 	public QClass() {
 
 		this.name = this.getClass().getSimpleName();
-		attributs = new QList("Test list", this);
+		attributs = new QList("QClass attributs", this);
 		container = this;
 	}
 
 	public QClass(final String name) {
 
 		this.name = name;
-		attributs = new QList("Test list", this);
+		attributs = new QList(name + " attributs", this);
 		container = this;
 	}
 
@@ -35,15 +35,6 @@ public class QClass {
 
 	public boolean add(final String name, final Object value) {
 		return attributs.add(new QAttribut<>(name, this, value));
-	}
-
-	public QAttribut<?> get(final String name) {
-		return attributs.get(name);
-	}
-
-	public boolean remove(final String name) {
-		QAttribut<?> attribut = get(name);
-		return attributs.remove(attribut);
 	}
 
 	public String toString() {

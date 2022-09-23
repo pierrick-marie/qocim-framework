@@ -2,64 +2,82 @@ package qocim.metamodel;
 
 import java.util.LinkedList;
 
-public class QList extends LinkedList<QAttribut<?>> {
+public class QList {
 
-    public final String name;
-    public final QClass container;
+	public final String name;
+	public final QClass container;
+	private final LinkedList<QAttribut<?>> elements;
 
-    private QList() {
-        name = "";
-        container = null;
-    }
+	private QList() {
+		name = "";
+		container = null;
+		elements = new LinkedList<>();
+	}
 
-    public QList(final String name, final QClass container) {
+	public QList(final String name, final QClass container) {
+		this.name = name;
+		this.container = container;
+		elements = new LinkedList<>();
+	}
 
-        this.name = name;
-        this.container = container;
-    }
+	@Override
+	public boolean equals(final Object comparable) {
 
-    @Override
-    public boolean equals(final Object comparable) {
+		QList compareList;
 
-        QList compareList;
+		if (comparable instanceof QList) {
+			compareList = (QList) comparable;
 
-        if (comparable instanceof QList) {
-            compareList = (QList) comparable;
+			if (!compareList.name.equals(name)) {
+				return false;
+			}
 
-            if (!compareList.name.equals(name)) {
-                return false;
-            }
+			for (final QAttribut<?> object : elements) {
+				if (null == compareList.get(object.name)) {
+					return false;
+				}
+			}
 
-            for (final QAttribut<?> object : this) {
-                if (!compareList.contains(object)) {
-                    return false;
-                }
-            }
+			for (final QAttribut<?> object : compareList.all()) {
+				if (null == get(object.name)) {
+					return false;
+				}
+			}
 
-            for (final QAttribut<?> object : compareList) {
-                if (!this.contains(object)) {
-                    return false;
-                }
-            }
+			return true;
+		}
 
-            return true;
-        }
+		return false;
+	}
 
-        return false;
-    }
+	public QAttribut<?> get(final String elementName) {
 
-    public QAttribut<?> get(final String attributName) {
+		for (QAttribut<?> attribut : elements) {
+			if (attribut.name.equals(elementName)) {
+				return attribut;
+			}
+		}
 
-        for (QAttribut<?> attribut: this) {
-            if (attribut.name.equals(attributName)) {
-                return attribut;
-            }
-        }
+		return null;
+	}
 
-        return null;
-    }
+	public Boolean add(final QAttribut<?> element) {
+		return elements.add(element);
+	}
 
-    public String toString() {
-        return name;
-    }
+	public Boolean remove(final String elementName) {
+		QAttribut<?> searchedElement = get(elementName);
+		if (null != searchedElement) {
+			return elements.remove(searchedElement);
+		}
+		return false;
+	}
+
+	public LinkedList<QAttribut<?>> all() {
+		return elements;
+	}
+
+	public String toString() {
+		return name;
+	}
 }
