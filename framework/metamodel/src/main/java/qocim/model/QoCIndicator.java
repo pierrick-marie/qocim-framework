@@ -31,7 +31,10 @@ public class QoCIndicator extends QClass {
 	}
 
 	public QoCIndicator setInformation(final QInformation<?> information) {
-		set(INFORMATION, information);
+		if (!set(INFORMATION, information)) {
+			System.out.println("FALSE");
+			add(INFORMATION, information);
+		}
 		return this;
 	}
 
@@ -39,7 +42,7 @@ public class QoCIndicator extends QClass {
 		return (List<QoCCriterion>) get(CRITERIA);
 	}
 
-	public QoCIndicator addCriteria(final QoCCriterion criterion) {
+	public QoCIndicator addCriterion(final QoCCriterion criterion) {
 		criterion.setContainer(this);
 		criteria().add(criterion);
 		return this;
@@ -69,6 +72,6 @@ public class QoCIndicator extends QClass {
 
 	@Override
 	public String toString() {
-		return TO_STRING + id();
+		return TO_STRING + name + " " + id();
 	}
 }

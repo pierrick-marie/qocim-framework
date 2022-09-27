@@ -1,29 +1,22 @@
 package qocim.information;
 
 import qocim.model.QoCIndicator;
+import qocim.metamodel.QClass;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class InformationImpl<T> implements QInformation<T> {
+public class InformationImpl<T> extends QClass implements QInformation<T>  {
 
     private T data;
     private Date creationDate;
     private List<QoCIndicator> indicators;
-    private String name;
-
-    public InformationImpl() {
-        creationDate = new Date();
-        data = null;
-        name = "";
-        indicators = new ArrayList<>();
-    }
 
     public InformationImpl(final String name, final T data) {
+        super(name);
         creationDate = new Date();
         this.data = data;
-        this.name = name;
         indicators = new ArrayList<>();
     }
 
@@ -49,34 +42,18 @@ public class InformationImpl<T> implements QInformation<T> {
     }
 
     @Override
+    public String name() {
+        return super.toString();
+    }
+
+    @Override
     public List<QoCIndicator> indicators() {
         return indicators;
     }
 
     @Override
-    public String name() {
-        return name;
-    }
-
-    @Override
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    @Override
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    @Override
     public void setIndicators(List<QoCIndicator> indicators) {
         this.indicators = indicators;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-
     }
 
     @Override

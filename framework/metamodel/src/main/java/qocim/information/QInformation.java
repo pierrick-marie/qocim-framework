@@ -11,17 +11,11 @@ public interface QInformation<T> extends Comparable<QInformation<T>> {
 
 	T data();
 
-	List<QoCIndicator> indicators();
-
 	String name();
 
-	void setCreationDate(Date creationDate);
-
-	void setData(T data);
+	List<QoCIndicator> indicators();
 
 	void setIndicators(List<QoCIndicator> indicators);
-
-	void setName(String name);
 
 	@Override
 	String toString();

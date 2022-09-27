@@ -1,10 +1,10 @@
 package test.qocim.metamodel;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import qocim.metamodel.QAttribut;
 import qocim.metamodel.QClass;
-import test.qocim.metamodel.log.Messages;
 
 import static org.junit.Assert.*;
 
@@ -15,10 +15,14 @@ public class TestQAttribut {
 	private QAttribut<Integer> testAttribut;
 	private QClass container;
 
+	@BeforeClass
+	public static final void beforeClass() {
+		System.out.println(" ======= Test QAttribut =======");
+	}
+
 	@Before
 	public final void before() {
-		System.out.println(Messages.BEFORE);
-		container = new QClass();
+		container = new QClass("container");
 		testAttribut = new QAttribut<>(ATTRIBUT_NAME, container, VALUE);
 	}
 
@@ -26,14 +30,18 @@ public class TestQAttribut {
 	public final void testToString() {
 		assertEquals(ATTRIBUT_NAME, testAttribut.toString());
 		assertEquals(ATTRIBUT_NAME, testAttribut.name);
+
+		System.out.println(" - toString(): OK");
 	}
 
 	@Test
 	public final void testContainer() {
 		assertEquals(container, testAttribut.container());
-		QClass testContainer = new QClass();
+		QClass testContainer = new QClass("test container");
 		testAttribut.setContainer(testContainer);
 		assertTrue(testContainer == testAttribut.container());
+
+		System.out.println(" - container(): OK");
 	}
 
 	@Test
@@ -41,6 +49,8 @@ public class TestQAttribut {
 		assertTrue(testAttribut.equals(testAttribut));
 		assertTrue(testAttribut.equals(ATTRIBUT_NAME));
 		assertFalse(testAttribut.equals(ATTRIBUT_NAME + " FALSE "));
+
+		System.out.println(" - equals(): OK");
 	}
 
 	@Test
@@ -48,7 +58,7 @@ public class TestQAttribut {
 		assertEquals(VALUE, testAttribut.value());
 
 		Integer newValue = 3;
-		assertTrue(testAttribut.setObjectValue(newValue));
+		testAttribut.setTValue(newValue);
 		assertEquals(newValue, testAttribut.value());
 
 		newValue = 4;
@@ -56,5 +66,7 @@ public class TestQAttribut {
 		assertEquals(newValue, testAttribut.value());
 
 		assertFalse(testAttribut.setObjectValue("Test False, type error, expected Integer"));
+
+		System.out.println(" - value(): OK");
 	}
 }

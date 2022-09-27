@@ -8,22 +8,17 @@ import java.util.List;
 public class QoCCriterion extends QClass {
 
 	private static final String ID = "id";
-	private static final String NAME = "name";
 	private static final String DEFINITIONS = "definitions";
+	private static final String TO_STRING = "QoC criterion: ";
 
 	public QoCCriterion(final String name, final String id) {
 		super(name);
 		add(ID, id);
-		add(NAME, "");
 		add(DEFINITIONS, new LinkedList<QoCDefinition>());
 	}
 
 	public String id() {
 		return (String) get(ID);
-	}
-
-	public String name() {
-		return (String) get(NAME);
 	}
 
 	public List<QoCDefinition> qocDefinitions() {
@@ -40,5 +35,10 @@ public class QoCCriterion extends QClass {
 		definition.setContainer(null);
 		qocDefinitions().remove(definition);
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		return TO_STRING + name + " " + id();
 	}
 }

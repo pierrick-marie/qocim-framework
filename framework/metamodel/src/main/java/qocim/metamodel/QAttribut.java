@@ -6,12 +6,6 @@ public class QAttribut<T> {
 	private T value;
 	private QClass container;
 
-	private QAttribut() {
-		name = "";
-		container = null;
-		value = null;
-	}
-
 	public QAttribut(final String name, final QClass container, final T value) {
 		this.name = name;
 		this.container = container;
@@ -47,11 +41,11 @@ public class QAttribut<T> {
 	}
 
 	public Boolean setObjectValue(final Object value) {
-		if (value.getClass().isInstance(this.value)) {
-			this.value = (T) value;
-			return true;
+		if ( (null != this.value) && (!value.getClass().isInstance(this.value)) ) {
+				return false;
 		}
-		return false;
+		this.value = (T) value;
+		return true;
 	}
 
 	public String toString() {

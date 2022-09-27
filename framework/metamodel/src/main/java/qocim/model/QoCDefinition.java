@@ -2,17 +2,14 @@ package qocim.model;
 
 import qocim.metamodel.QClass;
 
-import javax.measure.unit.Unit;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 public class QoCDefinition extends QClass {
 
 	private static final String ID = "id";
-	private static final String NAME = "name";
 	private static final String INVARIANT = "invariant";
 	private static final String UNIT = "unit";
 	private static final String PROVIDER_URI = "provider uri";
@@ -24,23 +21,24 @@ public class QoCDefinition extends QClass {
 	private static final String QOC_VALUES = "qoc values";
 	private static final String RELATED_DEFINITIONS = "related definitions";
 
+	private static final String TO_STRING = "QoC Definition: ";
+
 	public QoCDefinition(final String name, final String id) {
 		super(name);
 		add(ID, id);
-		add(NAME, name);
 		add(INVARIANT, false);
-		add(UNIT, Unit.ONE);
+		add(UNIT, "");
 		try {
 			add(PROVIDER_URI, new URI(""));
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
 		}
 		add(DIRECTION, Direction.UNKNOWN);
-		add(DEFAULT, true);
+		add(DEFAULT, false);
 		add(MIN_VALUE, null);
 		add(MAX_VALUE, null);
 		add(DESCRIPTION, null);
-		add(QOC_VALUES, new LinkedList<QoCValue>());
+		add(QOC_VALUES, new LinkedList<QoCValue<?>>());
 		add(RELATED_DEFINITIONS, new LinkedList<QoCDefinition>());
 	}
 
@@ -48,20 +46,12 @@ public class QoCDefinition extends QClass {
 		return (String) get(ID);
 	}
 
-	public String name() {
-		return (String) get(NAME);
+
+	public String unit() {
+		return (String) get(UNIT);
 	}
 
-	public QoCDefinition setName(final String name) {
-		set(NAME, name);
-		return this;
-	}
-
-	public Unit unit() {
-		return (Unit) get(UNIT);
-	}
-
-	public QoCDefinition setUnit(final Unit unit) {
+	public QoCDefinition setUnit(final String unit) {
 		set(UNIT, unit);
 		return this;
 	}
@@ -93,46 +83,46 @@ public class QoCDefinition extends QClass {
 		return this;
 	}
 
-	public QoCValue minValue() {
-		return (QoCValue) get(MIN_VALUE);
+	public QoCValue<?> minValue() {
+		return (QoCValue<?>) get(MIN_VALUE);
 	}
 
-	public QoCDefinition setMinValue(final QoCValue value) {
+	public QoCDefinition setMinValue(final QoCValue<?> value) {
 		set(MIN_VALUE, value);
 		return this;
 	}
 
-	public QoCValue maxValue() {
-		return (QoCValue) get(MAX_VALUE);
+	public QoCValue<?> maxValue() {
+		return (QoCValue<?>) get(MAX_VALUE);
 	}
 
-	public QoCDefinition setMaxValue(final QoCValue value) {
+	public QoCDefinition setMaxValue(final QoCValue<?> value) {
 		set(MAX_VALUE, value);
 		return this;
 	}
 
-	public String desription() {
-		return (String) get(DESCRIPTION);
+	public QoCDescription desription() {
+		return (QoCDescription) get(DESCRIPTION);
 	}
 
-	public QoCDefinition setDescription(final String description) {
+	public QoCDefinition setDescription(final QoCDescription description) {
 		set(DESCRIPTION, description);
 		return this;
 	}
 
-	public List<QoCValue> values() {
-		return (List<QoCValue>) get(QOC_VALUES);
+	public List<QoCValue<?>> qocValues() {
+		return (List<QoCValue<?>>) get(QOC_VALUES);
 	}
 
-	public QoCDefinition addValue(final QoCValue value) {
+	public QoCDefinition addValue(final QoCValue<?> value) {
 		value.setContainer(this);
-		values().add(value);
+		qocValues().add(value);
 		return this;
 	}
 
-	public QoCDefinition removeValue(final QoCValue value) {
+	public QoCDefinition removeValue(final QoCValue<?> value) {
 		value.setContainer(null);
-		values().remove(value);
+		qocValues().remove(value);
 		return this;
 	}
 
@@ -157,5 +147,10 @@ public class QoCDefinition extends QClass {
 	public QoCDefinition removeRelatedDefinition(final QoCDefinition definition) {
 		relatedDefinitions().remove(definition);
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		return TO_STRING + name + " " + id();
 	}
 }

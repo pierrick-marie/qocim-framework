@@ -9,16 +9,16 @@ import java.util.LinkedList;
 /**
  *
  */
-public class QoCValue extends QClass {
+public class QoCValue<T> extends QClass {
 
 	private static final String ID = "id";
-	private static final String NAME = "qoc value";
 	private static final String CREATION_DATE = "creation date";
 	private static final String MODIFICATION_DATE = "modification date";
 	private static final String VALUE = "value";
+	private static final String TO_STRING = "QoC Value: ";
 
 	public QoCValue(final String name, final Integer id) {
-		super(NAME + " #" + id);
+		super(name + " #" + id);
 		add(ID, id);
 		add(CREATION_DATE, new Date());
 		add(MODIFICATION_DATE, new Date());
@@ -33,26 +33,23 @@ public class QoCValue extends QClass {
 		return (Date) get(CREATION_DATE);
 	}
 
-	public QoCValue setCreationDate(final Date creationDate) {
-		set(CREATION_DATE, creationDate);
-		return this;
-	}
-
 	public Date modificationDate() {
 		return (Date) get(MODIFICATION_DATE);
 	}
 
-	public QoCValue setModificationDate(final Date modificationDate) {
-		set(MODIFICATION_DATE, modificationDate);
+	public T value() {
+		return (T) get(VALUE);
+	}
+
+	public QoCValue setValue(final T value) {
+		if (set(VALUE, value)) {
+			set(MODIFICATION_DATE, new Date());
+		}
 		return this;
 	}
 
-	public Object value() {
-		return (Object) get(VALUE);
-	}
-
-	public QoCValue setValue(final Object value) {
-		set(VALUE, value);
-		return this;
+	@Override
+	public String toString() {
+		return TO_STRING + name;
 	}
 }

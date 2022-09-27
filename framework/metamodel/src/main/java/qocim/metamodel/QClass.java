@@ -8,17 +8,9 @@ import java.util.List;
 public class QClass {
 
 	public final String name;
-//	private final QList attributs;
 
 	private final List<QAttribut<?>> attributs;
 	private QClass container;
-
-	public QClass() {
-
-		this.name = this.getClass().getSimpleName();
-		attributs = new LinkedList<>();
-		container = this;
-	}
 
 	public QClass(final String name) {
 
@@ -73,10 +65,6 @@ public class QClass {
 		return false;
 	}
 
-	public String toString() {
-		return name;
-	}
-
 	public QClass container() {
 		return container;
 	}
@@ -93,5 +81,9 @@ public class QClass {
 			}
 		}
 		return null;
+	}
+
+	public String toString() {
+		return name;
 	}
 }
