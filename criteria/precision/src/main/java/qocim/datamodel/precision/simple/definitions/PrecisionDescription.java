@@ -18,12 +18,19 @@
  * Initial developer(s): Pierrick MARIE
  * Contributor(s):
  */
-package qocim.datamodel.precision;
+package qocim.datamodel.precision.simple.definitions;
 
-import qocim.model.QoCIndicator;
+import qocim.model.QoCDescription;
 
-public class PrecisionQoCIndicator extends QoCIndicator {
+public class PrecisionDescription extends QoCDescription {
 
-	public static final String NAME= "Precision Indicator";
-	public static final Integer ID = 10;
+	public PrecisionDescription() {
+		super("Precision description");
+
+		setDescription("This is the informal description of the precision");
+
+		keywords().add("precision");
+		keywords().add("percent");
+		keywords().add("per-thousand");
+	}
 }

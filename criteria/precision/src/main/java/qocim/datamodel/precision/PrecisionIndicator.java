@@ -20,13 +20,12 @@
  */
 package qocim.datamodel.precision;
 
-import java.util.LinkedList;
-import java.util.List;
+import qocim.model.QoCIndicator;
 
-import qocim.model.QoCDescription;
+public class PrecisionIndicator extends QoCIndicator {
 
-public class PrecisionDescription extends QoCDescription {
-
-	public static final String INFORMAL_DESCRIPTION = "This is an informal description of the precision criterion.";
-	public static final String KEYWORDS[] = {"position", "meter", "radius"};
+	public PrecisionIndicator() {
+		super("Precision indicator", 10);
+		addCriterion(new PrecisionCriterion());
+	}
 }

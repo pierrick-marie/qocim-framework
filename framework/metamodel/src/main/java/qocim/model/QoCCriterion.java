@@ -37,6 +37,15 @@ public class QoCCriterion extends QClass {
 		return this;
 	}
 
+	public QoCDefinition getQoCDefinitionById(final String definitionId) {
+		for (QoCDefinition definition: qocDefinitions()) {
+			if (definition.id().equals(definitionId)) {
+				return definition;
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public String toString() {
 		return TO_STRING + name + " " + id();

@@ -17,6 +17,8 @@ public interface QInformation<T> extends Comparable<QInformation<T>> {
 
 	void setIndicators(List<QoCIndicator> indicators);
 
+	QoCIndicator getIndicator(final String indicatorName) ;
+
 	@Override
 	String toString();
 }

@@ -57,6 +57,18 @@ public class InformationImpl<T> extends QClass implements QInformation<T>  {
     }
 
     @Override
+    public QoCIndicator getIndicator(String indicatorName) {
+
+        for (QoCIndicator indicator: indicators) {
+            if (indicator.name.equals(indicatorName)) {
+                return indicator;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
     public String toString() {
         return name.toString();
     }

@@ -1,11 +1,13 @@
 package qocim.model;
 
+import qocim.information.QInformation;
 import qocim.metamodel.QClass;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 public class QoCDefinition extends QClass {
 
@@ -18,9 +20,7 @@ public class QoCDefinition extends QClass {
 	private static final String MIN_VALUE = "min value";
 	private static final String MAX_VALUE = "max value";
 	private static final String DESCRIPTION = "description";
-	private static final String QOC_VALUES = "qoc values";
 	private static final String RELATED_DEFINITIONS = "related definitions";
-
 	private static final String TO_STRING = "QoC Definition: ";
 
 	public QoCDefinition(final String name, final String id) {
@@ -38,7 +38,6 @@ public class QoCDefinition extends QClass {
 		add(MIN_VALUE, null);
 		add(MAX_VALUE, null);
 		add(DESCRIPTION, null);
-		add(QOC_VALUES, new LinkedList<QoCValue<?>>());
 		add(RELATED_DEFINITIONS, new LinkedList<QoCDefinition>());
 	}
 
@@ -56,11 +55,11 @@ public class QoCDefinition extends QClass {
 		return this;
 	}
 
-	public URI uri() {
+	public URI providerUri() {
 		return (URI) get(PROVIDER_URI);
 	}
 
-	public QoCDefinition setUri(final URI uri) {
+	public QoCDefinition setProviderUri(final URI uri) {
 		set(PROVIDER_URI, uri);
 		return this;
 	}
@@ -88,6 +87,7 @@ public class QoCDefinition extends QClass {
 	}
 
 	public QoCDefinition setMinValue(final QoCValue<?> value) {
+		value.setContainer(this);
 		set(MIN_VALUE, value);
 		return this;
 	}
@@ -97,6 +97,7 @@ public class QoCDefinition extends QClass {
 	}
 
 	public QoCDefinition setMaxValue(final QoCValue<?> value) {
+		value.setContainer(this);
 		set(MAX_VALUE, value);
 		return this;
 	}
@@ -106,23 +107,8 @@ public class QoCDefinition extends QClass {
 	}
 
 	public QoCDefinition setDescription(final QoCDescription description) {
+		description.setContainer(this);
 		set(DESCRIPTION, description);
-		return this;
-	}
-
-	public List<QoCValue<?>> qocValues() {
-		return (List<QoCValue<?>>) get(QOC_VALUES);
-	}
-
-	public QoCDefinition addValue(final QoCValue<?> value) {
-		value.setContainer(this);
-		qocValues().add(value);
-		return this;
-	}
-
-	public QoCDefinition removeValue(final QoCValue<?> value) {
-		value.setContainer(null);
-		qocValues().remove(value);
 		return this;
 	}
 

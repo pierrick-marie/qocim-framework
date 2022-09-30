@@ -1,19 +1,14 @@
 package qocim.model.tools;
 
-import java.util.List;
-import java.util.concurrent.Callable;
-
 import qocim.information.QInformation;
 import qocim.model.QoCValue;
 
-public interface IQoCEvaluator extends Callable<QoCValue> {
+import java.util.concurrent.Callable;
+
+public interface IQoCEvaluator extends Callable<QoCValue<?>>  {
 
 	@Override
-	QoCValue call();
+	public QoCValue<?> call() throws Exception ;
 
-	void fireNewInformation(QInformation information);
-
-	List<Class<?>> supportedDefinitionType();
-
-	List<Class<?>> supportedInformationType();
+	public void newInformation(final QInformation<?> information) ;
 }

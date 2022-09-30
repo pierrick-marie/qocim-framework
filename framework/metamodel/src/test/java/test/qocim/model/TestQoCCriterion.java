@@ -5,7 +5,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import qocim.model.QoCCriterion;
 import qocim.model.QoCDefinition;
-import qocim.model.QoCValue;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,7 +16,7 @@ public class TestQoCCriterion {
 	private QoCCriterion testCriterion;
 
 	@BeforeClass
-	public static final void beforeClass() {
+	public static void beforeClass() {
 		System.out.println(" ======= Test QoCCriterion =======");
 	}
 
@@ -53,5 +52,23 @@ public class TestQoCCriterion {
 		assertEquals(0, testCriterion.qocDefinitions().size());
 
 		System.out.println(" - qocDefinition(): OK");
+	}
+
+	@Test
+	public final void testGetQoCDefinitionById() {
+
+		for (int i = 0; i < 5; i++) {
+			testCriterion.addQoCDefinition(new QoCDefinition("test " + i , i + ".1.1"));
+		}
+
+		assertEquals(5, testCriterion.qocDefinitions().size());
+
+		for (int i = 0; i < 5; i++) {
+			QoCDefinition definition = testCriterion.getQoCDefinitionById(i + ".1.1");
+			assertEquals(i + ".1.1", definition.id());
+			assertEquals("test " + i, definition.name);
+		}
+
+		System.out.println(" - getQoCDefinitionById(): OK");
 	}
 }

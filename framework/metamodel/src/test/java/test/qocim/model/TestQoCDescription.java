@@ -14,7 +14,7 @@ public class TestQoCDescription {
 	private static final String DESCRIPTION_NAME = "description";
 
 	@BeforeClass
-	public static final void beforeClass() {
+	public static void beforeClass() {
 		System.out.println(" ======= Test QoCDescription =======");
 	}
 

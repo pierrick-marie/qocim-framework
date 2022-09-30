@@ -1,6 +1,5 @@
 package qocim.model;
 
-import qocim.information.QInformation;
 import qocim.metamodel.QClass;
 
 import java.util.LinkedList;
@@ -9,7 +8,6 @@ import java.util.List;
 public class QoCIndicator extends QClass {
 
 	private static final String ID = "id";
-	private static final String INFORMATION = "informaiton";
 	private static final String CRITERIA = "criteria";
 	private static final String VALUES = "values";
 	private static final String TO_STRING = "QoC Indicator: ";
@@ -17,7 +15,6 @@ public class QoCIndicator extends QClass {
 	public QoCIndicator(final String name, final Integer id) {
 		super(name);
 		add(ID, id);
-		add(INFORMATION, null);
 		add(CRITERIA, new LinkedList<QoCCriterion>());
 		add(VALUES, new LinkedList<QoCValue>());
 	}
@@ -26,48 +23,54 @@ public class QoCIndicator extends QClass {
 		return (Integer) get(ID);
 	}
 
-	public QInformation<?> information() {
-		return (QInformation<?>) get(INFORMATION);
-	}
-
-	public QoCIndicator setInformation(final QInformation<?> information) {
-		if (!set(INFORMATION, information)) {
-			System.out.println("FALSE");
-			add(INFORMATION, information);
-		}
-		return this;
-	}
-
-	public List<QoCCriterion> criteria() {
+	public List<QoCCriterion> qocCriteria() {
 		return (List<QoCCriterion>) get(CRITERIA);
 	}
 
-	public QoCIndicator addCriterion(final QoCCriterion criterion) {
+	public QoCIndicator addQoCCriterion(final QoCCriterion criterion) {
 		criterion.setContainer(this);
-		criteria().add(criterion);
+		qocCriteria().add(criterion);
 		return this;
 	}
 
-	public QoCIndicator removeCriteria(final QoCCriterion criterion) {
+	public QoCIndicator removeQoCCriteria(final QoCCriterion criterion) {
 		criterion.setContainer(null);
-		criteria().remove(criterion);
+		qocCriteria().remove(criterion);
 		return this;
 	}
 
-	public List<QoCValue> qocValues() {
-		return (List<QoCValue>) get(VALUES);
+	public QoCCriterion getQoCCriterionById(final String criterionId) {
+		for (QoCCriterion criterion: qocCriteria()) {
+			if (criterion.id().equals(criterionId)) {
+				return criterion;
+			}
+		}
+		return null;
 	}
 
-	public QoCIndicator addQoCValue(final QoCValue value) {
+	public List<QoCValue<?>> qocValues() {
+		return (List<QoCValue<?>>) get(VALUES);
+	}
+
+	public QoCIndicator addQoCValue(final QoCValue<?> value) {
 		value.setContainer(this);
 		qocValues().add(value);
 		return this;
 	}
 
-	public QoCIndicator removeQoCValue(final QoCValue value) {
+	public QoCIndicator removeQoCValue(final QoCValue<?> value) {
 		value.setContainer(null);
 		qocValues().remove(value);
 		return this;
+	}
+
+	public QoCValue<?> getQoCValueById(final Integer qocValueId) {
+		for (QoCValue<?> value: qocValues()) {
+			if (value.id().equals(qocValueId)) {
+				return value;
+			}
+		}
+		return null;
 	}
 
 	@Override

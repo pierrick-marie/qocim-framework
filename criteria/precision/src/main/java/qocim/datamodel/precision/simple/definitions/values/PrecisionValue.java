@@ -18,12 +18,13 @@
  * Initial developer(s): Pierrick MARIE
  * Contributor(s):
  */
-package qocim.datamodel.precision;
+package qocim.datamodel.precision.simple.definitions.values;
 
-import qocim.model.QoCCriterion;
+import qocim.model.QoCValue;
 
-public class PrecisionQoCCriterion extends QoCCriterion {
+public class PrecisionValue extends QoCValue<Integer> {
 
-	public static final String NAME= "Precision Criterion";
-	public static final String ID[] = {"10.1"};
+	public PrecisionValue(final Integer id) {
+		super("Precision value", id);
+	}
 }

@@ -20,7 +20,7 @@ public class TestQoCValue {
 	private static final Integer QOC_VALUE = 42;
 
 	@BeforeClass
-	public static final void beforeClass() {
+	public static void beforeClass() {
 		System.out.println(" ======= Test QoCValue =======");
 	}
 
@@ -32,7 +32,7 @@ public class TestQoCValue {
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		}
-		testValue = new QoCValue<>(VALUE_NAME, VALUE_ID);
+		testValue = new QoCValue<>(VALUE_NAME, VALUE_ID, QOC_VALUE);
 	}
 
 	@Test
@@ -65,31 +65,8 @@ public class TestQoCValue {
 
 	@Test
 	public final void testValue() {
-		assertEquals(null, testValue.value());
-		testValue.setValue(QOC_VALUE);
 		assertEquals(QOC_VALUE, testValue.value());
 
 		System.out.println(" - value(): OK");
-	}
-
-	@Test
-	public final void testModificationDate() {
-		final Date testModificationDateBefore = new Date();
-		try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		}
-		testValue.setValue(QOC_VALUE);
-		try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		}
-		final Date testModificationDateAfter = new Date();
-		assertTrue(testModificationDateBefore.before(testValue.modificationDate()));
-		assertTrue(testModificationDateAfter.after(testValue.modificationDate()));
-
-		System.out.println(" - modificationDate(): OK");
 	}
 }

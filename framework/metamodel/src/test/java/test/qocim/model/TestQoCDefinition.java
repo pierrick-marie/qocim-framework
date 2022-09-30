@@ -23,7 +23,7 @@ public class TestQoCDefinition {
 	private QoCDefinition testDefinition;
 
 	@BeforeClass
-	public static final void beforeClass() {
+	public static void beforeClass() {
 		System.out.println(" ======= Test QoCDefinition =======");
 	}
 
@@ -58,12 +58,12 @@ public class TestQoCDefinition {
 	public final void testUri() {
 		try {
 			URI testUri = new URI("");
-			assertEquals(testUri, testDefinition.uri());
+			assertEquals(testUri, testDefinition.providerUri());
 
 			testUri = new URI("telnet://192.0.2.16:80/");
-			testDefinition.setUri(testUri);
-			assertEquals(testUri, testDefinition.uri());
-			assertEquals("telnet://192.0.2.16:80/", testDefinition.uri().toString());
+			testDefinition.setProviderUri(testUri);
+			assertEquals(testUri, testDefinition.providerUri());
+			assertEquals("telnet://192.0.2.16:80/", testDefinition.providerUri().toString());
 
 			System.out.println(" - uri(): OK");
 		} catch (URISyntaxException e) {
@@ -105,7 +105,7 @@ public class TestQoCDefinition {
 	@Test
 	public final void testDescription() {
 
-		assertEquals(null, testDefinition.desription());
+		assertNull(testDefinition.desription());
 
 		QoCDescription testDescription = new QoCDescription("test description");
 		testDefinition.setDescription(testDescription);
@@ -131,27 +131,11 @@ public class TestQoCDefinition {
 	}
 
 	@Test
-	public final void testQoCValues() {
-
-		assertEquals(0, testDefinition.qocValues().size());
-
-		QoCValue<Integer> testQoCValue = new QoCValue<>("test qoc value", 1);
-		testDefinition.addValue(testQoCValue);
-		assertEquals(1, testDefinition.qocValues().size());
-		assertEquals(testQoCValue, testDefinition.qocValues().get(0));
-
-		testDefinition.removeValue(testQoCValue);
-		assertEquals(0, testDefinition.qocValues().size());
-
-		System.out.println(" - qocValues(): OK");
-	}
-
-	@Test
 	public final void testMinQoCValues() {
 
-		assertEquals(null, testDefinition.minValue());
+		assertNull(testDefinition.minValue());
 
-		QoCValue<Integer> testQoCValue = new QoCValue<>("test min qoc value", 2);
+		QoCValue<Integer> testQoCValue = new QoCValue<>("test min qoc value", 2, 0);
 		testDefinition.setMinValue(testQoCValue);
 		assertEquals(testQoCValue, testDefinition.minValue());
 
@@ -161,9 +145,9 @@ public class TestQoCDefinition {
 	@Test
 	public final void testMaxQoCValues() {
 
-		assertEquals(null, testDefinition.maxValue());
+		assertNull(testDefinition.maxValue());
 
-		QoCValue<Integer> testQoCValue = new QoCValue<>("test max qoc value", 3);
+		QoCValue<Integer> testQoCValue = new QoCValue<>("test max qoc value", 3, 100);
 		testDefinition.setMaxValue(testQoCValue);
 		assertEquals(testQoCValue, testDefinition.maxValue());
 

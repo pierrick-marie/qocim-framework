@@ -3,8 +3,6 @@ package test.qocim.model;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import qocim.information.InformationImpl;
-import qocim.information.QInformation;
 import qocim.model.QoCCriterion;
 import qocim.model.QoCIndicator;
 import qocim.model.QoCValue;
@@ -21,7 +19,7 @@ public class TestQoCIndicator {
 	private QoCIndicator testIndicator;
 
 	@BeforeClass
-	public static final void beforeClass() {
+	public static void beforeClass() {
 		System.out.println(" ======= Test QoCIndicator =======");
 	}
 
@@ -34,9 +32,8 @@ public class TestQoCIndicator {
 	public final void testContructor() {
 		assertEquals(INDICATOR_ID, testIndicator.id());
 		assertEquals(INDICATOR_NAME, testIndicator.name);
-		assertEquals(0, testIndicator.criteria().size());
+		assertEquals(0, testIndicator.qocCriteria().size());
 		assertEquals(0, testIndicator.qocValues().size());
-		assertEquals(null, testIndicator.information());
 
 		System.out.println(" - new(): OK");
 	}
@@ -66,18 +63,6 @@ public class TestQoCIndicator {
 	}
 
 	@Test
-	public final void testInformation() {
-		final Integer informationData = 42;
-		final String informationName = "test information";
-		final QInformation<Integer> testInformation = new InformationImpl<>(informationName, informationData);
-		testIndicator.setInformation(testInformation);
-		assertEquals(testInformation, testIndicator.information());
-		assertEquals(0, testInformation.compareTo((QInformation<Integer>) testIndicator.information()));
-
-		System.out.println(" - information(): OK");
-	}
-
-	@Test
 	public final void testToString() {
 		assertEquals("QoC Indicator: " + INDICATOR_NAME + " " + INDICATOR_ID, testIndicator.toString());
 
@@ -90,7 +75,7 @@ public class TestQoCIndicator {
 
 		assertEquals(0, testIndicator.qocValues().size());
 
-		QoCValue<Integer> testQoCValue = new QoCValue<>("test qoc value", 1);
+		QoCValue<Integer> testQoCValue = new QoCValue<>("test qoc value", 1, 42);
 		testIndicator.addQoCValue(testQoCValue);
 		assertEquals(1, testIndicator.qocValues().size());
 		assertEquals(testQoCValue, testIndicator.qocValues().get(0));
@@ -104,16 +89,52 @@ public class TestQoCIndicator {
 	@Test
 	public final void testQoCCriteria() {
 
-		assertEquals(0, testIndicator.criteria().size());
+		assertEquals(0, testIndicator.qocCriteria().size());
 
 		QoCCriterion testQoCCriterion = new QoCCriterion("test qoc value", "1.1");
-		testIndicator.addCriterion(testQoCCriterion);
-		assertEquals(1, testIndicator.criteria().size());
-		assertEquals(testQoCCriterion, testIndicator.criteria().get(0));
+		testIndicator.addQoCCriterion(testQoCCriterion);
+		assertEquals(1, testIndicator.qocCriteria().size());
+		assertEquals(testQoCCriterion, testIndicator.qocCriteria().get(0));
 
-		testIndicator.removeCriteria(testQoCCriterion);
-		assertEquals(0, testIndicator.criteria().size());
+		testIndicator.removeQoCCriteria(testQoCCriterion);
+		assertEquals(0, testIndicator.qocCriteria().size());
 
-		System.out.println(" - criteria(): OK");
+		System.out.println(" - qocCriteria(): OK");
+	}
+
+	@Test
+	public final void testGetQoCCriterionById() {
+
+		for (int i = 0; i < 5; i++) {
+			testIndicator.addQoCCriterion(new QoCCriterion("test " + i , i + ".1"));
+		}
+
+		assertEquals(5, testIndicator.qocCriteria().size());
+
+		for (int i = 0; i < 5; i++) {
+			QoCCriterion criterion = testIndicator.getQoCCriterionById(i + ".1");
+			assertEquals(i + ".1", criterion.id());
+			assertEquals("test " + i, criterion.name);
+		}
+
+		System.out.println(" - getQoCCriterionById(): OK");
+	}
+
+	@Test
+	public final void testGetQoCValueById() {
+
+		for (int i = 0; i < 5; i++) {
+			testIndicator.addQoCValue(new QoCValue<Integer>("test " + i , i + 10, i + 42));
+		}
+
+		assertEquals(5, testIndicator.qocValues().size());
+
+		for (int i = 0; i < 5; i++) {
+			QoCValue<Integer> value = (QoCValue<Integer>) testIndicator.getQoCValueById(i + 10);
+			assertEquals(i + 10, (int) value.id());
+			assertEquals(i + 42, (int) value.value());
+		}
+
+		System.out.println(" - getQoCValueById(): OK");
 	}
 }
