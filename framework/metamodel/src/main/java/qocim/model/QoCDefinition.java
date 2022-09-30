@@ -1,13 +1,12 @@
 package qocim.model;
 
-import qocim.information.QInformation;
 import qocim.metamodel.QClass;
+import qocim.model.tools.IQoCEvaluator;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 public class QoCDefinition extends QClass {
 
