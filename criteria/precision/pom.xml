@@ -16,62 +16,68 @@
     Contributor(s):
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 			     http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>qocim</groupId>
-		<artifactId>criteria</artifactId>
-		<version>2.0.0</version>
-	</parent>
+    <parent>
+        <groupId>qocim</groupId>
+        <artifactId>criteria</artifactId>
+        <version>2.0.0</version>
+    </parent>
 
-	<groupId>qocim.criteria</groupId>
-	<artifactId>precision</artifactId>
-	<name>QoCIM based precision indicator</name>
-	<description>This is a QoCIM-based definition of the precision indicator.</description>
-	<packaging>jar</packaging>
+    <groupId>qocim.criteria</groupId>
+    <artifactId>precision</artifactId>
+    <name>QoCIM based precision indicator</name>
+    <description>This is a QoCIM-based definition of the precision indicator.</description>
+    <packaging>jar</packaging>
 
-	<repositories>
-		<repository>
-				<id>github</id>
-				<name>GitHub Packages</name>
-				<url>https://maven.pkg.github.com/pierrick-marie/qocim</url>
-		</repository>
-	</repositories>
+    <repositories>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/pierrick-marie/qocim</url>
+        </repository>
+    </repositories>
 
-	<dependencies>
-		<dependency>
-			<groupId>qocim</groupId>
-			<artifactId>metamodel</artifactId>
-			<version>2.0.1</version>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>qocim</groupId>
+            <artifactId>metamodel</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<version>5.1.1</version>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Export-Package>
-							qocim.datamodel.precision;qocim.datamodel.precision.definitions;qocim.datamodel.precision.evaluators;qocim.datamodel.precision.values
-						</Export-Package>
-						<Private-Package></Private-Package>
-						<Bundle-Activator></Bundle-Activator>
-						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Export-Service></Export-Service>
-						<Embed-Dependency>*</Embed-Dependency>
-						<Embed-Transitive>true</Embed-Transitive>
-						<Include-Resource>{maven-resources},{maven-dependencies}</Include-Resource>
-						<Bundle-ClassPath>.,{maven-dependencies}</Bundle-ClassPath>
-					</instructions>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>5.1.1</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Export-Package>
+                            qocim.datamodel.precision;qocim.datamodel.precision.definitions;qocim.datamodel.precision.evaluators;qocim.datamodel.precision.simple.definitions.values
+                        </Export-Package>
+                        <Private-Package></Private-Package>
+                        <Bundle-Activator></Bundle-Activator>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Export-Service></Export-Service>
+                        <Embed-Dependency>*</Embed-Dependency>
+                        <Embed-Transitive>true</Embed-Transitive>
+                        <Include-Resource>{maven-resources},{maven-dependencies}</Include-Resource>
+                        <Bundle-ClassPath>.,{maven-dependencies}</Bundle-ClassPath>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

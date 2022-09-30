@@ -18,12 +18,25 @@
  * Initial developer(s): Pierrick MARIE
  * Contributor(s):
  */
-package qocim.datamodel.freshness;
+package qocim.datamodel.freshness.definitions;
 
-import qocim.model.QoCCriterion;
+import java.util.LinkedList;
+import java.util.List;
 
-public class FreshnessQoCCriterion extends QoCCriterion {
+import qocim.model.QoCDescription;
 
-	public static final String NAME= "Freshness Criterion";
-	public static final String ID[] = {"15.1", "15.2"};
+public class FreshnessDescription extends QoCDescription {
+
+	public static final String NAME = "Freshness description";
+
+	public FreshnessDescription() {
+		super(NAME);
+
+		setDescription("This is an informal description of the freshness criterion.");
+
+		keywords().add("time");
+		keywords().add("measurement");
+		keywords().add("interval");
+		keywords().add("second");
+	}
 }

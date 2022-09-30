@@ -20,15 +20,31 @@
  */
 package qocim.datamodel.precision;
 
+import qocim.datamodel.precision.simple.criteria.PrecisionCriterion;
+import qocim.datamodel.precision.simple.definitions.SimpleDefinition;
+import qocim.model.*;
+import qocim.model.tools.AbstractQoCFacade;
 
-import qocim.model.QoCIndicator;
+public class PrecisionFacade extends AbstractQoCFacade {
 
-public class PrecisionIndicator extends QoCIndicator {
+	public PrecisionFacade() {
+		super();
+	}
 
-	public static final String NAME = "Precision indicator";
-	public static final Integer ID = 10;
+	@Override
+	public String indicatorName() {
+		return PrecisionIndicator.NAME;
+	}
 
-	public PrecisionIndicator() {
-		super(NAME, ID);
+	@Override
+	public QoCIndicator newQoCIndicator() {
+		PrecisionIndicator indicator  = new PrecisionIndicator();
+		PrecisionCriterion criterion = new PrecisionCriterion();
+		SimpleDefinition definition = new SimpleDefinition();
+
+		indicator.addQoCCriterion(criterion);
+		criterion.addQoCDefinition(definition);
+
+		return indicator;
 	}
 }

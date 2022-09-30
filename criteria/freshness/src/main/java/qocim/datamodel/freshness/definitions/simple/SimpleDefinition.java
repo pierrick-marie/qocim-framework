@@ -1,39 +1,40 @@
 /**
  * This file is part of the QoCIM middleware.
- * <p>
+ *
  * Copyright (C) 2014 IRIT, Télécom SudParis
- * <p>
+ *
  * The QoCIM software is free software: you can redistribute it and/or modify
  * It under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * <p>
+ *
  * The QoCIM software platform is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * <p>
+ *
  * See the GNU Lesser General Public License
  * for more details: http://www.gnu.org/licenses
- * <p>
+ *
  * Initial developer(s): Pierrick MARIE
  * Contributor(s):
  */
-package qocim.datamodel.precision.simple.definitions;
-
-import qocim.datamodel.precision.simple.definitions.values.MaxPrecisionValue;
-import qocim.datamodel.precision.simple.definitions.values.MinPrecisionValue;
-import qocim.model.Direction;
-import qocim.model.QoCDefinition;
-import qocim.model.tools.IQoCEvaluator;
+package qocim.datamodel.freshness.definitions.simple;
 
 import javax.measure.unit.SI;
+
+import qocim.datamodel.freshness.definitions.FreshnessDescription;
+import qocim.datamodel.freshness.definitions.values.MaxFreshnessValue;
+import qocim.datamodel.freshness.definitions.values.MinFreshnessValue;
+import qocim.model.Direction;
+import qocim.model.QoCDefinition;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 
 public class SimpleDefinition extends QoCDefinition {
 
-	public static final String NAME = "Precision definition";
-	public static final String ID = "10.1.1";
+	public static final String NAME = "Simple freshness definition";
+	public static final String ID = "15.1.1";
 
 	public SimpleDefinition() {
 		super(NAME, ID);
@@ -45,9 +46,9 @@ public class SimpleDefinition extends QoCDefinition {
 		}
 		setDirection(Direction.LOWER);
 		setIsDefault(true);
-		setDescription(new PrecisionDescription());
-		setUnit(SI.METER.toString());
-		setMaxValue(new MaxPrecisionValue());
-		setMinValue(new MinPrecisionValue());
+		setDescription(new FreshnessDescription());
+		setUnit(SI.SECOND.toString());
+		setMaxValue(new MaxFreshnessValue());
+		setMinValue(new MinFreshnessValue());
 	}
 }
