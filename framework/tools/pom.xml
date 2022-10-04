@@ -27,7 +27,7 @@
     <modules>
         <!-- <module>functions</module> -->
         <!-- <module>routing-filter</module> -->
-        <!-- <module>formats</module>-->
+         <module>formats</module>
     </modules>
 
 </project>
