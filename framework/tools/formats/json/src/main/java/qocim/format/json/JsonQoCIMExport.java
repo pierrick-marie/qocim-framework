@@ -1,70 +1,66 @@
 package qocim.format.json;
 
 import com.google.gson.JsonObject;
+import qocim.model.*;
 
-import qocim.model.QoCCriterion;
-import qocim.model.QoCDescription;
-import qocim.model.QoCIndicator;
-import qocim.model.QoCMetricDefinition;
-import qocim.model.QoCMetricValue;
 
 import java.util.List;
 
 public final class JsonQoCIMExport {
 
-	public static JsonObject criterion(QoCCriterion criterion) {
+	public static JsonObject exportQoCCriterion(final QoCCriterion criterion) {
 
 		final JsonObject jsonObject = new JsonObject();
 
-		jsonObject.addProperty("name", criterion.name());
+		jsonObject.addProperty("name", criterion.name);
 		jsonObject.addProperty("id", criterion.id());
 
 		return jsonObject;
 	}
 
-	public static JsonObject definition(QoCMetricDefinition definition) {
+	public static JsonObject exportQoCDefinition(final QoCDefinition definition) {
 
 		final JsonObject jsonObject = new JsonObject();
 
-		jsonObject.addProperty("name", definition.name());
+		jsonObject.addProperty("name", definition.name);
 		jsonObject.addProperty("id", definition.id());
-		jsonObject.addProperty("is-invariant", definition.isInvariant());
+		jsonObject.addProperty("is invariant", definition.isInvariant());
 		jsonObject.addProperty("direction", definition.direction().toString());
-		jsonObject.addProperty("provider-uri", definition.providerUri().toString());
+		jsonObject.addProperty("provider uri", definition.providerUri().toString());
 		jsonObject.addProperty("unit", definition.unit().toString());
 
 		return jsonObject;
 	}
 
-	public static JsonObject description(QoCDescription description) {
+	public static JsonObject exportQoCDescription(final QoCDescription description) {
 
 		final JsonObject jsonObject = new JsonObject();
 
-		jsonObject.addProperty("informal-description", description.informalDescription());
-		jsonObject.addProperty("list-keywords", description.listKeywords().toString());
+		jsonObject.addProperty("informal description", description.description());
+		jsonObject.addProperty("keywords", description.keywords().toString());
 
 		return jsonObject;
 	}
 
-	public static JsonObject exportMetricValue(QoCMetricValue metricValue) {
+	public static JsonObject exportQoCValue(final QoCValue qocValue) {
 
 		final JsonObject jsonObject = new JsonObject();
 
-		jsonObject.addProperty("id", metricValue.id());
-		jsonObject.addProperty("creation date", metricValue.creationDate().toString());
-		jsonObject.addProperty("modification date", metricValue.modificationDate().toString());
-		jsonObject.addProperty("definition name", metricValue.getDefinition().name());
-		jsonObject.addProperty("indicator name", metricValue.getIndicator().name());
-		jsonObject.addProperty("value", metricValue.value().toString());
+		jsonObject.addProperty("name", qocValue.name);
+		jsonObject.addProperty("id", qocValue.id());
+		jsonObject.addProperty("creation date", qocValue.creationDate().toString());
+		jsonObject.addProperty("definition id", qocValue.definitionId());
+		jsonObject.addProperty("indicator name", qocValue.container().name);
+		jsonObject.addProperty("value", qocValue.value().toString());
 
 		return jsonObject;
 	}
 
-	public static JsonObject indicator(QoCIndicator indicator) {
+	public static JsonObject exportIndicator(final QoCIndicator indicator) {
 
 		final JsonObject jsonObject = new JsonObject();
 
-		jsonObject.addProperty("name", indicator.name());
+		jsonObject.addProperty("name", indicator.name);
 		jsonObject.addProperty("id", indicator.id());
 
 		return jsonObject;
@@ -77,7 +73,7 @@ public final class JsonQoCIMExport {
 	 *
 	 * @return the expected JsonObject
 	 */
-	public static JsonObject qocMetaData(List<QoCIndicator> QoCIndicators) {
+	public static JsonObject qocMetaData(final List<QoCIndicator> QoCIndicators) {
 		// TODO fix the function
 		return entireIndicator(QoCIndicators.get(0));
 		/*
@@ -111,6 +107,6 @@ public final class JsonQoCIMExport {
 
 	public static JsonObject entireIndicator(QoCIndicator indicator) {
 		// TODO fix the function
-		return indicator(indicator);
+		return exportIndicator(indicator);
 	}
 }
