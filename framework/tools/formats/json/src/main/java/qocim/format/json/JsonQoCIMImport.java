@@ -1,16 +1,14 @@
 package qocim.format.json;
 
 import com.google.gson.JsonObject;
-
+import qocim.model.QoCDefinition;
 import qocim.model.QoCIndicator;
-import qocim.model.QoCMetricDefinition;
-import qocim.model.QoCMetricValue;
 
 public final class JsonQoCIMImport {
 
 	public static QoCIndicator qocMetaData(final JsonObject jsonMetaData) {
 
-		final QoCIndicator qocIndicator = new QoCIndicator();
+		final QoCIndicator qocIndicator = new QoCIndicator("JSON name", -1);
 
 		jsonMetaData.entrySet().stream().forEach(streamMetaData -> {
 			// final JsonArray array = ;
@@ -22,13 +20,13 @@ public final class JsonQoCIMImport {
 			 */
 			streamMetaData.getValue().getAsJsonArray().get(0).getAsJsonObject().entrySet().stream()
 					.forEach(streamValue -> {
-						final QoCMetricDefinition definition = new QoCMetricDefinition();
-						definition.setId(streamValue.getKey());
-						final QoCMetricValue value = new QoCMetricValue();
-						value.setObjectValue(streamValue.getValue().getAsString());
-						value.setMetricDefinition(definition);
-						definition.addMetricValues(value);
-						qocIndicator.addMetricValue(value);
+						final QoCDefinition definition = new QoCDefinition("JSON definition", streamValue.getKey());
+//						definition.setId();
+//						final QoCMetricValue value = new QoCMetricValue();
+//						value.setObjectValue(streamValue.getValue().getAsString());
+//						value.setMetricDefinition(definition);
+//						definition.addMetricValues(value);
+//						qocIndicator.addMetricValue(value);
 					});
 		});
 		return qocIndicator;
