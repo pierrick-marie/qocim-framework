@@ -25,7 +25,7 @@ import qocim.model.QoCIndicator;
 
 public class TestIndicator extends QoCIndicator {
 
-	public static final String NAME = "Precision indicator";
+	public static final String NAME = "Test indicator";
 	public static final Integer ID = 10;
 
 	public TestIndicator() {

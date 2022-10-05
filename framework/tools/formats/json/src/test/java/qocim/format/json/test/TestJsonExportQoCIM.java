@@ -1,5 +1,8 @@
 package qocim.format.json.test;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import criteria.test.TestFacade;
 import criteria.test.TestIndicator;
 import criteria.test.simple.definitions.SimpleEvaluator;
@@ -16,6 +19,7 @@ import qocim.model.QoCDescription;
 import qocim.model.QoCValue;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class TestJsonExportQoCIM {
 
@@ -38,7 +42,7 @@ public class TestJsonExportQoCIM {
 	}
 
 	@Test
-	public void testJsonIndicator() {
+	public void testExportJsonIndicator() {
 		String expectedValue = "{\"name\":\"" + precision.name + "\",\"id\":" + precision.id() + "}";
 		assertEquals(expectedValue, JsonQoCIMExport.exportIndicator(precision).toString());
 
@@ -46,7 +50,7 @@ public class TestJsonExportQoCIM {
 	}
 
 	@Test
-	public void testJsonQoCValue() {
+	public void testExportJsonQoCValue() {
 
 		QoCValue<Integer> testValue = (QoCValue<Integer>) information.indicators().get(0).qocValues().get(0);
 
@@ -63,7 +67,7 @@ public class TestJsonExportQoCIM {
 	}
 
 	@Test
-	public void testJsonQoCCriterion() {
+	public void testExportJsonQoCCriterion() {
 
 		QoCCriterion testCriterion = information.indicators().get(0).qocCriteria().get(0);
 
@@ -75,7 +79,7 @@ public class TestJsonExportQoCIM {
 	}
 
 	@Test
-	public void testJsonQoCDefinition() {
+	public void testExportJsonQoCDefinition() {
 
 		QoCDefinition testDefinition = (QoCDefinition) information.indicators().get(0).qocCriteria().get(0).qocDefinitions().get(0);
 
@@ -92,7 +96,7 @@ public class TestJsonExportQoCIM {
 	}
 
 	@Test
-	public void testJsonQoCDescription() {
+	public void testExportJsonQoCDescription() {
 
 		QoCDescription testDescription = (QoCDescription) information.indicators().get(0).qocCriteria().get(0).qocDefinitions().get(0).desription();
 
@@ -102,5 +106,36 @@ public class TestJsonExportQoCIM {
 		assertEquals(expectedValue, JsonQoCIMExport.exportQoCDescription(testDescription).toString());
 
 		System.out.println(" - exportQoCDescription(): OK");
+	}
+
+	@Test
+	public void testExportJsonEntireIndicator() {
+
+		JsonObject testJson = JsonQoCIMExport.exportEntireIndicator(information.indicators().get(0));
+		JsonElement element;
+		JsonArray jsonArray;
+
+		element = testJson.get("name");
+		assertNotNull(element);
+
+		element = testJson.get("id");
+		assertNotNull(element);
+
+		element = testJson.get("criteria");
+		assertNotNull(element);
+		jsonArray = element.getAsJsonArray();
+		assertEquals(1, jsonArray.size());
+
+		element = testJson.get("values");
+		assertNotNull(element);
+		jsonArray = element.getAsJsonArray();
+		assertEquals(1, jsonArray.size());
+
+		element = testJson.get("definitions");
+		assertNotNull(element);
+		jsonArray = element.getAsJsonArray();
+		assertEquals(1, jsonArray.size());
+
+		System.out.println(" - exportEntireIndicator(): OK");
 	}
 }

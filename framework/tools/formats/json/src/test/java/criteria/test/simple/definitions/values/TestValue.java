@@ -24,7 +24,7 @@ import qocim.model.QoCValue;
 
 public class TestValue extends QoCValue<Integer> {
 
-	public static final String NAME = "Precision value";
+	public static final String NAME = "Test value";
 
 	public TestValue(final Integer id, Integer value) {
 		super(NAME, id, value);

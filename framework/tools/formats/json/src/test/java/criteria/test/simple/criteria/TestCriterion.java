@@ -24,7 +24,7 @@ import qocim.model.QoCCriterion;
 
 public class TestCriterion extends QoCCriterion {
 
-	public static final String NAME = "Precision criterion";
+	public static final String NAME = "Test criterion";
 	public static final String ID = "10.1";
 
 	public TestCriterion() {

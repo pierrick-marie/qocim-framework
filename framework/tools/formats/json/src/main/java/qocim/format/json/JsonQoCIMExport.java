@@ -1,5 +1,6 @@
 package qocim.format.json;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import qocim.model.*;
 
@@ -28,6 +29,8 @@ public final class JsonQoCIMExport {
 		jsonObject.addProperty("direction", definition.direction().toString());
 		jsonObject.addProperty("provider uri", definition.providerUri().toString());
 		jsonObject.addProperty("unit", definition.unit().toString());
+
+		jsonObject.add("description", exportQoCDescription(definition.desription()));
 
 		return jsonObject;
 	}
@@ -66,47 +69,68 @@ public final class JsonQoCIMExport {
 		return jsonObject;
 	}
 
-	/**
-	 * A method to export QoCEventMetaData as JsonObject
-	 *
-	 * @param QoCIndicators the meta-data to transform
-	 *
-	 * @return the expected JsonObject
-	 */
-	public static JsonObject qocMetaData(final List<QoCIndicator> QoCIndicators) {
-		// TODO fix the function
-		return entireIndicator(QoCIndicators.get(0));
-		/*
-		final JsonObject jsonMetaData = new JsonObject();
-		// Using try catch to get exceptions if some properties return null when getting the properties of the QoC objects in the map - It should not happened...
-		try {
-			qocMetaData.getQoCMetaData().entrySet().forEach(entry -> {
-				// The object that will contain the QoC mata-data
-				final JsonArray informationList = new JsonArray();
-				// Loop over the QoC metric values
-				for (final QoCMetricValue value : entry.getValue()) {
-					// Get the definition that provided the value
-					final QoCMetricDefinition definition = (QoCMetricDefinition) value.getDefinition().getObject();
-					// The object to store the value
-					final JsonObject qocList = new JsonObject();
-					// Stores the values
-					qocList.addProperty(definition.getId().getObject().toString(), value.value().toString());
-					// Put the Json object in the list
-					informationList.add(qocList);
-				}
-				// Index the current QoC metric values
-				jsonMetaData.add(entry.getKey(), informationList);
-			});
-		} catch (final Exception exception) {
-			QoCIMLogger.debug("QoCEventMetaData.toJson: " + exception.getMessage());
+//	/*
+//	 * A method to export QoCEventMetaData as JsonObject
+//	 *
+//	 * @param QoCIndicators the meta-data to transform
+//	 *
+//	 * @return the expected JsonObject
+//	 */
+//	public static JsonObject qocMetaData(final List<QoCIndicator> QoCIndicators) {
+//		// TODO fix the function
+////		return exportEntireIndicator(QoCIndicators.get(0));
+//
+//		final JsonObject jsonMetaData = new JsonObject();
+//		// Using try catch to get exceptions if some properties return null when getting the properties of the QoC objects in the map - It should not happened...
+//		try {
+//			qocMetaData.getQoCMetaData().entrySet().forEach(entry -> {
+//				// The object that will contain the QoC mata-data
+//				final JsonArray informationList = new JsonArray();
+//				// Loop over the QoC metric values
+//				for (final QoCMetricValue value : entry.getValue()) {
+//					// Get the definition that provided the value
+//					final QoCMetricDefinition definition = (QoCMetricDefinition) value.getDefinition().getObject();
+//					// The object to store the value
+//					final JsonObject qocList = new JsonObject();
+//					// Stores the values
+//					qocList.addProperty(definition.getId().getObject().toString(), value.value().toString());
+//					// Put the Json object in the list
+//					informationList.add(qocList);
+//				}
+//				// Index the current QoC metric values
+//				jsonMetaData.add(entry.getKey(), informationList);
+//			});
+//		} catch (final Exception exception) {
+//			QoCIMLogger.debug("QoCEventMetaData.toJson: " + exception.getMessage());
+//		}
+//		return jsonMetaData;
+//	}
+
+
+	public static JsonObject exportEntireIndicator(QoCIndicator indicator) {
+
+		final JsonObject jsonIndicator = new JsonObject();
+
+		jsonIndicator.addProperty("name", indicator.name);
+		jsonIndicator.addProperty("id", indicator.id());
+
+		JsonArray jsonCriteria = new JsonArray();
+		JsonArray jsonDefinitions = new JsonArray();
+		for (QoCCriterion criterion: indicator.qocCriteria() ) {
+			jsonCriteria.add(exportQoCCriterion(criterion));
+			for (QoCDefinition definition: criterion.qocDefinitions() ) {
+				jsonDefinitions.add(exportQoCDefinition(definition));
+			}
 		}
-		return jsonMetaData;
-		*/
-	}
+		jsonIndicator.add("criteria", jsonCriteria);
+		jsonIndicator.add("definitions", jsonDefinitions);
 
+		JsonArray jsonValues = new JsonArray();
+		for (QoCValue<?> value: indicator.qocValues() ) {
+			jsonValues.add(exportQoCValue(value));
+		}
+		jsonIndicator.add("values", jsonValues);
 
-	public static JsonObject entireIndicator(QoCIndicator indicator) {
-		// TODO fix the function
-		return exportIndicator(indicator);
+		return jsonIndicator;
 	}
 }

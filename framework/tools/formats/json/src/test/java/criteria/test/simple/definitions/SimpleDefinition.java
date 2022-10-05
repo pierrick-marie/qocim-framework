@@ -31,7 +31,7 @@ import java.net.URISyntaxException;
 
 public class SimpleDefinition extends QoCDefinition {
 
-	public static final String NAME = "Precision definition";
+	public static final String NAME = "Test definition";
 	public static final String ID = "10.1.1";
 
 	public SimpleDefinition() {

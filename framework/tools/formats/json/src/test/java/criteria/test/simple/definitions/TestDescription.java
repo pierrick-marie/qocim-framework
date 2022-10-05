@@ -24,15 +24,13 @@ import qocim.model.QoCDescription;
 
 public class TestDescription extends QoCDescription {
 
-	public static final String NAME = "Precision description";
+	public static final String NAME = "Test description";
 
 	protected TestDescription() {
 		super(NAME);
 
-		setDescription("This is the informal description of the precision");
+		setDescription("This is an informal description");
 
-		keywords().add("precision");
-		keywords().add("percent");
-		keywords().add("per-thousand");
+		keywords().add("test");
 	}
 }
