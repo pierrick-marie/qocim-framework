@@ -1,12 +1,12 @@
-package qocim.test;
+package qocim.format.json.test;
 
+import criteria.test.TestFacade;
+import criteria.test.TestIndicator;
+import criteria.test.simple.definitions.SimpleEvaluator;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import qocim.datamodel.precision.PrecisionFacade;
-import qocim.datamodel.precision.PrecisionIndicator;
-import qocim.datamodel.precision.simple.definitions.SimpleEvaluator;
 import qocim.format.json.JsonQoCIMExport;
 import qocim.information.InformationImpl;
 import qocim.information.QInformation;
@@ -19,20 +19,20 @@ import static org.junit.Assert.assertEquals;
 
 public class TestJsonExportQoCIM {
 
-	private static PrecisionFacade facade;
-	private PrecisionIndicator precision;
+	private static TestFacade facade;
+	private TestIndicator precision;
 	private QInformation<Integer> information;
 
 	@BeforeClass
 	public static void beforeClass() {
-		facade = new PrecisionFacade();
+		facade = new TestFacade();
 
 		System.out.println(" ======= Test JsonExport =======");
 	}
 
 	@Before
 	public final void before() {
-		precision = (PrecisionIndicator) facade.newQoCIndicator();
+		precision = (TestIndicator) facade.newQoCIndicator();
 		information = new InformationImpl<>("test information", 42);
 		facade.qualify(information, SimpleEvaluator.INSTANCE);
 	}

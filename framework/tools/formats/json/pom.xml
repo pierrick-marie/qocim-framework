@@ -32,23 +32,10 @@
     <description>This is a module to export any QoCIM based QoC criteria into Json format.</description>
     <packaging>jar</packaging>
 
-    <repositories>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/pierrick-marie/qocim</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>qocim</groupId>
             <artifactId>metamodel</artifactId>
-            <version>2.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>qocim.criteria</groupId>
-            <artifactId>precision</artifactId>
             <version>2.1.2</version>
         </dependency>
         <dependency>
