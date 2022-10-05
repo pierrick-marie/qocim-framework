@@ -9,14 +9,16 @@ import java.util.Date;
  */
 public class QoCValue<T> extends QClass {
 
-	private static final String ID = "id";
-	private static final String CREATION_DATE = "creation date";
-	private static final String VALUE = "value";
-	private static final String DEFINITION_ID = "definition id";
-	private static final String TO_STRING = "QoC Value: ";
+	public static final String ID = "id";
+	public static final String CREATION_DATE = "creation date";
+	public static final String VALUE = "value";
+	public static final String DEFINITION_ID = "definition id";
+	public static final String TO_STRING = "QoC Value: ";
+
+	public static final String DATE_FORMAT = "E MMM dd HH:mm:ss yyyy";
 
 	public QoCValue(final String name, final Integer id, final T value) {
-		super(name + " #" + id);
+		super(name);
 		add(ID, id);
 		add(CREATION_DATE, new Date());
 		add(VALUE, value);

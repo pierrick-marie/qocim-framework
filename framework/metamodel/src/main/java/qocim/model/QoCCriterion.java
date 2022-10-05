@@ -7,9 +7,9 @@ import java.util.List;
 
 public class QoCCriterion extends QClass {
 
-	private static final String ID = "id";
-	private static final String DEFINITIONS = "definitions";
-	private static final String TO_STRING = "QoC criterion: ";
+	public static final String ID = "id";
+	public static final String DEFINITIONS = "definitions";
+	public static final String TO_STRING = "QoC criterion: ";
 
 	public QoCCriterion(final String name, final String id) {
 		super(name);

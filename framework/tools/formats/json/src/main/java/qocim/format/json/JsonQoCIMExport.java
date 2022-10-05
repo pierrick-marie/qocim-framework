@@ -4,17 +4,23 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import qocim.model.*;
 
-
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public final class JsonQoCIMExport {
+
+	public static final  String NAME_PROPERTY = "name";
+	public static final  String CRITERIA_PROPERTY = "criteria";
+	public static final  String DEFINITIONS_PROPERTY = "definitions";
+	public static final  String VALUES_PROPERTY = "values";
 
 	public static JsonObject exportQoCCriterion(final QoCCriterion criterion) {
 
 		final JsonObject jsonObject = new JsonObject();
 
-		jsonObject.addProperty("name", criterion.name);
-		jsonObject.addProperty("id", criterion.id());
+		jsonObject.addProperty(NAME_PROPERTY, criterion.name);
+		jsonObject.addProperty(QoCCriterion.ID, criterion.id());
 
 		return jsonObject;
 	}
@@ -23,14 +29,14 @@ public final class JsonQoCIMExport {
 
 		final JsonObject jsonObject = new JsonObject();
 
-		jsonObject.addProperty("name", definition.name);
-		jsonObject.addProperty("id", definition.id());
-		jsonObject.addProperty("is invariant", definition.isInvariant());
-		jsonObject.addProperty("direction", definition.direction().toString());
-		jsonObject.addProperty("provider uri", definition.providerUri().toString());
-		jsonObject.addProperty("unit", definition.unit().toString());
+		jsonObject.addProperty(NAME_PROPERTY, definition.name);
+		jsonObject.addProperty(QoCDefinition.ID, definition.id());
+		jsonObject.addProperty(QoCDefinition.IS_INVARIANT, definition.isInvariant());
+		jsonObject.addProperty(QoCDefinition.DIRECTION, definition.direction().toString());
+		jsonObject.addProperty(QoCDefinition.PROVIDER_URI, definition.providerUri().toString());
+		jsonObject.addProperty(QoCDefinition.UNIT, definition.unit().toString());
 
-		jsonObject.add("description", exportQoCDescription(definition.desription()));
+		jsonObject.add(QoCDefinition.DESCRIPTION, exportQoCDescription(definition.desription()));
 
 		return jsonObject;
 	}
@@ -39,8 +45,14 @@ public final class JsonQoCIMExport {
 
 		final JsonObject jsonObject = new JsonObject();
 
-		jsonObject.addProperty("informal description", description.description());
-		jsonObject.addProperty("keywords", description.keywords().toString());
+		jsonObject.addProperty(NAME_PROPERTY, description.name);
+		jsonObject.addProperty(QoCDescription.DESCRIPTION, description.description());
+
+		JsonArray jsonKeywords = new JsonArray();
+		for(String keyword: description.keywords()) {
+			jsonKeywords.add(keyword);
+		}
+		jsonObject.add(QoCDescription.KEYWORDS, jsonKeywords);
 
 		return jsonObject;
 	}
@@ -49,70 +61,35 @@ public final class JsonQoCIMExport {
 
 		final JsonObject jsonObject = new JsonObject();
 
-		jsonObject.addProperty("name", qocValue.name);
-		jsonObject.addProperty("id", qocValue.id());
-		jsonObject.addProperty("creation date", qocValue.creationDate().toString());
-		jsonObject.addProperty("definition id", qocValue.definitionId());
-		jsonObject.addProperty("indicator name", qocValue.container().name);
-		jsonObject.addProperty("value", qocValue.value().toString());
+		jsonObject.addProperty(NAME_PROPERTY, qocValue.name);
+		jsonObject.addProperty(QoCValue.ID, qocValue.id());
+
+		Date creationDate = qocValue.creationDate();
+		DateFormat dateFormat = new SimpleDateFormat(QoCValue.DATE_FORMAT);
+		jsonObject.addProperty(QoCValue.CREATION_DATE, dateFormat.format(creationDate));
+
+		jsonObject.addProperty(QoCValue.DEFINITION_ID, qocValue.definitionId());
+		jsonObject.addProperty(QoCValue.VALUE, qocValue.value().toString());
 
 		return jsonObject;
 	}
 
-	public static JsonObject exportIndicator(final QoCIndicator indicator) {
+	public static JsonObject exportQoCIndicator(final QoCIndicator indicator) {
 
 		final JsonObject jsonObject = new JsonObject();
 
-		jsonObject.addProperty("name", indicator.name);
-		jsonObject.addProperty("id", indicator.id());
+		jsonObject.addProperty(NAME_PROPERTY, indicator.name);
+		jsonObject.addProperty(QoCIndicator.ID, indicator.id());
 
 		return jsonObject;
 	}
-
-//	/*
-//	 * A method to export QoCEventMetaData as JsonObject
-//	 *
-//	 * @param QoCIndicators the meta-data to transform
-//	 *
-//	 * @return the expected JsonObject
-//	 */
-//	public static JsonObject qocMetaData(final List<QoCIndicator> QoCIndicators) {
-//		// TODO fix the function
-////		return exportEntireIndicator(QoCIndicators.get(0));
-//
-//		final JsonObject jsonMetaData = new JsonObject();
-//		// Using try catch to get exceptions if some properties return null when getting the properties of the QoC objects in the map - It should not happened...
-//		try {
-//			qocMetaData.getQoCMetaData().entrySet().forEach(entry -> {
-//				// The object that will contain the QoC mata-data
-//				final JsonArray informationList = new JsonArray();
-//				// Loop over the QoC metric values
-//				for (final QoCMetricValue value : entry.getValue()) {
-//					// Get the definition that provided the value
-//					final QoCMetricDefinition definition = (QoCMetricDefinition) value.getDefinition().getObject();
-//					// The object to store the value
-//					final JsonObject qocList = new JsonObject();
-//					// Stores the values
-//					qocList.addProperty(definition.getId().getObject().toString(), value.value().toString());
-//					// Put the Json object in the list
-//					informationList.add(qocList);
-//				}
-//				// Index the current QoC metric values
-//				jsonMetaData.add(entry.getKey(), informationList);
-//			});
-//		} catch (final Exception exception) {
-//			QoCIMLogger.debug("QoCEventMetaData.toJson: " + exception.getMessage());
-//		}
-//		return jsonMetaData;
-//	}
-
 
 	public static JsonObject exportEntireIndicator(QoCIndicator indicator) {
 
 		final JsonObject jsonIndicator = new JsonObject();
 
-		jsonIndicator.addProperty("name", indicator.name);
-		jsonIndicator.addProperty("id", indicator.id());
+		jsonIndicator.addProperty(NAME_PROPERTY, indicator.name);
+		jsonIndicator.addProperty(QoCIndicator.ID, indicator.id());
 
 		JsonArray jsonCriteria = new JsonArray();
 		JsonArray jsonDefinitions = new JsonArray();
@@ -122,14 +99,14 @@ public final class JsonQoCIMExport {
 				jsonDefinitions.add(exportQoCDefinition(definition));
 			}
 		}
-		jsonIndicator.add("criteria", jsonCriteria);
-		jsonIndicator.add("definitions", jsonDefinitions);
+		jsonIndicator.add(CRITERIA_PROPERTY, jsonCriteria);
+		jsonIndicator.add(DEFINITIONS_PROPERTY, jsonDefinitions);
 
 		JsonArray jsonValues = new JsonArray();
 		for (QoCValue<?> value: indicator.qocValues() ) {
 			jsonValues.add(exportQoCValue(value));
 		}
-		jsonIndicator.add("values", jsonValues);
+		jsonIndicator.add(VALUES_PROPERTY, jsonValues);
 
 		return jsonIndicator;
 	}

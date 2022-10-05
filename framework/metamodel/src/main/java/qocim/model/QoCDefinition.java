@@ -1,7 +1,6 @@
 package qocim.model;
 
 import qocim.metamodel.QClass;
-import qocim.model.tools.IQoCEvaluator;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -10,22 +9,22 @@ import java.util.List;
 
 public class QoCDefinition extends QClass {
 
-	private static final String ID = "id";
-	private static final String INVARIANT = "invariant";
-	private static final String UNIT = "unit";
-	private static final String PROVIDER_URI = "provider uri";
-	private static final String DIRECTION = "direction";
-	private static final String DEFAULT = "default";
-	private static final String MIN_VALUE = "min value";
-	private static final String MAX_VALUE = "max value";
-	private static final String DESCRIPTION = "description";
-	private static final String RELATED_DEFINITIONS = "related definitions";
-	private static final String TO_STRING = "QoC Definition: ";
+	public static final String ID = "id";
+	public static final String IS_INVARIANT = "invariant";
+	public static final String UNIT = "unit";
+	public static final String PROVIDER_URI = "provider uri";
+	public static final String DIRECTION = "direction";
+	public static final String DEFAULT = "default";
+	public static final String MIN_VALUE = "min value";
+	public static final String MAX_VALUE = "max value";
+	public static final String DESCRIPTION = "description";
+	public static final String RELATED_DEFINITIONS = "related definitions";
+	public static final String TO_STRING = "QoC Definition: ";
 
 	public QoCDefinition(final String name, final String id) {
 		super(name);
 		add(ID, id);
-		add(INVARIANT, false);
+		add(IS_INVARIANT, false);
 		add(UNIT, "");
 		try {
 			add(PROVIDER_URI, new URI(""));
@@ -112,11 +111,11 @@ public class QoCDefinition extends QClass {
 	}
 
 	public Boolean isInvariant() {
-		return (Boolean) get(INVARIANT);
+		return (Boolean) get(IS_INVARIANT);
 	}
 
 	public QoCDefinition setIsInvariant(final Boolean isInvariant) {
-		set(INVARIANT, isInvariant);
+		set(IS_INVARIANT, isInvariant);
 		return this;
 	}
 

@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import criteria.test.TestFacade;
 import criteria.test.TestIndicator;
 import criteria.test.simple.definitions.SimpleEvaluator;
+import criteria.test.simple.definitions.TestDescription;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,18 +14,20 @@ import org.junit.Test;
 import qocim.format.json.JsonQoCIMExport;
 import qocim.information.InformationImpl;
 import qocim.information.QInformation;
-import qocim.model.QoCCriterion;
-import qocim.model.QoCDefinition;
-import qocim.model.QoCDescription;
-import qocim.model.QoCValue;
+import qocim.model.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.stream.Collectors;
+
+import static java.lang.Integer.parseInt;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class TestJsonExportQoCIM {
 
 	private static TestFacade facade;
-	private TestIndicator precision;
+	private TestIndicator testIndicator;
 	private QInformation<Integer> information;
 
 	@BeforeClass
@@ -36,15 +39,15 @@ public class TestJsonExportQoCIM {
 
 	@Before
 	public final void before() {
-		precision = (TestIndicator) facade.newQoCIndicator();
+		testIndicator = (TestIndicator) facade.newQoCIndicator();
 		information = new InformationImpl<>("test information", 42);
 		facade.qualify(information, SimpleEvaluator.INSTANCE);
 	}
 
 	@Test
 	public void testExportJsonIndicator() {
-		String expectedValue = "{\"name\":\"" + precision.name + "\",\"id\":" + precision.id() + "}";
-		assertEquals(expectedValue, JsonQoCIMExport.exportIndicator(precision).toString());
+		String expectedValue = "{\"" + JsonQoCIMExport.NAME_PROPERTY + "\":\"" + testIndicator.name + "\",\"id\":" + testIndicator.id() + "}";
+		assertEquals(expectedValue, JsonQoCIMExport.exportQoCIndicator(testIndicator).toString());
 
 		System.out.println(" - exportQoCIndicator(): OK");
 	}
@@ -54,12 +57,12 @@ public class TestJsonExportQoCIM {
 
 		QoCValue<Integer> testValue = (QoCValue<Integer>) information.indicators().get(0).qocValues().get(0);
 
-		String expectedValue = "{\"name\":\"" + testValue.name + "\"," +
-			"\"id\":" + testValue.id() + "," +
-			"\"creation date\":\"" + testValue.creationDate() + "\"," +
-			"\"definition id\":\"" + testValue.definitionId() + "\"," +
-			"\"indicator name\":\"" + testValue.container().name + "\"," +
-			"\"value\":\"" + testValue.value() + "\"" +
+		DateFormat dateFormat = new SimpleDateFormat(QoCValue.DATE_FORMAT);
+		String expectedValue = "{\"" + JsonQoCIMExport.NAME_PROPERTY + "\":\"" + testValue.name + "\"," +
+			"\"" + QoCValue.ID + "\":" + testValue.id() + "," +
+			"\"" + QoCValue.CREATION_DATE + "\":\"" +  dateFormat.format(testValue.creationDate()) + "\"," +
+			"\"" + QoCValue.DEFINITION_ID + "\":\"" + testValue.definitionId() + "\"," +
+			"\"" + QoCValue.VALUE + "\":\"" + testValue.value() + "\"" +
 			"}";
 		assertEquals(expectedValue, JsonQoCIMExport.exportQoCValue(testValue).toString());
 
@@ -71,8 +74,8 @@ public class TestJsonExportQoCIM {
 
 		QoCCriterion testCriterion = information.indicators().get(0).qocCriteria().get(0);
 
-		String expectedValue = "{\"name\":\"" + testCriterion.name + "\"," +
-			"\"id\":\"" + testCriterion.id() + "\"}";
+		String expectedValue = "{\"" + JsonQoCIMExport.NAME_PROPERTY + "\":\"" + testCriterion.name + "\"," +
+			"\"" + QoCCriterion.ID + "\":\"" + testCriterion.id() + "\"}";
 		assertEquals(expectedValue, JsonQoCIMExport.exportQoCCriterion(testCriterion).toString());
 
 		System.out.println(" - exportQoCCriterion(): OK");
@@ -83,12 +86,13 @@ public class TestJsonExportQoCIM {
 
 		QoCDefinition testDefinition = (QoCDefinition) information.indicators().get(0).qocCriteria().get(0).qocDefinitions().get(0);
 
-		String expectedValue = "{\"name\":\"" + testDefinition.name + "\"," +
-			"\"id\":\"" + testDefinition.id() + "\"," +
-			"\"is invariant\":" + testDefinition.isInvariant() + "," +
-			"\"direction\":\"" + testDefinition.direction() + "\"," +
-			"\"provider uri\":\"" + testDefinition.providerUri() + "\"," +
-			"\"unit\":\"" + testDefinition.unit() + "\"" +
+		String expectedValue = "{\"" + JsonQoCIMExport.NAME_PROPERTY + "\":\"" + testDefinition.name + "\"," +
+			"\"" + QoCDefinition.ID + "\":\"" + testDefinition.id() + "\"," +
+			"\"" + QoCDefinition.IS_INVARIANT + "\":" + testDefinition.isInvariant() + "," +
+			"\"" + QoCDefinition.DIRECTION + "\":\"" + testDefinition.direction() + "\"," +
+			"\"" + QoCDefinition.PROVIDER_URI + "\":\"" + testDefinition.providerUri() + "\"," +
+			"\"" + QoCDefinition.UNIT + "\":\"" + testDefinition.unit() + "\"," +
+			"\"" + QoCDefinition.DESCRIPTION + "\":" + JsonQoCIMExport.exportQoCDescription(new TestDescription()).toString() +
 			"}";
 		assertEquals(expectedValue, JsonQoCIMExport.exportQoCDefinition(testDefinition).toString());
 
@@ -100,8 +104,9 @@ public class TestJsonExportQoCIM {
 
 		QoCDescription testDescription = (QoCDescription) information.indicators().get(0).qocCriteria().get(0).qocDefinitions().get(0).desription();
 
-		String expectedValue = "{\"informal description\":\"" + testDescription.description() + "\"," +
-			"\"keywords\":\"" + testDescription.keywords() + "\"" +
+		String expectedValue = "{\"" + JsonQoCIMExport.NAME_PROPERTY + "\":\"" + testDescription.name + "\"," +
+			"\"" + QoCDescription.DESCRIPTION + "\":\"" + testDescription.description() + "\"," +
+			"\"" + QoCDescription.KEYWORDS + "\":[" + testDescription.keywords().stream().map(s -> "\"" + s + "\"").collect(Collectors.joining(",")) + "]" +
 			"}";
 		assertEquals(expectedValue, JsonQoCIMExport.exportQoCDescription(testDescription).toString());
 
@@ -115,23 +120,23 @@ public class TestJsonExportQoCIM {
 		JsonElement element;
 		JsonArray jsonArray;
 
-		element = testJson.get("name");
+		element = testJson.get(JsonQoCIMExport.NAME_PROPERTY);
 		assertNotNull(element);
 
-		element = testJson.get("id");
+		element = testJson.get(QoCIndicator.ID);
 		assertNotNull(element);
 
-		element = testJson.get("criteria");
-		assertNotNull(element);
-		jsonArray = element.getAsJsonArray();
-		assertEquals(1, jsonArray.size());
-
-		element = testJson.get("values");
+		element = testJson.get(JsonQoCIMExport.CRITERIA_PROPERTY);
 		assertNotNull(element);
 		jsonArray = element.getAsJsonArray();
 		assertEquals(1, jsonArray.size());
 
-		element = testJson.get("definitions");
+		element = testJson.get(JsonQoCIMExport.VALUES_PROPERTY);
+		assertNotNull(element);
+		jsonArray = element.getAsJsonArray();
+		assertEquals(1, jsonArray.size());
+
+		element = testJson.get(JsonQoCIMExport.DEFINITIONS_PROPERTY);
 		assertNotNull(element);
 		jsonArray = element.getAsJsonArray();
 		assertEquals(1, jsonArray.size());

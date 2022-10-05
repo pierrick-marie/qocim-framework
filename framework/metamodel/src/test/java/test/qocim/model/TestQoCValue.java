@@ -37,7 +37,7 @@ public class TestQoCValue {
 
 	@Test
 	public final void testToString() {
-		assertEquals("QoC Value: " + VALUE_NAME + " #" + VALUE_ID, testValue.toString());
+		assertEquals("QoC Value: " + VALUE_NAME, testValue.toString());
 
 		System.out.println(" - toString(): OK");
 	}

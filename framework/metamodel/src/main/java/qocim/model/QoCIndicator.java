@@ -7,10 +7,10 @@ import java.util.List;
 
 public class QoCIndicator extends QClass {
 
-	private static final String ID = "id";
-	private static final String CRITERIA = "criteria";
-	private static final String VALUES = "values";
-	private static final String TO_STRING = "QoC Indicator: ";
+	public static final String ID = "id";
+	public static final String CRITERIA = "criteria";
+	public static final String VALUES = "values";
+	public static final String TO_STRING = "QoC Indicator: ";
 
 	public QoCIndicator(final String name, final Integer id) {
 		super(name);

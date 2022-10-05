@@ -26,11 +26,13 @@ public class TestDescription extends QoCDescription {
 
 	public static final String NAME = "Test description";
 
-	protected TestDescription() {
+	public TestDescription() {
 		super(NAME);
 
 		setDescription("This is an informal description");
 
-		keywords().add("test");
+		keywords().add("test 0");
+		keywords().add("test 1");
+		keywords().add("test 2");
 	}
 }

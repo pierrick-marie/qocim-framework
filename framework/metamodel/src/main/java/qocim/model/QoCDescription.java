@@ -7,9 +7,9 @@ import qocim.metamodel.QClass;
 
 public class QoCDescription extends QClass {
 
-	private static final String KEYWORDS = "keywords";
-	private static final String DESCRIPTION = "description";
-	private static final String TO_STRING = "QoC Description: ";
+	public static final String KEYWORDS = "keywords";
+	public static final String DESCRIPTION = "description";
+	public static final String TO_STRING = "QoC Description: ";
 
 	public QoCDescription(final String name) {
 		super(name);
