@@ -46,7 +46,7 @@ public class SimpleDefinition extends QoCDefinition {
 		setIsDefault(true);
 		setDescription(new TestDescription());
 		setUnit(SI.METER.toString());
-		setMaxValue(new MaxTestValue());
-		setMinValue(new MinTestValue());
+		setMaxValue(new MaxTestValue().setDefinitionId(ID));
+		setMinValue(new MinTestValue().setDefinitionId(ID));
 	}
 }

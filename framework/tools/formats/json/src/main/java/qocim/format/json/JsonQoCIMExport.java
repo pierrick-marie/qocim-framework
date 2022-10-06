@@ -31,12 +31,30 @@ public final class JsonQoCIMExport {
 
 		jsonObject.addProperty(NAME_PROPERTY, definition.name);
 		jsonObject.addProperty(QoCDefinition.ID, definition.id());
+
+		return jsonObject;
+	}
+
+	public static JsonObject exportQoCDefinitionProperties(final QoCDefinition definition) {
+
+		final JsonObject jsonObject = exportQoCDefinition(definition);
+
 		jsonObject.addProperty(QoCDefinition.IS_INVARIANT, definition.isInvariant());
 		jsonObject.addProperty(QoCDefinition.DIRECTION, definition.direction().toString());
 		jsonObject.addProperty(QoCDefinition.PROVIDER_URI, definition.providerUri().toString());
-		jsonObject.addProperty(QoCDefinition.UNIT, definition.unit().toString());
+		jsonObject.addProperty(QoCDefinition.UNIT, definition.unit());
+		jsonObject.addProperty(QoCDefinition.IS_DEFAULT, definition.isDefault());
+
+		return jsonObject;
+	}
+
+	public static JsonObject exportWholeQoCDefinition(final QoCDefinition definition) {
+
+		final JsonObject jsonObject = exportQoCDefinitionProperties(definition);
 
 		jsonObject.add(QoCDefinition.DESCRIPTION, exportQoCDescription(definition.desription()));
+		jsonObject.add(QoCDefinition.MIN_VALUE, exportQoCValue(definition.minValue()));
+		jsonObject.add(QoCDefinition.MAX_VALUE, exportQoCValue(definition.maxValue()));
 
 		return jsonObject;
 	}
@@ -63,13 +81,21 @@ public final class JsonQoCIMExport {
 
 		jsonObject.addProperty(NAME_PROPERTY, qocValue.name);
 		jsonObject.addProperty(QoCValue.ID, qocValue.id());
+		jsonObject.addProperty(QoCValue.VALUE, qocValue.value().toString());
+
+		return jsonObject;
+	}
+
+	public static JsonObject exportWholeQoCValue(final QoCValue qocValue) {
+
+		final JsonObject jsonObject = exportQoCValue(qocValue);
+
 
 		Date creationDate = qocValue.creationDate();
 		DateFormat dateFormat = new SimpleDateFormat(QoCValue.DATE_FORMAT);
 		jsonObject.addProperty(QoCValue.CREATION_DATE, dateFormat.format(creationDate));
 
 		jsonObject.addProperty(QoCValue.DEFINITION_ID, qocValue.definitionId());
-		jsonObject.addProperty(QoCValue.VALUE, qocValue.value().toString());
 
 		return jsonObject;
 	}

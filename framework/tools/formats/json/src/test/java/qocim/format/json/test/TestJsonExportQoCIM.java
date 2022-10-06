@@ -57,14 +57,28 @@ public class TestJsonExportQoCIM {
 
 		QoCValue<Integer> testValue = (QoCValue<Integer>) information.indicators().get(0).qocValues().get(0);
 
-		DateFormat dateFormat = new SimpleDateFormat(QoCValue.DATE_FORMAT);
 		String expectedValue = "{\"" + JsonQoCIMExport.NAME_PROPERTY + "\":\"" + testValue.name + "\"," +
 			"\"" + QoCValue.ID + "\":" + testValue.id() + "," +
-			"\"" + QoCValue.CREATION_DATE + "\":\"" +  dateFormat.format(testValue.creationDate()) + "\"," +
-			"\"" + QoCValue.DEFINITION_ID + "\":\"" + testValue.definitionId() + "\"," +
 			"\"" + QoCValue.VALUE + "\":\"" + testValue.value() + "\"" +
 			"}";
 		assertEquals(expectedValue, JsonQoCIMExport.exportQoCValue(testValue).toString());
+
+		System.out.println(" - exportQoCValue(): OK");
+	}
+
+	@Test
+	public void testExportJsonWholeQoCValue() {
+
+		QoCValue<Integer> testValue = (QoCValue<Integer>) information.indicators().get(0).qocValues().get(0);
+
+		DateFormat dateFormat = new SimpleDateFormat(QoCValue.DATE_FORMAT);
+		String expectedValue = "{\"" + JsonQoCIMExport.NAME_PROPERTY + "\":\"" + testValue.name + "\"," +
+			"\"" + QoCValue.ID + "\":" + testValue.id() + "," +
+			"\"" + QoCValue.VALUE + "\":\"" + testValue.value() + "\"," +
+			"\"" + QoCValue.CREATION_DATE + "\":\"" +  dateFormat.format(testValue.creationDate()) + "\"," +
+			"\"" + QoCValue.DEFINITION_ID + "\":\"" + testValue.definitionId() + "\"" +
+			"}";
+		assertEquals(expectedValue, JsonQoCIMExport.exportWholeQoCValue(testValue).toString());
 
 		System.out.println(" - exportQoCValue(): OK");
 	}
@@ -84,7 +98,26 @@ public class TestJsonExportQoCIM {
 	@Test
 	public void testExportJsonQoCDefinition() {
 
-		QoCDefinition testDefinition = (QoCDefinition) information.indicators().get(0).qocCriteria().get(0).qocDefinitions().get(0);
+		QoCDefinition testDefinition = information.indicators().get(0).qocCriteria().get(0).qocDefinitions().get(0);
+
+		String expectedValue = "{\"" + JsonQoCIMExport.NAME_PROPERTY + "\":\"" + testDefinition.name + "\"," +
+			"\"" + QoCDefinition.ID + "\":\"" + testDefinition.id() + "\"" +
+//			"\"" + QoCDefinition.IS_INVARIANT + "\":" + testDefinition.isInvariant() + "," +
+//			"\"" + QoCDefinition.IS_DEFAULT + "\":" + testDefinition.isDefault() + "," +
+//			"\"" + QoCDefinition.DIRECTION + "\":\"" + testDefinition.direction() + "\"," +
+//			"\"" + QoCDefinition.PROVIDER_URI + "\":\"" + testDefinition.providerUri() + "\"," +
+//			"\"" + QoCDefinition.UNIT + "\":\"" + testDefinition.unit() + "\"," +
+//			"\"" + QoCDefinition.DESCRIPTION + "\":" + JsonQoCIMExport.exportQoCDescription(new TestDescription()).toString() +
+			"}";
+		assertEquals(expectedValue, JsonQoCIMExport.exportQoCDefinition(testDefinition).toString());
+
+		System.out.println(" - exportQoCDefinition(): OK");
+	}
+
+	@Test
+	public void testExportJsonWholeQoCDefinition() {
+
+		QoCDefinition testDefinition = information.indicators().get(0).qocCriteria().get(0).qocDefinitions().get(0);
 
 		String expectedValue = "{\"" + JsonQoCIMExport.NAME_PROPERTY + "\":\"" + testDefinition.name + "\"," +
 			"\"" + QoCDefinition.ID + "\":\"" + testDefinition.id() + "\"," +
@@ -92,9 +125,9 @@ public class TestJsonExportQoCIM {
 			"\"" + QoCDefinition.DIRECTION + "\":\"" + testDefinition.direction() + "\"," +
 			"\"" + QoCDefinition.PROVIDER_URI + "\":\"" + testDefinition.providerUri() + "\"," +
 			"\"" + QoCDefinition.UNIT + "\":\"" + testDefinition.unit() + "\"," +
-			"\"" + QoCDefinition.DESCRIPTION + "\":" + JsonQoCIMExport.exportQoCDescription(new TestDescription()).toString() +
+			"\"" + QoCDefinition.IS_DEFAULT + "\":" + testDefinition.isDefault() +
 			"}";
-		assertEquals(expectedValue, JsonQoCIMExport.exportQoCDefinition(testDefinition).toString());
+		assertEquals(expectedValue, JsonQoCIMExport.exportQoCDefinitionProperties(testDefinition).toString());
 
 		System.out.println(" - exportQoCDefinition(): OK");
 	}

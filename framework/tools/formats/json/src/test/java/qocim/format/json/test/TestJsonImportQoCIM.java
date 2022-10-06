@@ -2,6 +2,7 @@ package qocim.format.json.test;
 
 import criteria.test.TestFacade;
 import criteria.test.TestIndicator;
+import criteria.test.simple.definitions.SimpleDefinition;
 import criteria.test.simple.definitions.SimpleEvaluator;
 import criteria.test.simple.definitions.TestDescription;
 import org.junit.Before;
@@ -49,9 +50,9 @@ public class TestJsonImportQoCIM {
 
 
 	@Test
-	public void testImportJsonQoCValue() {
+	public void testImportJsonWholeQoCValue() {
 		QoCValue<Integer> testValue = (QoCValue<Integer>) information.indicators().get(0).qocValues().get(0);
-		QoCValue<String> jsonValue = (QoCValue<String>) JsonQoCIMImport.importQoCValue(JsonQoCIMExport.exportQoCValue(testValue));
+		QoCValue<String> jsonValue = (QoCValue<String>) JsonQoCIMImport.importQoCValue(JsonQoCIMExport.exportWholeQoCValue(testValue));
 
 
 		assertEquals(testValue.name, jsonValue.name);
@@ -84,5 +85,25 @@ public class TestJsonImportQoCIM {
 		assertEquals(testDescription.keywords(), jsonDescription.keywords());
 
 		System.out.println(" - importQoCDescription(): OK");
+	}
+
+	@Test
+	public void testImportJsonWholeQoCDefinition() {
+		QoCDefinition testDefinition = new SimpleDefinition();
+		QoCDefinition jsonDefinition = JsonQoCIMImport.importQoCDefinition(JsonQoCIMExport.exportWholeQoCDefinition(testDefinition));
+
+		assertEquals(testDefinition.name, jsonDefinition.name);
+		assertEquals(testDefinition.id(), jsonDefinition.id());
+		assertEquals(testDefinition.isInvariant(), jsonDefinition.isInvariant());
+		assertEquals(testDefinition.isDefault(), jsonDefinition.isDefault());
+		assertEquals(testDefinition.unit(), jsonDefinition.unit());
+		assertEquals(testDefinition.providerUri(), jsonDefinition.providerUri());
+		assertEquals(testDefinition.direction(), jsonDefinition.direction());
+
+		assertEquals(testDefinition.minValue(), jsonDefinition.minValue());
+		assertEquals(testDefinition.maxValue(), jsonDefinition.maxValue());
+		assertEquals(testDefinition.desription(), jsonDefinition.desription());
+
+		System.out.println(" - importQoCDefinition(): OK");
 	}
 }
