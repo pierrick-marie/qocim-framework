@@ -47,7 +47,7 @@ public class SimpleDefinition extends QoCDefinition {
 		setIsDefault(true);
 		setDescription(new PrecisionDescription());
 		setUnit(SI.METER.toString());
-		setMaxValue(new MaxPrecisionValue());
-		setMinValue(new MinPrecisionValue());
+		setMaxValue(new MaxPrecisionValue().setDefinitionId(ID));
+		setMinValue(new MinPrecisionValue().setDefinitionId(ID));
 	}
 }

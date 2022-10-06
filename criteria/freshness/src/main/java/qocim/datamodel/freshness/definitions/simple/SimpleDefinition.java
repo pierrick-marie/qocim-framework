@@ -48,7 +48,7 @@ public class SimpleDefinition extends QoCDefinition {
 		setIsDefault(true);
 		setDescription(new FreshnessDescription());
 		setUnit(SI.SECOND.toString());
-		setMaxValue(new MaxFreshnessValue());
-		setMinValue(new MinFreshnessValue());
+		setMaxValue(new MaxFreshnessValue().setDefinitionId(ID));
+		setMinValue(new MinFreshnessValue().setDefinitionId(ID));
 	}
 }
