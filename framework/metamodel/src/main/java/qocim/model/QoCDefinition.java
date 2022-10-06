@@ -14,7 +14,7 @@ public class QoCDefinition extends QClass {
 	public static final String UNIT = "unit";
 	public static final String PROVIDER_URI = "provider uri";
 	public static final String DIRECTION = "direction";
-	public static final String DEFAULT = "default";
+	public static final String IS_DEFAULT = "default";
 	public static final String MIN_VALUE = "min value";
 	public static final String MAX_VALUE = "max value";
 	public static final String DESCRIPTION = "description";
@@ -32,7 +32,7 @@ public class QoCDefinition extends QClass {
 			throw new RuntimeException(e);
 		}
 		add(DIRECTION, Direction.UNKNOWN);
-		add(DEFAULT, false);
+		add(IS_DEFAULT, false);
 		add(MIN_VALUE, null);
 		add(MAX_VALUE, null);
 		add(DESCRIPTION, null);
@@ -72,11 +72,11 @@ public class QoCDefinition extends QClass {
 	}
 
 	public Boolean isDefault() {
-		return (Boolean) get(DEFAULT);
+		return (Boolean) get(IS_DEFAULT);
 	}
 
 	public QoCDefinition setIsDefault(final Boolean isDefault) {
-		set(DEFAULT, isDefault);
+		set(IS_DEFAULT, isDefault);
 		return this;
 	}
 
