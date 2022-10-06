@@ -51,4 +51,12 @@ public enum Direction {
 	public String toString() {
 		return order;
 	}
+
+	public static Direction getEnum(final String stringValue) {
+		switch (stringValue) {
+			case "Lower" : return Direction.LOWER;
+			case "Upper" : return Direction.UPPER;
+			default : return Direction.UNKNOWN;
+		}
+	}
 }
