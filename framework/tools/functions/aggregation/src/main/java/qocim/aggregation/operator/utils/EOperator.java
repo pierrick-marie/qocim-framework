@@ -29,7 +29,7 @@ package qocim.cdfm.operator.utils;
  */
 public enum EOperator {
 
-    NONE("None"), MEAN("Mean"), GEOMETRICMEAN("GeometricMean"), MIN("Min"), MAX("Max");
+    MEAN("Mean"), GEOMETRICMEAN("GeometricMean"), MIN("Min"), MAX("Max");
     private String operator;
 
     private EOperator(final String operator) {

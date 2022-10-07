@@ -18,7 +18,7 @@
  * Initial developer(s): Pierrick MARIE
  * Contributor(s): 
  */
-package qocim.cdfm.operator.utils;
+package qocim.aggregation.operator.utils;
 
 import qocim.cdfm.operator.aggregation.impl.GeometricMeanAggregator;
 import qocim.cdfm.operator.aggregation.impl.MaxSelectionAggregator;

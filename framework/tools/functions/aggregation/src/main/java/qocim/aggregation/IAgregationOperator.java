@@ -45,7 +45,7 @@ public interface IAgregationOperator {
 	 * @throws NotValidInformationException
 	 *             An exception if it is impossible to execute the operation.
 	 */
-	List<QInformation> applyOperator(List<QInformation> input) throws NotValidInformationException;
+	QInformation applyOperator(List<QInformation> input) throws NotValidInformationException;
 
 	/**
 	 * This method sets the parameters of the operator.

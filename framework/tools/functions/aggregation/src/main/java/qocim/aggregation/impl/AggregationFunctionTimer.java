@@ -18,21 +18,15 @@
  * Initial developer(s): Pierrick MARIE
  * Contributor(s):
  */
-package qocim.cdfm.function.impl;
-
-import java.util.logging.Level;
-
-import qocim.datamodel.utils.QoCIMLogger;
+package qocim.aggregation.impl;
 
 /**
  * TemporalCDFMFunctionTimer is used by the class <b>TemporalCDFMFunction</b> to
  * wait before executing the function.
  *
- * @see qocim.cdfm.function.impl.CDFMFunction
- *
  * @author Pierrick MARIE
  */
-class CDFMFunctionTimer implements Runnable {
+class AggregationFunctionTimer implements Runnable {
 
 	// # # # # # PROTECTED VARIABLES # # # # #
 
@@ -48,11 +42,11 @@ class CDFMFunctionTimer implements Runnable {
 	 * The temporal function that have to be executed after
 	 * <i>nbWaintingSecond</i> seconds.
 	 */
-	protected final CDFMFunction function;
+	protected final AggregationFunction function;
 
 	// # # # # # CONSTRUCTORS # # # # #
 
-	public CDFMFunctionTimer(final CDFMFunction _function) {
+	public AggregationFunctionTimer(final AggregationFunction _function) {
 		// - - - - - CORE OF THE METHOD - - - - -
 		run = false;
 		nbWaintingMiliSecond = 0;
@@ -69,7 +63,7 @@ class CDFMFunctionTimer implements Runnable {
 				Thread.sleep(nbWaintingMiliSecond);
 				function.execFunction();
 			} catch (final InterruptedException _exception) {
-				QoCIMLogger.logger.log(Level.WARNING, "Error in TemporalCDFMFunctionTimer.run()", _exception);
+//				QoCIMLogger.logger.log(Level.WARNING, "Error in TemporalCDFMFunctionTimer.run()", _exception);
 			}
 		}
 	}
