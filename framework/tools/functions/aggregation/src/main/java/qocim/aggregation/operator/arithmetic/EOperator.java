@@ -18,14 +18,14 @@
  * Initial developer(s): Pierrick MARIE
  * Contributor(s): 
  */
-package qocim.cdfm.operator.utils;
+package qocim.aggregation.operator.arithmetic;
 
 /**
  * EOperator class presents the enum presentation of all the available operators
  * for summary and aggregation functions. Defining an enumeration type for those
  * operators facilitate their usage with other classes.
  *
- * @author Atif MANZOOR
+ * @author Atif MANZOOR, Pierrick MARIE
  */
 public enum EOperator {
 

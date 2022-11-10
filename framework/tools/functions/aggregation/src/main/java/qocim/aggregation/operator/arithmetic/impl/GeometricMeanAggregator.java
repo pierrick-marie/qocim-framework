@@ -18,10 +18,11 @@
  * Initial developer(s): Pierrick MARIE
  * Contributor(s):
  */
-package qocim.aggregation.operator.impl;
+package qocim.aggregation.operator.arithmetic.impl;
 
 import qocim.aggregation.IAgregationOperator;
-import qocim.cdfm.operator.utils.EOperator;
+import qocim.aggregation.operator.arithmetic.EOperator;
+import qocim.aggregation.operator.utils.NotValidInformationException;
 import qocim.information.QInformation;
 
 import java.util.HashMap;
@@ -29,26 +30,26 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * MinSelection is the operator used to select the maximal value of a numeric
+ * MeanSelection is the operator used to compute the geometric mean of a list of
  * information.
  *
  * @author Pierrick MARIE
  */
-public class MaxSelectionAggregator implements IAgregationOperator {
+public class GeometricMeanAggregator implements IAgregationOperator {
 
 //    @Override
 //    public Double aggregateListValue(final List<Double> listValue) {
-//	final Max min = new Max();
-//	final double[] arrayValue = new double[listValue.size()];
-//	Integer index_arrayValue = 0;
-//	for (final Double loop_value : listValue) {
-//	    arrayValue[index_arrayValue++] = loop_value;
-//	}
-//	return min.evaluate(arrayValue);
+//	    final GeometricMean geometricMean = new GeometricMean();
+//	    final double[] arrayValue = new double[listValue.size()];
+//	    Integer index_arrayValue = 0;
+//	    for (final Double loop_value : listValue) {
+//		    arrayValue[index_arrayValue++] = loop_value;
+//	    }
+//	    return geometricMean.evaluate(arrayValue);
 //    }
 
 	@Override
-	public QInformation applyOperator(List<QInformation> input) throws qocim.cdfm.operator.utils.NotValidInformationException {
+	public QInformation<?> applyOperator(List<QInformation<?>> input) throws NotValidInformationException {
 		return null;
 	}
 
@@ -64,6 +65,6 @@ public class MaxSelectionAggregator implements IAgregationOperator {
 
 	@Override
 	public String getName() {
-		return EOperator.MAX.toString();
+		return EOperator.GEOMETRICMEAN.toString();
 	}
 }

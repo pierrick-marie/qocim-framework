@@ -18,16 +18,16 @@
  * Initial developer(s): Pierrick MARIE
  * Contributor(s):
  */
-package qocim.cdfm.operator.utils;
+package qocim.aggregation.operator.utils;
 
-import java.util.logging.Level;
 
-import qocim.datamodel.utils.QoCIMLogger;
+import org.apache.log4j.Level;
+import qocim.utils.logs.QoCIMLogger;
 
 /**
  * An exception to inform the function is not able to transform the information.
  *
- * @author Atif MANZOOR
+ * @author Atif MANZOOR, Pierrick MARIE
  */
 public class NotValidInformationException extends Exception {
 
@@ -41,11 +41,11 @@ public class NotValidInformationException extends Exception {
 
 	// # # # # # CONSTRUCTORS # # # # #
 
-	public NotValidInformationException(final String _message) {
+	public NotValidInformationException(final String message) {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
-		message = "Not valid information exception: " + _message;
+		this.message = "Not valid information exception: " + message;
 		// - - - - - CORE OF THE METHOD - - - - -
-		QoCIMLogger.logger.log(Level.WARNING, message, this);
+		QoCIMLogger.logger.log(Level.WARN, this.message, this);
 	}
 
 	// # # # # # PUBLIC METHODS # # # # #

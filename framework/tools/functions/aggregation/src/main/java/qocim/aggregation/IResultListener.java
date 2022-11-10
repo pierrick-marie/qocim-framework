@@ -2,7 +2,7 @@ package qocim.aggregation;
 
 import qocim.information.QInformation;
 
-public interface IAggregationListener {
+public interface IResultListener {
 
 	void newInformation(QInformation<?> information);
 }

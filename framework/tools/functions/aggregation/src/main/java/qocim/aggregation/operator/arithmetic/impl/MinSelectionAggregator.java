@@ -18,11 +18,11 @@
  * Initial developer(s): Pierrick MARIE
  * Contributor(s):
  */
-package qocim.aggregation.operator.impl;
+package qocim.aggregation.operator.arithmetic.impl;
 
 import qocim.aggregation.IAgregationOperator;
-import qocim.cdfm.operator.utils.EOperator;
-import qocim.cdfm.operator.utils.NotValidInformationException;
+import qocim.aggregation.operator.arithmetic.EOperator;
+import qocim.aggregation.operator.utils.NotValidInformationException;
 import qocim.information.QInformation;
 
 import java.util.HashMap;
@@ -49,7 +49,7 @@ public class MinSelectionAggregator implements IAgregationOperator {
 //    }
 
 	@Override
-	public QInformation applyOperator(List<QInformation> input) throws NotValidInformationException {
+	public QInformation<?> applyOperator(List<QInformation<?>> input) throws NotValidInformationException {
 		return null;
 	}
 

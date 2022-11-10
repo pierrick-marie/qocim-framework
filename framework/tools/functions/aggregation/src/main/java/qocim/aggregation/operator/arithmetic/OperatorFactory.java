@@ -18,43 +18,45 @@
  * Initial developer(s): Pierrick MARIE
  * Contributor(s): 
  */
-package qocim.aggregation.operator.utils;
+package qocim.aggregation.operator.arithmetic;
 
-import qocim.cdfm.operator.aggregation.impl.GeometricMeanAggregator;
-import qocim.cdfm.operator.aggregation.impl.MaxSelectionAggregator;
-import qocim.cdfm.operator.aggregation.impl.MeanAggregator;
-import qocim.cdfm.operator.aggregation.impl.MinSelectionAggregator;
+import qocim.aggregation.IAgregationOperator;
+import qocim.aggregation.operator.arithmetic.impl.GeometricMeanAggregator;
+import qocim.aggregation.operator.arithmetic.impl.MaxSelectionAggregator;
+import qocim.aggregation.operator.arithmetic.impl.MeanAggregator;
+import qocim.aggregation.operator.arithmetic.impl.MinSelectionAggregator;
+import qocim.aggregation.operator.utils.OperatorNotSupportedException;
 
 /**
  *
  * AggregationOperatorFactory will be used to create the operator of
  * IAggregationOperator type and return it using a static function.
  *
- * @author Atif MANZOOR
+ * @author Atif MANZOOR, Pierrick MARIE
  */
 public class OperatorFactory {
 
-    public static qocim.cdfm.function.IAgregationOperator createOperator(final EOperator _operator) throws OperatorNotSupportedException {
+    public static IAgregationOperator createOperator(final EOperator operator) throws OperatorNotSupportedException {
 
-	qocim.cdfm.function.IAgregationOperator ret_aggregationOperator = null;
+	IAgregationOperator aggregator = null;
 
-	switch (_operator) {
+	switch (operator) {
 	case MEAN:
-	    ret_aggregationOperator = new MeanAggregator();
+	    aggregator = new MeanAggregator();
 	    break;
 	case GEOMETRICMEAN:
-	    ret_aggregationOperator = new GeometricMeanAggregator();
+	    aggregator = new GeometricMeanAggregator();
 	    break;
 	case MIN:
-	    ret_aggregationOperator = new MinSelectionAggregator();
+	    aggregator = new MinSelectionAggregator();
 	    break;
 	case MAX:
-	    ret_aggregationOperator = new MaxSelectionAggregator();
+	    aggregator = new MaxSelectionAggregator();
 	    break;
 	default:
-	    throw new OperatorNotSupportedException("Expected operator: " + _operator.toString());
+	    throw new OperatorNotSupportedException("Expected operator: " + aggregator.toString());
 	}
 
-	return ret_aggregationOperator;
+	return aggregator;
     }
 }

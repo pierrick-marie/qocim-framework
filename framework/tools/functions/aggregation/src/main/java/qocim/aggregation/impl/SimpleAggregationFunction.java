@@ -20,7 +20,6 @@
  */
 package qocim.aggregation.impl;
 
-import org.apache.log4j.Level;
 import qocim.aggregation.IAggregationFunction;
 import qocim.aggregation.IAgregationOperator;
 import qocim.aggregation.IResultListener;
@@ -32,15 +31,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * AggregationFunctionTimer waits nb milliseconds before executing the function.
- *
  * @author Pierrick MARIE
  */
-class AggregationFunctionTimer implements Runnable, IAggregationFunction {
+public class SimpleAggregationFunction implements IAggregationFunction {
 
-	// # # # # # PROTECTED VARIABLES # # # # #
+	// # # # # # CONSTANTS # # # # #
+
+	/**
+	 * <i>functionThread</i> is used as a deamon thread.
+	 */
+	public static final boolean IS_A_DEAMON = true;
+
+	// # # # # # PRIVATE VARIABLES # # # # #
 
 	private List<QInformation<?>> informationList;
+
 	/**
 	 * The listener to notify when a new context report is available.
 	 */
@@ -50,21 +55,17 @@ class AggregationFunctionTimer implements Runnable, IAggregationFunction {
 	 */
 	private IAgregationOperator operator;
 	/**
-	 * A boolean to allow the execution of the method <i>run</i>.
+	 * The number of context report that have to be collected by the function
+	 * before the execution of the operator.
 	 */
-	protected volatile Boolean run;
-	/**
-	 * Determine the number of seconds to wait.
-	 */
-	protected volatile Integer nbWaintingMiliSecond;
+	private Integer nbHandledInformation;
 
 	// # # # # # CONSTRUCTORS # # # # #
 
-	public AggregationFunctionTimer(final Integer nbWaintingMiliSecond, final IAgregationOperator operator, final IResultListener listener) {
+	public SimpleAggregationFunction(final Integer nbHandledInformation, final IAgregationOperator operator, final IResultListener listener) {
 		// - - - - - CORE OF THE METHOD - - - - -
-		run = false;
-		this.nbWaintingMiliSecond = nbWaintingMiliSecond;
 		informationList = new LinkedList<>();
+		this.nbHandledInformation = nbHandledInformation;
 		resultListener = listener;
 		this.operator = operator;
 	}
@@ -72,26 +73,20 @@ class AggregationFunctionTimer implements Runnable, IAggregationFunction {
 	// # # # # # PUBLIC METHODS # # # # #
 
 	@Override
-	public void run() {
-		// - - - - - CORE OF THE METHOD - - - - -
-		while (run) {
-			try {
-				Thread.sleep(nbWaintingMiliSecond);
-				execFunction();
-			} catch (final InterruptedException exception) {
-				QoCIMLogger.logger.log(Level.WARN, "Error in AggregationFunctionTimer.run()", exception);
-			}
-		}
-	}
-
-	@Override
 	public IAggregationFunction addInformation(QInformation<?> information) {
+
 		informationList.add(information);
+		nbHandledInformation++;
+
+		if(informationList.size() >= nbHandledInformation) {
+			execFunction();
+		}
+
 		return this;
 	}
 
 	@Override
-	public void execFunction() {
+	public synchronized void execFunction() {
 		// - - - - - CORE OF THE METHOD - - - -
 		try {
 			resultListener.newInformation(operator.applyOperator(informationList));
@@ -103,13 +98,13 @@ class AggregationFunctionTimer implements Runnable, IAggregationFunction {
 	}
 
 	@Override
-	public IAggregationFunction setOperator(IAgregationOperator operator) {
+	public IAggregationFunction setOperator(final IAgregationOperator operator) {
 		this.operator = operator;
 		return this;
 	}
 
 	@Override
-	public IAggregationFunction setResultListener(IResultListener listener) {
+	public IAggregationFunction setResultListener(final IResultListener listener) {
 		resultListener = listener;
 		return this;
 	}
@@ -122,5 +117,14 @@ class AggregationFunctionTimer implements Runnable, IAggregationFunction {
 	@Override
 	public IResultListener resultListener() {
 		return resultListener;
+	}
+
+	public Integer nbHandledInformation() {
+		return nbHandledInformation;
+	}
+
+	public IAggregationFunction setNbHandledInformation(Integer nbHandledInformation) {
+		this.nbHandledInformation = nbHandledInformation;
+		return this;
 	}
 }

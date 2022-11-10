@@ -20,7 +20,7 @@
  */
 package qocim.aggregation;
 
-import qocim.cdfm.operator.utils.NotValidInformationException;
+import qocim.aggregation.operator.utils.NotValidInformationException;
 import qocim.information.QInformation;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public interface IAgregationOperator {
 	 * @throws NotValidInformationException
 	 *             An exception if it is impossible to execute the operation.
 	 */
-	QInformation applyOperator(List<QInformation> input) throws NotValidInformationException;
+	QInformation<?> applyOperator(List<QInformation<?>> input) throws NotValidInformationException;
 
 	/**
 	 * This method sets the parameters of the operator.

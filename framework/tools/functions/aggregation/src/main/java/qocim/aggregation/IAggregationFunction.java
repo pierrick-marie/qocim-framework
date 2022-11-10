@@ -62,7 +62,7 @@ public interface IAggregationFunction {
 	 *            The listener.
 	 * @return this.
 	 */
-	IAggregationFunction setResultListener(IAggregationListener listener);
+	IAggregationFunction setResultListener(IResultListener listener);
 
 	/**
 	 * This method is used to set the number of context report stored by the
@@ -72,52 +72,52 @@ public interface IAggregationFunction {
 	 *            The number of context report stored by the function.
 	 * @return this.
 	 */
-	IAggregationFunction setNbHandledInformation(Integer nbHandledInformation);
-
-	/**
-	 * This method set the number of second to wait before the execution of the
-	 * operator. When this method is called, the timer is start.
-	 *
-	 * @param timeToWait
-	 *            The number of second to wait.
-	 * @return this.
-	 */
-	IAggregationFunction setTimeToWait(Integer timeToWait);
-
-	/**
-	 * This method configure when the context reports are aggregated. If
-	 * <i>_timerOnly</i> is True, the function is executed every time the
-	 * countdown of the timer reach zero. Then, context report used by the
-	 * function are the last context report added with the
-	 * <i>addContextReport</i> method. The number of context report handled by
-	 * the function is in this case at most <i>nbHandledContextReport</i>.
-	 *
-	 * If <i>_timerOnly</i> is False, the function is executed when the function
-	 * receive <i>nbHandledContextReport</i> context report AND every time the
-	 * countdown of the timer reach zero. In this case, the number of context
-	 * report handled by the function is the last context report added with the
-	 * <i>addContextReport</i> method.
-	 *
-	 * @param timerOnly
-	 * @return this.
-	 */
-	IAggregationFunction setTimerOnly(Boolean timerOnly);
-
-	/**
-	 * @return The field <i>timerOnly</i>.
-	 *
-	 */
-	Boolean isTimerOnly();
-
-	/**
-	 * @return The number of second to wait.
-	 */
-	Integer timeToWait();
-
-	/**
-	 * @return The number of context report stored by the function.
-	 */
-	Integer nbHandledInformation();
+//	IAggregationFunction setNbHandledInformation(Integer nbHandledInformation);
+//
+//	/**
+//	 * This method set the number of second to wait before the execution of the
+//	 * operator. When this method is called, the timer is start.
+//	 *
+//	 * @param timeToWait
+//	 *            The number of second to wait.
+//	 * @return this.
+//	 */
+//	IAggregationFunction setTimeToWait(Integer timeToWait);
+//
+//	/**
+//	 * This method configure when the context reports are aggregated. If
+//	 * <i>_timerOnly</i> is True, the function is executed every time the
+//	 * countdown of the timer reach zero. Then, context report used by the
+//	 * function are the last context report added with the
+//	 * <i>addContextReport</i> method. The number of context report handled by
+//	 * the function is in this case at most <i>nbHandledContextReport</i>.
+//	 *
+//	 * If <i>_timerOnly</i> is False, the function is executed when the function
+//	 * receive <i>nbHandledContextReport</i> context report AND every time the
+//	 * countdown of the timer reach zero. In this case, the number of context
+//	 * report handled by the function is the last context report added with the
+//	 * <i>addContextReport</i> method.
+//	 *
+//	 * @param timerOnly
+//	 * @return this.
+//	 */
+//	IAggregationFunction setTimerOnly(Boolean timerOnly);
+//
+//	/**
+//	 * @return The field <i>timerOnly</i>.
+//	 *
+//	 */
+//	Boolean isTimerOnly();
+//
+//	/**
+//	 * @return The number of second to wait.
+//	 */
+//	Integer timeToWait();
+//
+//	/**
+//	 * @return The number of context report stored by the function.
+//	 */
+//	Integer nbHandledInformation();
 
 	/**
 	 * @return The operator used by the function.
@@ -127,5 +127,5 @@ public interface IAggregationFunction {
 	/**
 	 * @return The current listener used by the function.
 	 */
-	IAggregationListener resultListener();
+	IResultListener resultListener();
 }
