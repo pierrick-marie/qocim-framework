@@ -86,7 +86,7 @@ You can use many module from QoCIM framework. For example, add the following cod
   <dependency>
     <groupId>qocim.criteria</groupId>
     <artifactId>precision</artifactId>
-    <version>1.1.1</version>
+    <version>2.1.2</version>
   </dependency>
 
 If you want to explore the precision criterion, you can use this dependency:
@@ -94,7 +94,7 @@ If you want to explore the precision criterion, you can use this dependency:
   <dependency>
     <groupId>qocim.criteria</groupId>
     <artifactId>precision</artifactId>
-    <version>1.1.1</version>
+    <version>2.1.2</version>
   </dependency>
 
 All the packages are listed https://github.com/pierrick-marie?tab=packages&repo_name=qocim[here].
