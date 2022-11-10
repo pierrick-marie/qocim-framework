@@ -36,7 +36,7 @@ import java.util.List;
  *
  * @author Pierrick MARIE
  */
-class AggregationFunctionTimer implements Runnable, IAggregationFunction {
+public class AggregationFunctionTimer implements IAggregationFunction {
 
 	// # # # # # PROTECTED VARIABLES # # # # #
 
@@ -52,11 +52,13 @@ class AggregationFunctionTimer implements Runnable, IAggregationFunction {
 	/**
 	 * A boolean to allow the execution of the method <i>run</i>.
 	 */
-	protected volatile Boolean run;
+	private volatile Boolean run;
 	/**
 	 * Determine the number of seconds to wait.
 	 */
-	protected volatile Integer nbWaintingMiliSecond;
+	private volatile Integer nbWaintingMiliSecond;
+
+	private Runnable runner;
 
 	// # # # # # CONSTRUCTORS # # # # #
 
@@ -67,21 +69,30 @@ class AggregationFunctionTimer implements Runnable, IAggregationFunction {
 		informationList = new LinkedList<>();
 		resultListener = listener;
 		this.operator = operator;
+		runner = new Runnable() {
+			@Override
+			public void run() {
+				while (run) {
+					try {
+						Thread.sleep(nbWaintingMiliSecond);
+						execFunction();
+					} catch (final InterruptedException exception) {
+						QoCIMLogger.logger.log(Level.WARN, "Error in AggregationFunctionTimer.run()", exception);
+					}
+				}
+			}
+		};
+		new Thread(runner).start();
 	}
 
 	// # # # # # PUBLIC METHODS # # # # #
 
-	@Override
-	public void run() {
-		// - - - - - CORE OF THE METHOD - - - - -
-		while (run) {
-			try {
-				Thread.sleep(nbWaintingMiliSecond);
-				execFunction();
-			} catch (final InterruptedException exception) {
-				QoCIMLogger.logger.log(Level.WARN, "Error in AggregationFunctionTimer.run()", exception);
-			}
-		}
+	public void start() {
+		run = true;
+	}
+
+	public void stop() {
+		run = false;
 	}
 
 	@Override

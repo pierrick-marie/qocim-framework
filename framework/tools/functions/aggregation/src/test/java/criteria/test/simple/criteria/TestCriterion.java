@@ -18,26 +18,16 @@
  * Initial developer(s): Pierrick MARIE
  * Contributor(s):
  */
-package qocim.aggregation.operator.arithmetic;
+package criteria.test.simple.criteria;
 
-/**
- * EOperator class presents the enum presentation of all the available operators
- * for summary and aggregation functions. Defining an enumeration type for those
- * operators facilitate their usage with other classes.
- *
- * @author Atif MANZOOR, Pierrick MARIE
- */
-public enum EOperator {
+import qocim.model.QoCCriterion;
 
-	MIN("Min"), MAX("Max");
-	private String operator;
+public class TestCriterion extends QoCCriterion {
 
-	private EOperator(final String operator) {
-		this.operator = operator;
-	}
+	public static final String NAME = "Test criterion";
+	public static final String ID = "10.1";
 
-	@Override
-	public String toString() {
-		return operator;
+	public TestCriterion() {
+		super(NAME, ID);
 	}
 }

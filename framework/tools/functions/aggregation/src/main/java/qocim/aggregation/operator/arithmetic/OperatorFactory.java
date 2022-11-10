@@ -21,11 +21,6 @@
 package qocim.aggregation.operator.arithmetic;
 
 import qocim.aggregation.IAgregationOperator;
-import qocim.aggregation.operator.arithmetic.impl.GeometricMeanAggregator;
-import qocim.aggregation.operator.arithmetic.impl.MaxSelectionAggregator;
-import qocim.aggregation.operator.arithmetic.impl.MeanAggregator;
-import qocim.aggregation.operator.arithmetic.impl.MinSelectionAggregator;
-import qocim.aggregation.operator.utils.OperatorNotSupportedException;
 
 /**
  *
@@ -36,25 +31,19 @@ import qocim.aggregation.operator.utils.OperatorNotSupportedException;
  */
 public class OperatorFactory {
 
-    public static IAgregationOperator createOperator(final EOperator operator) throws OperatorNotSupportedException {
+    public static IAgregationOperator getOperator(final EOperator operator) {
 
 	IAgregationOperator aggregator = null;
 
 	switch (operator) {
-	case MEAN:
-	    aggregator = new MeanAggregator();
-	    break;
-	case GEOMETRICMEAN:
-	    aggregator = new GeometricMeanAggregator();
-	    break;
 	case MIN:
-	    aggregator = new MinSelectionAggregator();
+	    aggregator = new MinOperator();
 	    break;
 	case MAX:
-	    aggregator = new MaxSelectionAggregator();
+	    aggregator = new MaxOperator();
 	    break;
 	default:
-	    throw new OperatorNotSupportedException("Expected operator: " + aggregator.toString());
+	    throw null;
 	}
 
 	return aggregator;

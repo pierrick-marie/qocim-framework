@@ -18,7 +18,7 @@
  * Initial developer(s): Pierrick MARIE
  * Contributor(s):
  */
-package qocim.aggregation.operator.arithmetic.impl;
+package qocim.aggregation.operator.arithmetic;
 
 import qocim.aggregation.IAgregationOperator;
 import qocim.aggregation.operator.arithmetic.EOperator;
@@ -31,30 +31,29 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * MinSelection is the operator used to select the minimal value of a numeric
+ * MaxSelection is the operator used to select the maximal value of a numeric
  * information.
  *
  * @author Pierrick MARIE
  */
-public class MinSelectionAggregator implements IAgregationOperator {
+public class MaxOperator implements IAgregationOperator {
+
+	protected MaxOperator() {}
 
 	@Override
 	public QInformation<?> applyOperator(List<QInformation<?>> input) throws NotValidInformationException {
-
-		Number comparedValue = null;
 		QInformation<?> selectedInformation = null;
 
 		for( QInformation<?> information: input) {
 			if( information.data() instanceof Number) {
 				Number value = (Number) information.data();
-				if( null == comparedValue ) {
-					comparedValue = value;
+				if( null == selectedInformation ) {
+					selectedInformation = information;
 				} else {
-					BigDecimal nb1 = BigDecimal.valueOf(comparedValue.doubleValue());
+					BigDecimal nb1 = BigDecimal.valueOf(((Number)selectedInformation.data()).doubleValue());
 					BigDecimal nb2 = BigDecimal.valueOf(value.doubleValue());
-					if( nb1.compareTo(nb2) >= 1 ) {
+					if( nb1.compareTo(nb2) <= 1 ) {
 						selectedInformation = information;
-						comparedValue = value;
 					}
 				}
 			} else {
@@ -77,6 +76,6 @@ public class MinSelectionAggregator implements IAgregationOperator {
 
 	@Override
 	public String getName() {
-		return EOperator.MIN.toString();
+		return EOperator.MAX.toString();
 	}
 }

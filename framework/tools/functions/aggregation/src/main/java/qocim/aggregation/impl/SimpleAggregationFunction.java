@@ -76,7 +76,6 @@ public class SimpleAggregationFunction implements IAggregationFunction {
 	public IAggregationFunction addInformation(QInformation<?> information) {
 
 		informationList.add(information);
-		nbHandledInformation++;
 
 		if(informationList.size() >= nbHandledInformation) {
 			execFunction();

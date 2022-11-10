@@ -18,39 +18,50 @@
  * Initial developer(s): Pierrick MARIE
  * Contributor(s):
  */
-package qocim.aggregation.operator.arithmetic.impl;
+package qocim.aggregation.operator.arithmetic;
 
 import qocim.aggregation.IAgregationOperator;
 import qocim.aggregation.operator.arithmetic.EOperator;
 import qocim.aggregation.operator.utils.NotValidInformationException;
 import qocim.information.QInformation;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * MeanSelection is the operator used to compute the geometric mean of a list of
+ * MinSelection is the operator used to select the minimal value of a numeric
  * information.
  *
  * @author Pierrick MARIE
  */
-public class GeometricMeanAggregator implements IAgregationOperator {
+public class MinOperator implements IAgregationOperator {
 
-//    @Override
-//    public Double aggregateListValue(final List<Double> listValue) {
-//	    final GeometricMean geometricMean = new GeometricMean();
-//	    final double[] arrayValue = new double[listValue.size()];
-//	    Integer index_arrayValue = 0;
-//	    for (final Double loop_value : listValue) {
-//		    arrayValue[index_arrayValue++] = loop_value;
-//	    }
-//	    return geometricMean.evaluate(arrayValue);
-//    }
+	protected MinOperator() {}
 
 	@Override
 	public QInformation<?> applyOperator(List<QInformation<?>> input) throws NotValidInformationException {
-		return null;
+
+		QInformation<?> selectedInformation = null;
+		for( QInformation<?> information: input) {
+			if( information.data() instanceof Number) {
+				Number value = (Number) information.data();
+				if( null == selectedInformation ) {
+					selectedInformation = information;
+				} else {
+					BigDecimal nb1 = BigDecimal.valueOf(((Number)selectedInformation.data()).doubleValue());
+					BigDecimal nb2 = BigDecimal.valueOf(value.doubleValue());
+					if( nb1.compareTo(nb2) >= 1 ) {
+						selectedInformation = information;
+					}
+				}
+			} else {
+				throw new NotValidInformationException("information data not comparable");
+			}
+		}
+
+		return selectedInformation;
 	}
 
 	@Override
@@ -65,6 +76,6 @@ public class GeometricMeanAggregator implements IAgregationOperator {
 
 	@Override
 	public String getName() {
-		return EOperator.GEOMETRICMEAN.toString();
+		return EOperator.MIN.toString();
 	}
 }
