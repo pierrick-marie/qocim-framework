@@ -11,8 +11,8 @@ public enum EQoCIMPerformanceLogLevel {
 
 	String logLevel;
 
-	private EQoCIMPerformanceLogLevel(final String _logLevel) {
-		logLevel = _logLevel;
+	private EQoCIMPerformanceLogLevel(final String logLevel) {
+		this.logLevel = logLevel;
 	}
 
 	@Override

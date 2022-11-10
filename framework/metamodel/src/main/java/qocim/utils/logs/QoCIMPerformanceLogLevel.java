@@ -20,7 +20,8 @@
  */
 package qocim.utils.logs;
 
-import java.util.logging.Level;
+
+import org.apache.log4j.Level;
 
 /**
  * The QoCIMCapsuleLogLevel class defines a set of logging levels for the
@@ -45,30 +46,30 @@ public class QoCIMPerformanceLogLevel extends Level {
 	 * HARDWARE8MESSAGE.
 	 */
 	public final static QoCIMPerformanceLogLevel ALL = new QoCIMPerformanceLogLevel(
-			EQoCIMPerformanceLogLevel.ALL.name(), Level.INFO.intValue());
+			EQoCIMPerformanceLogLevel.ALL.name(), Level.INFO.toInt());
 	/**
 	 * HARDWARE_MESSAGE: Display information concerning the hardware
 	 * (configuration, memory and CPU usage) + the time messages + trace
 	 * message.
 	 */
 	public final static QoCIMPerformanceLogLevel HARDWARE = new QoCIMPerformanceLogLevel(
-			EQoCIMPerformanceLogLevel.HARDWARE.name(), ALL.intValue() + 1);
+			EQoCIMPerformanceLogLevel.HARDWARE.name(), ALL.toInt() + 1);
 	/**
 	 * TIME_MESSAGE: Display information concerning the date (current time) of
 	 * the events.
 	 */
 	public final static QoCIMPerformanceLogLevel TIME = new QoCIMPerformanceLogLevel(
-			EQoCIMPerformanceLogLevel.TIME.name(), HARDWARE.intValue() + 1);
+			EQoCIMPerformanceLogLevel.TIME.name(), HARDWARE.toInt() + 1);
 	/**
 	 * EVENT_MESASGE: Display information concerning the event that appears.
 	 */
 	public final static QoCIMPerformanceLogLevel EVENT = new QoCIMPerformanceLogLevel(
-			EQoCIMPerformanceLogLevel.EVENT.name(), TIME.intValue() + 1);
+			EQoCIMPerformanceLogLevel.EVENT.name(), TIME.toInt() + 1);
 	/**
 	 * NONE: don't display any performance messages.
 	 */
 	public final static QoCIMPerformanceLogLevel NONE = new QoCIMPerformanceLogLevel(
-			EQoCIMPerformanceLogLevel.NONE.name(), EVENT.intValue() + 1);
+			EQoCIMPerformanceLogLevel.NONE.name(), EVENT.toInt() + 1);
 
 	// # # # # # CONSTRUCTORS # # # # #
 
@@ -101,6 +102,6 @@ public class QoCIMPerformanceLogLevel extends Level {
 
 	public QoCIMPerformanceLogLevel(final String name, final int value) {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
-		super(name, value);
+		super(value, name, 7);
 	}
 }

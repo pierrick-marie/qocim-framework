@@ -20,13 +20,14 @@
  */
 package qocim.utils.logs;
 
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.junit.internal.management.ManagementFactory;
+
 import com.sun.management.OperatingSystemMXBean;
 
-import java.lang.management.ManagementFactory;
 import java.util.Date;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The QoCIMLogger class is used to log messages with log4j.
@@ -89,7 +90,7 @@ public class QoCIMLogger {
 	 */
 	public static synchronized void error(final String message) {
 		// - - - - - CORE OF THE METHOD - - - - -
-		logger.log(Level.SEVERE, message);
+		logger.log(Level.ERROR, message);
 	}
 
 	/**
@@ -124,7 +125,7 @@ public class QoCIMLogger {
 	 */
 	private static String getJvmCpuUsage() {
 		// - - - - - INITIALIZE THE VARIABLES - - - - -
-		final OperatingSystemMXBean operatingSystemMXBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+		final OperatingSystemMXBean operatingSystemMXBean = (OperatingSystemMXBean) ManagementFactory.getRuntimeMXBean();
 		// - - - - - RETURN STATEMENT - - - - -
 		return "" + (operatingSystemMXBean.getCpuLoad() * 100.0);
 	}
@@ -162,7 +163,7 @@ public class QoCIMLogger {
 	 */
 	public static synchronized void info(final String message) {
 		// - - - - - CORE OF THE METHOD - - - - -
-		logger.log(Level.FINEST, " *INFO* " + message);
+		logger.log(Level.INFO, " *INFO* " + message);
 	}
 
 	/**
@@ -171,9 +172,9 @@ public class QoCIMLogger {
 	 */
 	public static synchronized void loadDefaultConfig() {
 		if (!isConfigured) {
-			final ConsoleHandler consoleHandler = new ConsoleHandler();
-			consoleHandler.setFormatter(new LogFormatter());
-			QoCIMLogger.logger.addHandler(consoleHandler);
+			final ConsoleAppender consoleAppender = new ConsoleAppender();
+			consoleAppender.setLayout(new LogFormatter());
+			QoCIMLogger.logger.addAppender(consoleAppender);
 			isConfigured = true;
 		}
 	}
@@ -186,7 +187,7 @@ public class QoCIMLogger {
 	 */
 	public static synchronized void severe(final String message) {
 		// - - - - - CORE OF THE METHOD - - - - -
-		logger.log(Level.SEVERE, " *SEVERE* " + message);
+		logger.log(Level.ERROR, " *ERROR* " + message);
 	}
 
 	/**

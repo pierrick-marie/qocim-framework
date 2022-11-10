@@ -20,8 +20,9 @@
  */
 package qocim.utils.logs;
 
-import java.util.logging.Formatter;
-import java.util.logging.LogRecord;
+
+import org.apache.log4j.Layout;
+import org.apache.log4j.spi.LoggingEvent;
 
 /**
  * This class is the formatter of the log messages produced by the class
@@ -30,10 +31,20 @@ import java.util.logging.LogRecord;
  *
  * @author Pierrick MARIE
  */
-public class LogFormatter extends Formatter {
+public class LogFormatter extends Layout {
 
 	@Override
-	public String format(final LogRecord record) {
+	public String format(LoggingEvent loggingEvent) {
 		return "\n";
+	}
+
+	@Override
+	public boolean ignoresThrowable() {
+		return false;
+	}
+
+	@Override
+	public void activateOptions() {
+
 	}
 }
