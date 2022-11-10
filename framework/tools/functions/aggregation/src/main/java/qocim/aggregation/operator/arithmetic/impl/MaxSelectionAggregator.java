@@ -25,32 +25,43 @@ import qocim.aggregation.operator.arithmetic.EOperator;
 import qocim.aggregation.operator.utils.NotValidInformationException;
 import qocim.information.QInformation;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * MinSelection is the operator used to select the maximal value of a numeric
+ * MaxSelection is the operator used to select the maximal value of a numeric
  * information.
  *
  * @author Pierrick MARIE
  */
 public class MaxSelectionAggregator implements IAgregationOperator {
 
-//    @Override
-//    public Double aggregateListValue(final List<Double> listValue) {
-//	final Max min = new Max();
-//	final double[] arrayValue = new double[listValue.size()];
-//	Integer index_arrayValue = 0;
-//	for (final Double loop_value : listValue) {
-//	    arrayValue[index_arrayValue++] = loop_value;
-//	}
-//	return min.evaluate(arrayValue);
-//    }
-
 	@Override
 	public QInformation<?> applyOperator(List<QInformation<?>> input) throws NotValidInformationException {
-		return null;
+		Number comparedValue = null;
+		QInformation<?> selectedInformation = null;
+
+		for( QInformation<?> information: input) {
+			if( information.data() instanceof Number) {
+				Number value = (Number) information.data();
+				if( null == comparedValue ) {
+					comparedValue = value;
+				} else {
+					BigDecimal nb1 = BigDecimal.valueOf(comparedValue.doubleValue());
+					BigDecimal nb2 = BigDecimal.valueOf(value.doubleValue());
+					if( nb1.compareTo(nb2) <= 1 ) {
+						selectedInformation = information;
+						comparedValue = value;
+					}
+				}
+			} else {
+				throw new NotValidInformationException("information data not comparable");
+			}
+		}
+
+		return selectedInformation;
 	}
 
 	@Override
