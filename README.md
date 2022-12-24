@@ -9,3 +9,5 @@ This repository contains:
  * model: QoCIM model of Quality of Context criteria (QoC criteria)
  * criteria: examples of QoC criteria
  * tools: all tools required to manipulate QoC criteria and context data
+ 
+ # Licence: GNU Lesser General Public License
