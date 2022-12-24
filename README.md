@@ -1,4 +1,4 @@
-The QoCIM project - a fork deployed on github
+# The QoCIM project (a fork deployed on github)
 
 The original project is available [here](https://fusionforge.int-evry.fr/www/qocim). For more information about the origin of the project, please visite [this web page](https://pierrick-marie.github.io/qocim).
 
@@ -10,4 +10,6 @@ This repository contains:
  * criteria: examples of QoC criteria
  * tools: all tools required to manipulate QoC criteria and context data
  
- # Licence: GNU Lesser General Public License
+ # Licence
+ 
+ **GNU Lesser General Public License**
