@@ -1,6 +1,6 @@
 # The QoCIM project (a fork deployed on github)
 
-The original project is available [here](https://fusionforge.int-evry.fr/www/qocim).
+The original project is available [here](https://fusionforge.int-evry.fr/www/qocim/).
 
 This is the version 2.1.2 of the project. 
 This version has no more dependencies to [muContext](https://fusionforge.int-evry.fr/www/mucontext) and [muDEBS](https://fusionforge.int-evry.fr/www/mudebs) projects.
