@@ -1,4 +1,4 @@
-# The QoCIM project (a fork deployed on github)
+# QoCIM Framework (fork deployed on github)
 
 The original project is available [here](https://fusionforge.int-evry.fr/www/qocim/).
 
