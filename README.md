@@ -1,8 +1,12 @@
 # QoCIM Framework (fork deployed on github)
 
-The original project: https://fusionforge.int-evry.fr/www/qocim
+Source code of the original project: https://fusionforge.int-evry.fr/www/qocim
 
-Documentation of that updated project: https://pierrick-marie.github.io/qocim-framework
+# Documentation
+
+Please follow that link: https://pierrick-marie.github.io/qocim-framework
+
+# Description
 
 That project was previously financed by the ANR project INCOME: https://www.irit.fr/income/
 
