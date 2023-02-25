@@ -11,6 +11,6 @@ This repository contains:
  * criteria: examples of QoC criteria
  * tools: all tools required to manipulate QoC criteria and context data
  
- # Licence
+ # Licence GPL-3.0 license 
  
- **GNU Lesser General Public License**
+https://raw.githubusercontent.com/pierrick-marie/QoCIM-Framework/main/LICENSE
